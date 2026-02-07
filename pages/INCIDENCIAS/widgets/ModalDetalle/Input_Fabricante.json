@@ -4,7 +4,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 24,
   "boxShadow": "none",
-  "defaultText": "{{Table2.selectedRow.fabricante}}",
+  "defaultText": "{{Table2.selectedRow.cliente}}",
   "dynamicBindingPathList": [
     {
       "key": "defaultText"

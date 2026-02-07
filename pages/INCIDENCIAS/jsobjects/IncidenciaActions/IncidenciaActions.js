@@ -50,6 +50,22 @@ export default {
                 const clienteNombre = clientesMap[item["account-id"]] ||
                     (parts.length > 1 ? parts.slice(1).join(" | ").split(" - ")[0].trim() : "Desconocido");
 
+                // Extraer ubicación/emplazamiento de la descripción
+                // Formato: "ES00538724 | 5637193446 - ESTACION SERVICIO GUIBE S L - RIVAS | C/.FUNDICION, 53..."
+                // O: "413216055 | Flow Car Global Alcobendas - cortar y tensar cadena"
+                let emplazamiento = "";
+                if (parts.length > 1) {
+                    const locationPart = parts[1].trim();
+                    // Coger nombre del emplazamiento (antes del último segmento que suele ser la descripción)
+                    const segments = locationPart.split(" - ");
+                    if (segments.length >= 2) {
+                        // Tomamos los primeros segmentos como ubicación
+                        emplazamiento = segments.slice(0, Math.min(segments.length, 2)).join(" - ").trim();
+                    } else {
+                        emplazamiento = locationPart;
+                    }
+                }
+
                 await Query_Upsert_Incidencia.run({
                     id: item.id,
                     fecha: item["creation-date"],
@@ -57,7 +73,7 @@ export default {
                     asunto: item["full-reference"] || "Sin Ref",
                     descripcion: desc,
                     estado: statusName,
-                    direccion: "",
+                    direccion: emplazamiento,
                     prioridad: item.priority || "Normal",
                     cliente_id: item["account-id"]
                 });
@@ -98,13 +114,13 @@ export default {
                 showAlert(`⚠️ No se encontró cliente '${clienteNombre}' en STEL.`, "warning");
             }
 
-            const incidentRef = row.id || row.numero_actividad || row.numero_averia;
+            const incidentRef = row.referencia || row.numero_actividad || row.numero_averia;
             const newId = Date.now();
 
             await Query_Insert_New_Albaran.run({
                 id_stel: newId,
                 referencia: nextRef,
-                titulo: `${incidentRef} - ${row.direccion || ''}`,
+                titulo: `${incidentRef} - ${row.emplazamiento || ''}`,
                 cliente_id: clienteId,
                 ref_incidencia: incidentRef
             });
