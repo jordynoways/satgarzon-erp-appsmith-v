@@ -1,0 +1,3 @@
+SELECT id_stel, nombre 
+FROM public.estados_documento
+ORDER BY id_stel ASC;

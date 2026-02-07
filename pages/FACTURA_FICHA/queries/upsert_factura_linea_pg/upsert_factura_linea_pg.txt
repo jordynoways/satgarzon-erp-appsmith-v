@@ -1,0 +1,37 @@
+INSERT INTO public.facturas_lineas (
+  referencia,
+  linea_num,
+  codigo,
+  nombre,
+  descripcion,
+  precio_base,
+  uds,
+  dto_pct,
+  subtotal,
+  impuesto_nombre,
+  impuesto_pct
+)
+VALUES (
+  {{ this.params.referencia }},
+  {{ this.params.linea_num }},
+  {{ this.params.codigo }},
+  {{ this.params.nombre }},
+  {{ this.params.descripcion }},
+  {{ this.params.precio_base }},
+  {{ this.params.uds }},
+  {{ this.params.dto_pct }},
+  {{ this.params.subtotal }},
+  {{ this.params.impuesto_nombre }},
+  {{ this.params.impuesto_pct }}
+)
+ON CONFLICT (referencia, linea_num)
+DO UPDATE SET
+  codigo = EXCLUDED.codigo,
+  nombre = EXCLUDED.nombre,
+  descripcion = EXCLUDED.descripcion,
+  precio_base = EXCLUDED.precio_base,
+  uds = EXCLUDED.uds,
+  dto_pct = EXCLUDED.dto_pct,
+  subtotal = EXCLUDED.subtotal,
+  impuesto_nombre = EXCLUDED.impuesto_nombre,
+  impuesto_pct = EXCLUDED.impuesto_pct;

@@ -1,0 +1,28 @@
+INSERT INTO public.productos_stel (
+  id,
+  referencia,
+  nombre,
+  descripcion,
+  precio_venta,
+  familia_id,
+  eliminado,
+  fecha_creacion
+)
+SELECT
+  (value->>'id')::bigint,
+  value->>'reference',
+  value->>'name',
+  value->>'description',
+  COALESCE(value->>'salesPrice', value->>'sales-price')::numeric,
+  COALESCE(value->>'categoryId', value->>'category-id')::integer,
+  CASE WHEN (value->>'deleted')::boolean THEN 1 ELSE 0 END,
+  (value->>'creationDate')::timestamp
+FROM json_array_elements('{{ JSON.stringify(this.params.products) }}'::json) as value
+ON CONFLICT (id) DO UPDATE SET
+  referencia = EXCLUDED.referencia,
+  nombre = EXCLUDED.nombre,
+  descripcion = EXCLUDED.descripcion,
+  precio_venta = EXCLUDED.precio_venta,
+  familia_id = EXCLUDED.familia_id,
+  eliminado = EXCLUDED.eliminado,
+  fecha_creacion = EXCLUDED.fecha_creacion;

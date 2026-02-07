@@ -1,0 +1,23 @@
+INSERT INTO public.product_categories_stel (
+    id,
+    name,
+    description,
+    rate_id,
+    utc_last_modification_date,
+    deleted
+)
+SELECT
+    (value->>'id')::bigint,
+    value->>'name',
+    value->>'description',
+    (value->>'rate-id')::bigint,
+    (value->>'utc-last-modification-date')::timestamp with time zone,
+    (value->>'deleted')::boolean
+FROM json_array_elements('{{ JSON.stringify(Stel_GetProductCategories.data) }}'::json)
+ON CONFLICT (id) DO UPDATE SET
+    name = EXCLUDED.name,
+    description = EXCLUDED.description,
+    rate_id = EXCLUDED.rate_id,
+    utc_last_modification_date = EXCLUDED.utc_last_modification_date,
+    deleted = EXCLUDED.deleted,
+    updated_at = NOW();

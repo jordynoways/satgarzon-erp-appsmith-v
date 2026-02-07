@@ -1,0 +1,4 @@
+SELECT nombre_fiscal, nombre_comercial, cif_nif
+FROM public.clientes
+WHERE id = {{this.params.id}}
+LIMIT 1;

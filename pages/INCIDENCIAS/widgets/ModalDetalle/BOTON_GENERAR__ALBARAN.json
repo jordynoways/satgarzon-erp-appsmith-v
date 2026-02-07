@@ -1,0 +1,52 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 53,
+  "boxShadow": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+  "buttonColor": "#ff8c82",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [],
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "add",
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "upp9hi4b1e",
+  "leftColumn": 0,
+  "minWidth": 120,
+  "mobileBottomRow": 23,
+  "mobileLeftColumn": 3,
+  "mobileRightColumn": 19,
+  "mobileTopRow": 19,
+  "needsErrorInfo": false,
+  "onClick": "{{IncidenciaActions.irAAlbaran(Table2.selectedRow)}}",
+  "originalBottomRow": 68,
+  "originalTopRow": 79,
+  "parentColumnSpace": 11.875,
+  "parentId": "xfirhtgsix",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 32,
+  "text": "GENERAR ALBARAN",
+  "topRow": 64,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "st54mpa5nb",
+  "widgetName": "BOTON_GENERAR__ALBARAN"
+}

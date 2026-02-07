@@ -1,0 +1,15 @@
+INSERT INTO public.albaranes (
+  id_stel,
+  referencia, 
+  fecha, 
+  estado_id, 
+  titulo
+) 
+VALUES (
+  {{ this.params.id }}::bigint, 
+  '{{ this.params.referencia }}', 
+  CURRENT_DATE, 
+  301, 
+  'Nuevo Albarán'
+) 
+RETURNING id_stel;

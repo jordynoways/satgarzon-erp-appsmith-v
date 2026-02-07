@@ -1,0 +1,2 @@
+DELETE FROM public.clientes
+WHERE id = {{appsmith.URL.queryParams.id}};

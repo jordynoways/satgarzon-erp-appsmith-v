@@ -1,0 +1,50 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 12,
+  "boxShadow": "none",
+  "buttonColor": "#3f3f46",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [],
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "add",
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "gliadljhup",
+  "leftColumn": 3,
+  "minWidth": 120,
+  "mobileBottomRow": 8,
+  "mobileLeftColumn": 2,
+  "mobileRightColumn": 18,
+  "mobileTopRow": 4,
+  "needsErrorInfo": false,
+  "onClick": "{{\n  q_get_next_ref.run()\n    .then(async (data) => {\n      if (!data || data.length === 0) {\n        showAlert('❌ Error: La consulta no devolvió ningún dato', 'error');\n        return;\n      }\n\n      const nuevaRef = data[0].siguiente_ref; \n      \n      if (!nuevaRef) {\n        showAlert('⚠️ Alerta: Se recibieron datos, pero \"siguiente_ref\" está vacío.', 'warning');\n        return;\n      }\n\n      // Generar ID único desde JS (usando timestamp)\n      const uniqueId = Date.now();\n\n      // INSERTAR EL ALBARÁN CON EL ID GENERADO - CONSULTA NUEVA\n      await q_create_new_albaran.run({ \n         referencia: nuevaRef, \n         id: uniqueId \n      });\n      \n      showAlert('✅ Albarán creado con ID: ' + uniqueId + '. Navegando...', 'success');\n      navigateTo('ALBARANES FICHA', { id: uniqueId, id_stel: uniqueId, ref: nuevaRef, mode: 'NEW' });\n\n    })\n    .catch((error) => {\n      showAlert('🔥 Error crítico: ' + error.message, 'error');\n    });\n}}",
+  "parentColumnSpace": 13.609375,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 19,
+  "text": "CREAR",
+  "topRow": 8,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "4nain86kzj",
+  "widgetName": "ButtonCrear"
+}

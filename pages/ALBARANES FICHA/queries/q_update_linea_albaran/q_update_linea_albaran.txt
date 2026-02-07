@@ -1,0 +1,9 @@
+UPDATE public.lineas_albaran 
+SET
+  cantidad = {{ this.params.cantidad }},
+  precio_unitario = {{ this.params.precio }},
+  descuento_porcentaje = {{ this.params.descuento }},
+  referencia_articulo = '{{ this.params.referencia }}',
+  nombre_articulo = '{{ this.params.descripcion }}',
+  importe_total = ({{ this.params.cantidad }} * {{ this.params.precio }} * (1 - ({{ this.params.descuento }} / 100)))
+WHERE id = {{ this.params.id }}::bigint;

@@ -1,0 +1,2 @@
+INSERT INTO incidencias (cliente_nombre, direccion, descripcion_problema, prioridad)
+VALUES ({{InputNombre.text}}, {{InputDireccion.text}}, {{InputDesc.text}}, {{SelectPrioridad.selectedOptionValue}});

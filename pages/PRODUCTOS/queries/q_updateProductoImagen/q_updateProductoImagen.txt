@@ -1,0 +1,3 @@
+UPDATE productos_stel 
+SET imagen = {{ this.params.imagen }}
+WHERE id = {{ this.params.item_id }};

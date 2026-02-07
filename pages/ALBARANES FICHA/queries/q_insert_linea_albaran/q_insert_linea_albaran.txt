@@ -1,0 +1,18 @@
+INSERT INTO public.lineas_albaran (
+  id_albaran_stel, 
+  referencia_articulo, 
+  nombre_articulo, 
+  cantidad, 
+  precio_unitario, 
+  descuento_porcentaje, 
+  importe_total
+) 
+VALUES (
+  {{ appsmith.URL.queryParams.id }}::bigint, 
+  '{{ this.params.referencia }}', 
+  '{{ this.params.descripcion }}', 
+  {{ parseFloat(this.params.cantidad || 0) }}, 
+  {{ parseFloat(this.params.precio || 0) }}, 
+  {{ parseFloat(this.params.descuento || 0) }}, 
+  {{ (parseFloat(this.params.cantidad || 0) * parseFloat(this.params.precio || 0) * (1 - (parseFloat(this.params.descuento || 0) / 100))) }}
+);

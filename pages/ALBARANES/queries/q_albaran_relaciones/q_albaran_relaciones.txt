@@ -1,0 +1,8 @@
+SELECT
+  f.referencia      AS factura_ref,
+  to_date(NULLIF(btrim(f.fecha), ''), 'DD/MM/YYYY') AS factura_fecha,
+  f.estado          AS factura_estado,
+  NULLIF(f.total_importe,'')::numeric AS factura_total
+FROM public.facturas_stel_clean f
+WHERE f.deleted_at IS NULL
+  AND btrim(f.generado_a_partir_de) = {{ tabla_albaranes.selectedRow.referencia }};

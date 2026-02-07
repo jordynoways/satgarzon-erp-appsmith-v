@@ -1,0 +1,22 @@
+-- Creamos la tabla de incidencias
+CREATE TABLE IF NOT EXISTS incidencias (
+    id SERIAL PRIMARY KEY,
+    fecha_creacion TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    cliente_nombre TEXT NOT NULL,
+    direccion TEXT,
+    descripcion_problema TEXT,
+    prioridad VARCHAR(20) DEFAULT 'MEDIA',
+    estado VARCHAR(20) DEFAULT 'PENDIENTE',
+    tecnico_id INT
+);
+
+-- Creamos la tabla de partes de trabajo vinculada a la incidencia
+CREATE TABLE IF NOT EXISTS partes_de_trabajo (
+    id SERIAL PRIMARY KEY,
+    incidencia_id INT REFERENCES incidencias(id),
+    fecha_trabajo DATE DEFAULT CURRENT_DATE,
+    trabajo_realizado TEXT,
+    materiales_empleados TEXT,
+    horas_empleadas DECIMAL(5,2),
+    finalizado BOOLEAN DEFAULT FALSE
+);

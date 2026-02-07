@@ -1,0 +1,23 @@
+INSERT INTO albaranes (
+  id_stel, 
+  referencia, 
+  fecha, 
+  cliente, 
+  titulo, 
+  importe_total, 
+  estado
+)
+VALUES (
+  {{ this.params.id_stel }},
+  {{ this.params.referencia }},
+  {{ this.params.fecha }},
+  {{ this.params.cliente }},
+  {{ this.params.titulo }},
+  {{ this.params.importe_total }},
+  {{ this.params.estado }}
+)
+ON CONFLICT (id_stel) DO UPDATE 
+SET 
+  referencia = EXCLUDED.referencia,
+  cliente = EXCLUDED.cliente,
+  titulo = EXCLUDED.titulo;

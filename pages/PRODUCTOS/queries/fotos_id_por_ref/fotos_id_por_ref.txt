@@ -1,0 +1,6 @@
+SELECT 
+    referencia || '.jpg' as antiguo, 
+    id || '.jpg' as nuevo 
+FROM public.productos_stel 
+WHERE referencia IS NOT NULL 
+LIMIT 3100; -- Aseguramos que entren todos

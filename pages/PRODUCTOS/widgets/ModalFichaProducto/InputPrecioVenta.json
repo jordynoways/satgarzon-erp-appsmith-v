@@ -1,0 +1,72 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "autoFocus": false,
+  "backgroundColor": "#FFFFFF",
+  "borderRadius": "1.5rem",
+  "bottomRow": 42,
+  "bottomRowBeforeCollapse": 31,
+  "boxShadow": "none",
+  "defaultText": "{{Table1.selectedRow?.precio_venta || appsmith.store.producto_precio}}",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "defaultText"
+    },
+    {
+      "key": "isDisabled"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicPropertyPathList": [
+    {
+      "key": "isDisabled"
+    },
+    {
+      "key": "isRequired"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "iconAlign": "left",
+  "inputType": "NUMBER",
+  "isDisabled": "{{!CheckEditar.isChecked}}",
+  "isLoading": false,
+  "isRequired": "false",
+  "isVisible": true,
+  "key": "78ugnm23mo",
+  "label": "",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelStyle": "BOLD",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 0,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 16,
+  "mobileLeftColumn": 32,
+  "mobileRightColumn": 52,
+  "mobileTopRow": 9,
+  "needsErrorInfo": false,
+  "originalBottomRow": 38,
+  "originalTopRow": 34,
+  "parentColumnSpace": 12.94921875,
+  "parentId": "4p7wibpg6o",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "resetOnSubmit": false,
+  "responsiveBehavior": "fill",
+  "rightColumn": 12,
+  "shouldAllowAutofill": false,
+  "shouldScrollContents": true,
+  "showStepArrows": false,
+  "topRow": 38,
+  "topRowBeforeCollapse": 27,
+  "type": "INPUT_WIDGET_V2",
+  "version": 2,
+  "widgetId": "pvqwbv3z8a",
+  "widgetName": "InputPrecioVenta"
+}

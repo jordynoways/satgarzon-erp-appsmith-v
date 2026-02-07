@@ -1,0 +1,12 @@
+INSERT INTO public.incidencias_api_clean (id_stel, referencia, titulo, fecha_creacion)
+VALUES (
+  {{this.params.id_stel}}, 
+  {{this.params.referencia}}, 
+  {{this.params.titulo}}, 
+  {{this.params.fecha}}::date
+)
+ON CONFLICT (id_stel) 
+DO UPDATE SET 
+  referencia = EXCLUDED.referencia,
+  titulo = EXCLUDED.titulo,
+  fecha_creacion = EXCLUDED.fecha_creacion;

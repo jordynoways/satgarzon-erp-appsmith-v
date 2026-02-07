@@ -1,0 +1,10 @@
+UPDATE public.productos_stel
+SET
+    referencia = {{ InputReferencia.text }},
+    nombre = {{ InputNombre.text }},
+    descripcion = {{ InputDescripcion.text }},
+    familia = {{ SelectFamilia.selectedOptionLabel || '' }},
+    familia_id = {{ SelectFamilia.selectedOptionValue ? SelectFamilia.selectedOptionValue : null }},
+    precio_venta = {{ parseFloat(InputPrecioVenta.text || appsmith.store.producto_precio) || appsmith.store.producto_precio }}
+WHERE
+    id = {{ appsmith.store.id_producto_seleccionado }};

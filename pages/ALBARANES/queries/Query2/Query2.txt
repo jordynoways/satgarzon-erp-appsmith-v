@@ -1,0 +1,4 @@
+SELECT column_name 
+FROM information_schema.columns 
+WHERE table_name = 'productos_stel' 
+AND (column_name LIKE '%cost%' OR column_name LIKE '%compra%' OR column_name LIKE '%precio%');

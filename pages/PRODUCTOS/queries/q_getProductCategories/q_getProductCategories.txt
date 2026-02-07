@@ -1,0 +1,4 @@
+SELECT id, name, description
+FROM public.product_categories_stel
+WHERE deleted = false
+ORDER BY name ASC;

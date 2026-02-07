@@ -1,0 +1,84 @@
+{
+  "account-id": {{ 
+    (function() {
+       // USAMOS EL ID CONGELADO
+       const idFila = appsmith.store.id_averia_activa;
+       const original = get_averias.data.find(item => String(item.id) == String(idFila));
+       return (original && original['account-id']) ? original['account-id'] : 111;
+    })()
+  }},
+  
+  "incident-id": {{ appsmith.store.id_averia_activa }},
+  
+  "date": "{{ moment().utc().format('YYYY-MM-DDTHH:mm:ss') + '+0000' }}",
+
+  "subject": {{ 
+    (function() {
+      // RECUPERAR TEXTO USANDO EL ID CONGELADO
+      const idFila = appsmith.store.id_averia_activa;
+      const original = get_averias.data.find(item => String(item.id) == String(idFila));
+      const texto = original ? (original.description || "") : "";
+
+      // 1. BUSCAR NÚMERO (Más flexible)
+      let numero = "S/N";
+      // Busca números largos de 6 a 12 cifras (ej: 000413...)
+      const matchNum = texto.match(/(\d{6,12})/);
+      if (matchNum) numero = matchNum[1];
+
+      // 2. BUSCAR SITIO (Entre barras // o después de un guion largo)
+      let sitio = "CLIENTE";
+      const matchSitio = texto.match(/\/\/\s*(.*?)\s*\/\//);
+      
+      if (matchSitio) {
+          sitio = matchSitio[1].trim();
+      } else {
+          // Plan B: Busca algo que parezca un nombre de gasolinera (E.S, GALP, REPSOL)
+          const matchB = texto.match(/(E\.S\.|GALP|REPSOL|CEPSA|BP)\s+.*?(?=\n|\r|\/\/)/i);
+          if (matchB) sitio = matchB[0].trim();
+      }
+
+      return numero + " // " + sitio + " //";
+    })() 
+  }},
+
+  "lines": {{
+    (function() {
+      const lineas = [];
+      
+      // 1. HORAS (Leemos el valor seleccionado)
+      const horasVal = SelectHoras.selectedOptionValue;
+      // Truco: Si es nulo o texto, forzamos número. Si es 0, ponemos 1 por defecto.
+      const horas = Number(horasVal) || 1; 
+      
+      lineas.push({
+        "line-type": "ITEM",
+        "item-id": 21124499, 
+        "quantity": horas,
+        "description": "Horas de Trabajo (HTW)"
+      });
+
+      // 2. DESPLAZAMIENTO
+      const idDesp = Number(SelectDesplazamiento.selectedOptionValue);
+      if (idDesp && idDesp !== 0) {
+        lineas.push({
+          "line-type": "ITEM",
+          "item-id": idDesp,
+          "quantity": 1
+        });
+      }
+
+      // 3. MATERIALES
+      // (Aquí usamos tu Input o tu Cesta, lo que tengas configurado)
+      if (typeof InputMateriales !== 'undefined' && InputMateriales.text) {
+         lineas.push({
+            "line-type": "ITEM",
+            "item-id": 21124499,
+            "quantity": 1,
+            "description": "MATERIALES: " + InputMateriales.text
+         });
+      }
+
+      return lineas;
+    })()
+  }}
+}

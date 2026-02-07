@@ -1,0 +1,6 @@
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'incidencias_n8n' AND column_name = 'estado') THEN
+        ALTER TABLE public.incidencias_n8n ADD COLUMN estado TEXT DEFAULT 'Pendiente';
+    END IF;
+END $$;

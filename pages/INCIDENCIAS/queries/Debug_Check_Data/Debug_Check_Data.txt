@@ -1,0 +1,1 @@
+SELECT * FROM public.incidencias_n8n LIMIT 100;

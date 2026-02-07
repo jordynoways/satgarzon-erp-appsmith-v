@@ -1,0 +1,1 @@
+SELECT id, cliente_nombre, prioridad, estado FROM incidencias;

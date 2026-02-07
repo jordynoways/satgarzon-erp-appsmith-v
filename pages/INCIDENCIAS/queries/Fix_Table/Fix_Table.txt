@@ -1,0 +1,11 @@
+-- Añade la columna de fecha
+ALTER TABLE public.incidencias_n8n 
+ADD COLUMN IF NOT EXISTS fecha_recepcion TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+-- Añadimos también numero_parte por si n8n intenta enviarlo
+ALTER TABLE public.incidencias_n8n 
+ADD COLUMN IF NOT EXISTS numero_parte VARCHAR(100);
+
+-- Añadimos numero_averia por si acaso
+ALTER TABLE public.incidencias_n8n 
+ADD COLUMN IF NOT EXISTS numero_averia VARCHAR(100);

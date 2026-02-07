@@ -1,0 +1,33 @@
+CREATE OR REPLACE FUNCTION importar_facturas_stel(data_json json)
+RETURNS text AS $$
+DECLARE
+    count_rows int;
+BEGIN
+    INSERT INTO public.facturas (
+        id_stel, referencia, fecha, id_cliente, nombre_cliente, 
+        base_imponible, total, estado, id_albaran_origen, datos_json
+    )
+    SELECT 
+        (obj->>'id')::text,
+        obj->>'full-reference',
+        (obj->>'date')::date, -- Usamos 'date' según tu doc
+        (obj->>'account-id')::text,
+        COALESCE(obj->>'legal-name', obj->>'account-id'), -- Si no viene nombre, ponemos el ID
+        (obj->>'subtotal-amount')::numeric,
+        (obj->>'total-amount')::numeric,
+        COALESCE(obj->>'document-state-name', 'Pendiente'),
+        (obj->>'parent-document-id')::text, -- Enlace al Albarán
+        obj::jsonb
+    FROM json_array_elements(data_json) AS obj
+    ON CONFLICT (id_stel) DO UPDATE SET
+        referencia = EXCLUDED.referencia,
+        fecha = EXCLUDED.fecha,
+        total = EXCLUDED.total,
+        id_albaran_origen = EXCLUDED.id_albaran_origen,
+        datos_json = EXCLUDED.datos_json,
+        actualizado_at = CURRENT_TIMESTAMP;
+
+    GET DIAGNOSTICS count_rows = ROW_COUNT;
+    RETURN 'Sincronizadas ' || count_rows || ' facturas.';
+END;
+$$ LANGUAGE plpgsql;

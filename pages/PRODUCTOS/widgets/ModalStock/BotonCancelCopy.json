@@ -1,0 +1,61 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 34,
+  "boxShadow": "none",
+  "buttonColor": "#ef4444",
+  "buttonStyle": "PRIMARY_BUTTON",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "resetFormOnClick"
+    },
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "cross",
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": "{{ CheckEditar.isChecked }}",
+  "key": "5wljn7kxut",
+  "leftColumn": 17,
+  "minWidth": 120,
+  "mobileBottomRow": 22,
+  "mobileLeftColumn": 47,
+  "mobileRightColumn": 63,
+  "mobileTopRow": 18,
+  "needsErrorInfo": false,
+  "onClick": "// 1. Apagamos el modo edición (desmarcamos el checkbox)\nCheckEditar.setValue(false);\n\n// 2. Reseteamos el Modal para borrar lo que escribiste y no guardaste\nresetWidget(\"ModalFichaProducto\", true);",
+  "originalBottomRow": 36,
+  "originalTopRow": 32,
+  "parentId": "9mhq2u8xhj",
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": "true",
+  "responsiveBehavior": "hug",
+  "rightColumn": 25,
+  "text": "Cancel",
+  "topRow": 30,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "lwg720dma4",
+  "widgetName": "BotonCancelCopy"
+}

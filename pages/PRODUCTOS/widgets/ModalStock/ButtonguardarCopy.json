@@ -1,0 +1,58 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 34,
+  "boxShadow": "none",
+  "buttonColor": "#22c55e",
+  "buttonStyle": "PRIMARY",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "floppy-disk",
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": "{{ CheckEditar.isChecked }}",
+  "key": "5wljn7kxut",
+  "leftColumn": 9,
+  "minWidth": 120,
+  "mobileBottomRow": 22,
+  "mobileLeftColumn": 31,
+  "mobileRightColumn": 47,
+  "mobileTopRow": 18,
+  "needsErrorInfo": false,
+  "onClick": "{{ \n  (async function() {\n      try {\n          // 1. Guardamos los cambios de DANI, PEPE, NAVE, etc.\n          await API_ActualizarStock.run();\n          \n          showAlert('✅ Stock repartido correctamente', 'success');\n\n          // 2. Recalculamos la SUMA TOTAL en la tabla\n          await API_ListarProductos.run();\n          \n          // 3. Cerramos\n          closeModal('ModalStock');\n\n      } catch (error) {\n          showAlert('❌ Error al guardar stock', 'error');\n          console.log(error);\n      }\n  })()\n}}",
+  "originalBottomRow": 36,
+  "originalTopRow": 32,
+  "parentId": "9mhq2u8xhj",
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 17,
+  "text": "Guardar",
+  "topRow": 30,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "uuqs4xml75",
+  "widgetName": "ButtonguardarCopy"
+}

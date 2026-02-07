@@ -1,0 +1,11 @@
+BEGIN;
+
+-- 1. Borrar líneas del albarán actual
+DELETE FROM public.lineas_albaran 
+WHERE id_albaran_stel = {{ appsmith.URL.queryParams.id }}::bigint;
+
+-- 2. Borrar el albarán actual
+DELETE FROM public.albaranes 
+WHERE id_stel = {{ appsmith.URL.queryParams.id }}::bigint;
+
+COMMIT;

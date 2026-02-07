@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS public.clientes_stel_clean;
+
+CREATE TABLE public.clientes_stel_clean (
+  referencia TEXT PRIMARY KEY,
+  nombre_juridico TEXT,
+  nombre_comercial TEXT,
+  cif_nif TEXT,
+  email TEXT,
+  telefono1 TEXT,
+  telefono2 TEXT,
+  imported_at timestamptz DEFAULT now()
+);

@@ -1,0 +1,77 @@
+WITH src AS (
+  SELECT *
+  FROM jsonb_to_recordset({{ this.params.payload }}::jsonb) AS x(
+    referencia text,
+    fecha text,
+    cliente_id bigint,
+    cliente_nombre text,
+    estado text,
+    total_importe numeric,
+    creado_por_id bigint,
+    agente_id bigint,
+    forma_pago_id bigint,
+    titulo text,
+    parent_incident_id bigint,
+    parent_document_id bigint,
+    utc_last_modification_date text,
+    fecha_creacion text,
+    deleted boolean,
+    raw jsonb
+  )
+)
+INSERT INTO public.albaranes_api_clean (
+  referencia,
+  fecha,
+  cliente_id,
+  cliente_nombre,
+  estado,
+  total_importe,
+  creado_por_id,
+  agente_id,
+  forma_pago_id,
+  titulo,
+  parent_incident_id,
+  parent_document_id,
+  utc_last_modification_date,
+  fecha_creacion,
+  deleted,
+  raw,
+  updated_at
+)
+SELECT
+  s.referencia,
+  NULLIF(s.fecha,'')::date,
+  s.cliente_id,
+  s.cliente_nombre,
+  NULLIF(s.estado,''),
+  s.total_importe,
+  s.creado_por_id,
+  s.agente_id,
+  s.forma_pago_id,
+  s.titulo,
+  s.parent_incident_id,
+  s.parent_document_id,
+  NULLIF(s.utc_last_modification_date,'')::timestamptz,
+  NULLIF(s.fecha_creacion,'')::timestamptz,
+  COALESCE(s.deleted,false),
+  COALESCE(s.raw, to_jsonb(s)),
+  now()
+FROM src s
+WHERE s.referencia IS NOT NULL
+ON CONFLICT (referencia) DO UPDATE SET
+  fecha = EXCLUDED.fecha,
+  cliente_id = EXCLUDED.cliente_id,
+  cliente_nombre = EXCLUDED.cliente_nombre,
+  estado = EXCLUDED.estado,
+  total_importe = EXCLUDED.total_importe,
+  creado_por_id = EXCLUDED.creado_por_id,
+  agente_id = EXCLUDED.agente_id,
+  forma_pago_id = EXCLUDED.forma_pago_id,
+  titulo = EXCLUDED.titulo,
+  parent_incident_id = EXCLUDED.parent_incident_id,
+  parent_document_id = EXCLUDED.parent_document_id,
+  utc_last_modification_date = EXCLUDED.utc_last_modification_date,
+  fecha_creacion = EXCLUDED.fecha_creacion,
+  deleted = EXCLUDED.deleted,
+  raw = EXCLUDED.raw,
+  updated_at = now();

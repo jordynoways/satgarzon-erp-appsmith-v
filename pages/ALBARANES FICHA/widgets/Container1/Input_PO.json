@@ -1,0 +1,70 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "autoFocus": false,
+  "borderRadius": "1.5rem",
+  "bottomRow": 14,
+  "boxShadow": "none",
+  "defaultText": "{{ \n  (q_ficha_lineas.data || []).find(linea => \n    // 1. Buscamos por el código conflictivo\n    (linea.referencia_articulo === 'SER000035' || linea.referencia_articulo === 'SER00035') && \n    // 2. FILTRO CLAVE: Que el nombre diga \"PO\" O que el texto sea cortito (menos de 20 letras)\n    ((linea.nombre_articulo || \"\").toUpperCase().includes(\"PO\") || (linea.descripcion_larga || \"\").length < 20)\n  )?.descripcion_larga || \"\" \n}}",
+  "dynamicBindingPathList": [
+    {
+      "key": "defaultText"
+    },
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "isDisabled"
+    },
+    {
+      "key": "accentColor"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "isDisabled"
+    },
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "iconAlign": "left",
+  "inputType": "TEXT",
+  "isDisabled": "{{ !appsmith.store.editando }}",
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": "{{ q_ficha_lineas.data[0].cliente_nombre.toLowerCase().includes('washtec') }}",
+  "key": "508vfwkz6f",
+  "label": "PO",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelStyle": "BOLD",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 0,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 19,
+  "mobileLeftColumn": 25,
+  "mobileRightColumn": 45,
+  "mobileTopRow": 12,
+  "needsErrorInfo": false,
+  "originalBottomRow": 14,
+  "originalTopRow": 10,
+  "parentColumnSpace": 12.7294921875,
+  "parentId": "zb9eyzjlmy",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "resetOnSubmit": true,
+  "responsiveBehavior": "fill",
+  "rightColumn": 13,
+  "showStepArrows": false,
+  "topRow": 10,
+  "type": "INPUT_WIDGET_V2",
+  "version": 2,
+  "widgetId": "743rhrydll",
+  "widgetName": "Input_PO"
+}

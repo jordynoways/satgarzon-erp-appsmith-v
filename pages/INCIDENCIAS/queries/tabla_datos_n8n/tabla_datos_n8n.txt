@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS incidencias_n8n;
+
+CREATE TABLE incidencias_n8n (
+    numero_actividad VARCHAR(255) PRIMARY KEY, -- Esta es nuestra llave única
+    numero_parte VARCHAR(255),
+    fabricante VARCHAR(50),
+    emplazamiento VARCHAR(255),
+    direccion TEXT,
+    modelo VARCHAR(100),
+    descripcion_averia TEXT,
+    urgencia VARCHAR(20),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

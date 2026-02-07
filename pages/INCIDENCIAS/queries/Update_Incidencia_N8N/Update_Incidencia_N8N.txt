@@ -1,0 +1,12 @@
+UPDATE public.incidencias_n8n
+SET 
+  descripcion_averia = {{Input_Descripcion.text}},
+  estado = {{Select1.selectedOptionValue}},
+  urgencia = {{Select_Urgencia.selectedOptionValue}},
+  numero_averia = {{Input_NumeroAveria.text}},
+  numero_parte = {{Input_NumeroParte.text}},
+  fecha_recepcion = {{Date_FechaRecepcion.formattedDate}},
+  modelo = {{Input_Modelo.text}},
+  fabricante = {{Input_Fabricante.text}},
+  emplazamiento = {{Input_Emplazamiento.text}}
+WHERE numero_actividad = {{Input_NumeroActividad.text}};

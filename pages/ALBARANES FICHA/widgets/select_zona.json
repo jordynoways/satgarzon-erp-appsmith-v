@@ -1,0 +1,66 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 62,
+  "boxShadow": "none",
+  "defaultOptionValue": "{{ ((options, serverSideFiltering) => ( \n  (function() {\n    const cliente = (Select_public_clientes2.selectedOptionLabel || \"\").toUpperCase();\n\n    // CASO 1: ES WASHTEC\n    if (cliente.includes(\"WASHTEC\")) {\n       // Por defecto seleccionamos la primera zona (Repsol/Campsa 50€)\n       // Pero como es un desplegable, tú podrás cambiarlo a Zona 2, 3 o 4 manualmente.\n       return 50; \n    }\n\n    // CASO 2: CUALQUIER OTRO (Repsol cliente directo, Particulares...)\n    // Les ponemos la tarifa plana de 65€.\n    return 65;\n  })()\n))(select_zona.options, select_zona.serverSideFiltering) }}",
+  "dynamicBindingPathList": [
+    {
+      "key": "defaultOptionValue"
+    },
+    {
+      "key": "isDisabled"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicPropertyPathList": [
+    {
+      "key": "sourceData"
+    },
+    {
+      "key": "isDisabled"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "isDisabled": "{{ !appsmith.store.editando }}",
+  "isFilterable": true,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "al1tspb4lq",
+  "labelAlignment": "left",
+  "labelPosition": "Auto",
+  "labelStyle": "",
+  "labelText": "",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 1,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 57,
+  "mobileLeftColumn": 0,
+  "mobileRightColumn": 9,
+  "mobileTopRow": 50,
+  "needsErrorInfo": false,
+  "optionLabel": "name",
+  "optionValue": "code",
+  "originalBottomRow": 62,
+  "originalTopRow": 58,
+  "parentColumnSpace": 13.890625,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "placeholderText": "Select option",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 13,
+  "serverSideFiltering": false,
+  "shouldScrollContents": true,
+  "sourceData": "[\n  {\n    \"name\": \"Repsol / Campsa (50€)\",\n    \"code\": 50\n  },\n  {\n    \"name\": \"Zona 2 - Estándar (52€)\",\n    \"code\": 52\n  },\n  {\n    \"name\": \"Zona 3 - Lejos (78€)\",\n    \"code\": 78\n  },\n  {\n    \"name\": \"Zona 4 - Muy Lejos (110€)\",\n    \"code\": 110\n  },\n  {\n    \"name\": \"TARIFA GENERAL / NO WASHTEC (65€)\",\n    \"code\": 65\n  }\n]",
+  "topRow": 58,
+  "type": "SELECT_WIDGET",
+  "version": 1,
+  "widgetId": "ubf8cgcwaw",
+  "widgetName": "select_zona"
+}

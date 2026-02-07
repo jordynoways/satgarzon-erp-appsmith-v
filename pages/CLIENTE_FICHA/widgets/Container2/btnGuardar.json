@@ -1,0 +1,63 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 4,
+  "boxShadow": "none",
+  "buttonColor": "#22c55e",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "isDisabled"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "isDisabled"
+    },
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "floppy-disk",
+  "isDefaultClickDisabled": true,
+  "isDisabled": "{{ !appsmith.store.editando || appsmith.store.guardando }}",
+  "isLoading": false,
+  "isVisible": "{{ appsmith.store.editando }}",
+  "key": "xvm2ewjhac",
+  "leftColumn": 10,
+  "minWidth": 120,
+  "mobileBottomRow": 4,
+  "mobileLeftColumn": 14,
+  "mobileRightColumn": 30,
+  "mobileTopRow": 0,
+  "needsErrorInfo": false,
+  "onClick": "{{\n(async () => {\n  // Anti doble-click\n  if (appsmith.store.guardando) {\n    showAlert(\"Ya estoy guardando, jefe 😅\", \"warning\");\n    return;\n  }\n\n  await storeValue(\"guardando\", true);\n\n  try {\n    const esEdicion = !!appsmith.URL.queryParams.id;\n\n    // Ejecuta el query correcto\n    const res = esEdicion\n      ? await update_cliente.run()\n      : await insert_cliente.run();\n\n    // Salir de modo edición\n    await storeValue(\"editando\", false);\n\n    // Aviso OK\n    showAlert(esEdicion ? \"Cliente actualizado ✅\" : \"Cliente creado ✅\", \"success\");\n\n    // Si es nuevo, navegar a la ficha del nuevo ID\n    if (!esEdicion) {\n      const newId = res?.[0]?.id;\n      if (newId) {\n        navigateTo(\"CLIENTE_FICHA\", { id: newId }, \"SAME_WINDOW\");\n      }\n    } else {\n      // Si editas, refresca datos para que se vean los cambios\n      await get_cliente_by_id.run();\n    }\n\n  } catch (err) {\n    showAlert(\"Error al guardar: \" + (err?.message || err), \"error\");\n  } finally {\n    await storeValue(\"guardando\", false);\n  }\n})()\n}}",
+  "parentColumnSpace": 1.828125,
+  "parentId": "nqkiy25mfu",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 20,
+  "text": "Guardar",
+  "topRow": 0,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "xhxtfis71v",
+  "widgetName": "btnGuardar"
+}

@@ -1,0 +1,1 @@
+SELECT id_stel FROM public.clientes WHERE TRIM(nombre_fiscal) ILIKE TRIM({{ this.params.nombre }}) LIMIT 1

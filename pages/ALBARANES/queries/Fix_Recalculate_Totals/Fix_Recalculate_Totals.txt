@@ -1,0 +1,7 @@
+UPDATE public.albaranes a
+SET importe_total = (
+    SELECT COALESCE(SUM(importe_total), 0)
+    FROM public.lineas_albaran l
+    WHERE l.id_albaran_stel = a.id_stel
+)
+WHERE importe_total = 0 OR importe_total IS NULL;

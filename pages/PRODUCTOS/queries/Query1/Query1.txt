@@ -1,0 +1,7 @@
+-- Sustituye 1234 por un ID real que veas en tu tabla
+UPDATE public.productos_stel
+SET 
+    nombre = 'TEST_UPDATE_' || TO_CHAR(NOW(), 'HH24:MI:SS'),
+    descripcion = 'Test update manual'
+WHERE id = 40937933; -- CAMBIA ESTO POR UN ID EXISTENTE
+

@@ -1,0 +1,7 @@
+-- Añadimos la columna para el Número de Parte (el de 9 dígitos)
+ALTER TABLE public.incidencias_n8n 
+ADD COLUMN IF NOT EXISTS numero_parte TEXT;
+
+-- Añadimos la columna para el Número de Avería o Actividad (el de 5-6 dígitos)
+ALTER TABLE public.incidencias_n8n 
+ADD COLUMN IF NOT EXISTS numero_averia TEXT;

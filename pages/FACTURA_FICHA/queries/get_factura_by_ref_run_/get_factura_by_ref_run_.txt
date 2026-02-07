@@ -1,0 +1,4 @@
+SELECT *
+FROM public.facturas
+WHERE referencia = {{ appsmith.store.facturaSeleccionada?.referencia }}
+LIMIT 1;

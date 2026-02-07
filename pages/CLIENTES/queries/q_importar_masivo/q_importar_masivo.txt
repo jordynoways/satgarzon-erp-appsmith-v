@@ -1,0 +1,1 @@
+SELECT importar_clientes_stel({{ this.params.json_data }}::json);

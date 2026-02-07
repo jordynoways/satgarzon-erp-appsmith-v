@@ -1,0 +1,11 @@
+-- Agregar columna familia_id a productos_stel
+ALTER TABLE public.productos_stel
+ADD COLUMN IF NOT EXISTS familia_id BIGINT;
+
+-- Crear índice para mejorar búsquedas
+CREATE INDEX IF NOT EXISTS idx_productos_familia_id ON public.productos_stel(familia_id);
+
+-- Agregar foreign key (opcional, comentado por si no existe la tabla de categorías aún)
+-- ALTER TABLE public.productos_stel
+-- ADD CONSTRAINT fk_productos_familia
+-- FOREIGN KEY (familia_id) REFERENCES public.product_categories_stel(id);

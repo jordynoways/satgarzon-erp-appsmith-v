@@ -1,0 +1,3 @@
+UPDATE public.incidencias_n8n 
+SET estado = {{Select1.selectedOptionValue}} 
+WHERE numero_actividad = {{Table1.selectedRow.numero_actividad}};

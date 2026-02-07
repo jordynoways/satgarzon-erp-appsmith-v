@@ -1,0 +1,16 @@
+SELECT
+  f.referencia,
+  f.fecha,
+  COALESCE(
+    NULLIF(c.nombre_comercial,''),
+    NULLIF(c.nombre_fiscal,''),
+    NULLIF(f.nombre_comercial,''),
+    NULLIF(f.nombre_fiscal,''),
+    'Cliente sin nombre'
+  ) AS cliente_nombre,
+  f.estado,
+  f.total_importe,
+  f.importe_restante
+FROM public.facturas f
+LEFT JOIN public.clientes c ON c.id = f.cliente_id
+ORDER BY f.fecha DESC NULLS LAST, f.referencia DESC;

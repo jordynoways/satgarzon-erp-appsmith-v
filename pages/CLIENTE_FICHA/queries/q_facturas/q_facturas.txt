@@ -1,0 +1,3 @@
+SELECT *
+FROM public.facturas.referencia
+ORDER BY fecha_txt DESC;

@@ -1,0 +1,5 @@
+UPDATE public.facturas
+SET deleted_at = NOW(),
+    deleted_by = {{ this.params.user || 'app' }}
+WHERE referencia = ANY ({{ this.params.refs }})
+  AND deleted_at IS NULL;

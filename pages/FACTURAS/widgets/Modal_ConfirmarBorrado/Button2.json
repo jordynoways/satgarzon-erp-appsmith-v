@@ -1,0 +1,53 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 20,
+  "boxShadow": "none",
+  "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "buttonStyle": "PRIMARY_BUTTON",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "buttonColor"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "swqti3g72u",
+  "leftColumn": 34,
+  "minWidth": 120,
+  "mobileBottomRow": 22,
+  "mobileLeftColumn": 47,
+  "mobileRightColumn": 63,
+  "mobileTopRow": 18,
+  "needsErrorInfo": false,
+  "onClick": "{{\n(() => {\n  const refs = Table1.selectedRows.map(r => r.referencia);\n\n  return q_soft_delete_facturas.run({\n    refs,\n    user: appsmith.user.email\n  })\n  .then(() => q_facturas.run())\n  .then(() => {\n    closeModal(\"Modal_ConfirmarBorrado\");\n    showAlert(`Enviado a papelera 🗑️ (${refs.length})`, \"success\");\n    storeValue(\"lastDeletedRefs\", refs);\n  })\n  .catch(e => {\n    showAlert(\"Error ❌ \" + (e.message || e), \"error\");\n  });\n})()\n}}",
+  "originalBottomRow": 20,
+  "originalTopRow": 16,
+  "parentId": "gnx2xssl1x",
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 50,
+  "text": "Borrar",
+  "topRow": 16,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "2qhfy2tlm3",
+  "widgetName": "Button2"
+}

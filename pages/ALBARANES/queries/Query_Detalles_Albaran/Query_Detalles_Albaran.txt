@@ -1,0 +1,9 @@
+SELECT 
+    id_albaran_stel, 
+    nombre_articulo, 
+    cantidad, 
+    precio_unitario,
+    descripcion_larga
+FROM lineas_albaran 
+-- Usamos ANY para que acepte el array que envía Appsmith
+WHERE id_albaran_stel = ANY({{ tabla_albaranes.selectedRows.map(r => r.id_stel) }});

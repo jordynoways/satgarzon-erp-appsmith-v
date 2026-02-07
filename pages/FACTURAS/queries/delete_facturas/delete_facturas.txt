@@ -1,0 +1,2 @@
+DELETE FROM public.facturas
+WHERE referencia = ANY ({{this.params.referencias}});

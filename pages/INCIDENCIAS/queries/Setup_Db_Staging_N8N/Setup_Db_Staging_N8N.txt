@@ -1,0 +1,7 @@
+ALTER TABLE public.incidencias_n8n 
+ADD COLUMN IF NOT EXISTS cliente_nombre TEXT,
+ADD COLUMN IF NOT EXISTS descripcion_averia TEXT,
+ADD COLUMN IF NOT EXISTS urgencia TEXT,
+ADD COLUMN IF NOT EXISTS fabricante TEXT,
+ADD COLUMN IF NOT EXISTS emplazamiento TEXT,
+ADD COLUMN IF NOT EXISTS email_remitente TEXT;

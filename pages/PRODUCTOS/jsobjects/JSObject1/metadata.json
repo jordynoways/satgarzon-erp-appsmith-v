@@ -1,0 +1,16 @@
+{
+  "gitSyncId": "694ce73ebe5af016d4a63fd2_dfc72540-446d-44a7-82fd-c3eca5ec23b3",
+  "id": "PRODUCTOS_JSObject1",
+  "unpublishedCollection": {
+    "name": "JSObject1",
+    "pageId": "PRODUCTOS",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "modoEdicion",
+        "value": "false"
+      }
+    ]
+  }
+}

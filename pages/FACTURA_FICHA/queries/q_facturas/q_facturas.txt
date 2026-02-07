@@ -1,0 +1,8 @@
+SELECT
+  referencia,
+  fecha,
+  total_importe AS importe,
+  estado
+FROM public.facturas
+ORDER BY fecha DESC
+LIMIT 200;

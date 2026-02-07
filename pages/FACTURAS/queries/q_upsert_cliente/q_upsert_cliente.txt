@@ -1,0 +1,11 @@
+INSERT INTO public.clientes (id, nombre_comercial, nombre_fiscal, cif_nif)
+VALUES (
+  {{this.params.id}},
+  {{this.params.nombre_comercial}},
+  {{this.params.nombre_fiscal}},
+  {{this.params.cif_nif}}
+)
+ON CONFLICT (id) DO UPDATE SET
+  nombre_comercial = COALESCE(EXCLUDED.nombre_comercial, public.clientes.nombre_comercial),
+  nombre_fiscal = COALESCE(EXCLUDED.nombre_fiscal, public.clientes.nombre_fiscal),
+  cif_nif = COALESCE(EXCLUDED.cif_nif, public.clientes.cif_nif);

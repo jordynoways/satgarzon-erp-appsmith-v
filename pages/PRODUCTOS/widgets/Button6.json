@@ -1,0 +1,52 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 15,
+  "boxShadow": "none",
+  "buttonColor": "#f97316",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [],
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "add",
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "ad4e6ody2o",
+  "leftColumn": 3,
+  "minWidth": 120,
+  "mobileBottomRow": 9,
+  "mobileLeftColumn": 0,
+  "mobileRightColumn": 13,
+  "mobileTopRow": 5,
+  "needsErrorInfo": false,
+  "onClick": "// 1. Decimos que vamos a crear\nstoreValue('modoFicha', 'crear');\n\n// 2. Limpiamos el modal\nresetWidget('ModalFichaProducto', true);\n\n// 3. Calculamos la referencia Y LUEGO abrimos el modal\nAPI_SiguienteRef.run(\n  () => { showModal('ModalFichaProducto'); }, \n  () => { showAlert('Error al calcular ref', 'error'); }\n);",
+  "originalBottomRow": 9,
+  "originalTopRow": 5,
+  "parentColumnSpace": 13.890625,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 12,
+  "text": "Nuevo",
+  "topRow": 11,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "un63olgq1j",
+  "widgetName": "Button6"
+}

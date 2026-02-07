@@ -1,0 +1,14 @@
+INSERT INTO public.clientes
+(nombre_comercial, nombre_fiscal, cif_nif, email, direccion, poblacion, codigo_postal, telefono)
+VALUES
+(
+  {{ inpNombreComercial.text }},
+  {{ Input_nombre_fiscal.text }},
+  {{ Input_cif.text }},
+  {{ Input_Mail.text }},
+  {{ Input_direccion.text }},
+  {{ Input_poblacion.text }},
+  NULLIF(TRIM({{ Input_codigo_postal.text }}), ''),
+  {{ Input_telefono.text }}
+)
+RETURNING *;

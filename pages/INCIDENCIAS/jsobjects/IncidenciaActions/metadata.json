@@ -1,0 +1,16 @@
+{
+  "gitSyncId": "6930adeefaf88d0819448125_IncidenciaActions",
+  "id": "INCIDENCIAS_IncidenciaActions",
+  "unpublishedCollection": {
+    "name": "IncidenciaActions",
+    "pageId": "INCIDENCIAS",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "loading",
+        "value": "false"
+      }
+    ]
+  }
+}

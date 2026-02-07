@@ -1,0 +1,24 @@
+{
+  "gitSyncId": "6930adeefaf88d0819448125_fbfd554b-cebb-44fe-8e47-c44534c4f60f",
+  "id": "GESTION_JSObject1",
+  "unpublishedCollection": {
+    "name": "JSObject1",
+    "pageId": "GESTION",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "PAGE_SIZE",
+        "value": "100"
+      },
+      {
+        "name": "FROM_DATE",
+        "value": "\"2025-01-01T00:00:00.000Z\""
+      },
+      {
+        "name": "SLEEP_MS",
+        "value": "350"
+      }
+    ]
+  }
+}

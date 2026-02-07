@@ -1,0 +1,94 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 15,
+  "bottomRowBeforeCollapse": 5,
+  "boxShadow": "none",
+  "dynamicBindingPathList": [
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "menuItems.menuItem1.onClick"
+    },
+    {
+      "key": "menuItems.menuItem3.onClick"
+    },
+    {
+      "key": "menuItems.menuItem2.onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "menuItems.menuItem1.onClick"
+    },
+    {
+      "key": "menuItems.menuItem3.onClick"
+    },
+    {
+      "key": "menuItems.menuItem2.onClick"
+    }
+  ],
+  "isCompact": false,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": "{{Table1.selectedRows.length > 0}}",
+  "key": "i95nkfqjcp",
+  "label": "Opciones",
+  "leftColumn": 13,
+  "menuColor": "#3f3f46",
+  "menuItems": {
+    "menuItem1": {
+      "iconColor": "#ef4444",
+      "iconName": "trash",
+      "id": "menuItem1",
+      "index": 0,
+      "isDisabled": false,
+      "isVisible": true,
+      "label": "Eliminar ",
+      "onClick": "{{ \n  (async function() {\n      if (Table1.selectedRows.length === 0) {\n          showAlert('Selecciona algo para borrar', 'warning');\n          return;\n      }\n\n      try {\n          // 1. Mandamos borrar\n          await API_EliminarProducto.run({ \n              ids: Table1.selectedRows.map(row => row.id).join(',') \n          });\n\n          showAlert('Borrando...', 'info');\n\n          // 2. 🛑 EL TRUCO: Esperamos medio segundo (500ms)\n          // Esto da tiempo a que la base de datos termine de escribir\n          await new Promise(resolve => setTimeout(resolve, 500));\n\n          // 3. Ahora sí, pedimos la lista\n          await API_ListarProductos.run();\n          \n          // 4. Limpiamos y avisamos\n          resetWidget('Table1');\n          showAlert('¡Eliminado correctamente!', 'success');\n\n      } catch (error) {\n          showAlert('Error al eliminar', 'error');\n      }\n  })()\n}}",
+      "widgetId": ""
+    },
+    "menuItem2": {
+      "id": "menuItem2",
+      "index": 1,
+      "isDisabled": false,
+      "isVisible": true,
+      "label": "Duplicar",
+      "onClick": "// Guardamos en memoria que queremos DUPLICAR\nstoreValue('modoFicha', 'duplicar');\n// Reseteamos el modal y lo abrimos\nresetWidget('ModalFichaProducto', true);\nshowModal('ModalFichaProducto');",
+      "widgetId": ""
+    },
+    "menuItem3": {
+      "id": "menuItem3",
+      "index": 2,
+      "isDisabled": false,
+      "isVisible": true,
+      "label": "Exportar",
+      "onClick": "{{ \n  download(Table1.selectedRows, 'seleccion_productos.csv', 'text/csv');\n}}",
+      "widgetId": ""
+    }
+  },
+  "menuItemsSource": "STATIC",
+  "menuVariant": "PRIMARY",
+  "mobileBottomRow": 9,
+  "mobileLeftColumn": 11,
+  "mobileRightColumn": 27,
+  "mobileTopRow": 5,
+  "needsErrorInfo": false,
+  "originalBottomRow": 5,
+  "originalTopRow": 1,
+  "parentColumnSpace": 13.890625,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "renderMode": "CANVAS",
+  "rightColumn": 22,
+  "topRow": 11,
+  "topRowBeforeCollapse": 1,
+  "type": "MENU_BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "rejyq0xq15",
+  "widgetName": "MenuButton1"
+}

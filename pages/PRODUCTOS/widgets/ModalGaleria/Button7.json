@@ -1,0 +1,54 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 15,
+  "boxShadow": "none",
+  "buttonColor": "#ef4444",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "trash",
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "derid1ncec",
+  "leftColumn": 27,
+  "minWidth": 120,
+  "mobileBottomRow": 15,
+  "mobileLeftColumn": 27,
+  "mobileRightColumn": 43,
+  "mobileTopRow": 11,
+  "needsErrorInfo": false,
+  "onClick": "{{ \n  (function() {\n    // 1. Verificación de seguridad\n    if (!appsmith.store.id_para_borrar) {\n        showAlert('❌ Error: No tengo el ID en memoria', 'error');\n        return; // Paramos aquí si no hay ID\n    }\n\n    // 2. Si tenemos ID, disparamos el borrado\n    API_PapeleraFoto.run(() => {\n        showAlert('🗑️ Foto enviada a la papelera', 'success');\n        \n        // Reseteamos las imágenes\n        resetWidget(\"Image2\"); // Tu imagen de la galería\n        resetWidget(\"Image1\"); // Tu imagen de la ficha\n        \n        // Refrescamos la tabla\n        API_ListarProductos.run();\n        \n        // Cerramos el modal\n        closeModal('ModalGaleria'); \n\n    }, (error) => {\n        showAlert('❌ Error al borrar: ' + (API_PapeleraFoto.data.message || 'Error desconocido'), 'error');\n    });\n  })()\n}}",
+  "parentColumnSpace": 9.46875,
+  "parentId": "3ahzl9t2lr",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 43,
+  "text": "Borrar",
+  "topRow": 11,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "xh5klaj5x9",
+  "widgetName": "Button7"
+}

@@ -1,0 +1,20 @@
+SELECT 
+    id_stel,
+    referencia, 
+    fecha, 
+    nombre_cliente, 
+    nif_cliente, 
+    total AS total_importe, 
+    estado,
+    titulo,
+    creado_por, -- <--- NUEVA COLUMNA
+    id_albaran_origen
+FROM public.facturas 
+WHERE 
+    (nombre_cliente ILIKE {{'%' + Table1.searchText + '%'}} 
+    OR referencia ILIKE {{'%' + Table1.searchText + '%'}}
+    OR creado_por ILIKE {{'%' + Table1.searchText + '%'}} -- Buscar por técnico
+    OR titulo ILIKE {{'%' + Table1.searchText + '%'}})
+ORDER BY fecha DESC, referencia DESC
+LIMIT {{Table1.pageSize}} 
+OFFSET {{Table1.pageOffset}};

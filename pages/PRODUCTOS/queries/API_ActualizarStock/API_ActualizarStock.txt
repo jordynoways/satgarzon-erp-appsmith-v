@@ -1,0 +1,9 @@
+UPDATE productos_stel SET
+    stock_real_1 = {{ InputStock1.text == "" ? "0" : InputStock1.text }}, -- DANI
+    stock_real_2 = {{ InputStock2.text == "" ? "0" : InputStock2.text }}, -- JORGE
+    stock_real_3 = {{ InputStock3.text == "" ? "0" : InputStock3.text }}, -- MARCO
+    stock_real_4 = {{ InputStock4.text == "" ? "0" : InputStock4.text }}, -- PEPE
+    stock_real_5 = {{ InputStock5.text == "" ? "0" : InputStock5.text }}, -- KRZYSZTOF
+    stock_real_6 = {{ InputStock6.text == "" ? "0" : InputStock6.text }}  -- NAVE
+-- CÓDIGO CORRECTO: Lee de la memoria 'store'
+WHERE id = {{ appsmith.store.id_stock_editar }};

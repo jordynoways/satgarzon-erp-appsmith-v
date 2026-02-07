@@ -1,0 +1,6 @@
+UPDATE public.facturas_stel_clean
+SET
+  deleted_at = NULL,
+  deleted_by = NULL
+WHERE referencia = ANY({{this.params.refs}})
+  AND deleted_at IS NOT NULL;

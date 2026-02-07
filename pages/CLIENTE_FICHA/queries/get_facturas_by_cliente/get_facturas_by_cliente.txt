@@ -1,0 +1,9 @@
+SELECT
+  referencia,
+  fecha,
+  total_importe AS importe,
+  estado
+FROM public.facturas
+WHERE cif_nif = {{ appsmith.store.clienteSeleccionado.cif_nif }}
+ORDER BY fecha DESC
+LIMIT 200;

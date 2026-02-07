@@ -1,0 +1,14 @@
+SELECT
+  linea_num,
+  codigo,
+  nombre,
+  descripcion,
+  precio_base,
+  uds,
+  dto_pct,
+  subtotal,
+  impuesto_nombre,
+  impuesto_pct
+FROM public.facturas_lineas
+WHERE referencia = {{ appsmith.store.facturaSeleccionada?.referencia }}
+ORDER BY linea_num ASC;

@@ -1,0 +1,5 @@
+SELECT 
+    id_stel, 
+    nombre_juridico 
+FROM public.clientes_stel_clean 
+WHERE id_stel = {{ q_ficha_lineas.data[0]?.cliente_id }};

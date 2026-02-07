@@ -1,0 +1,35 @@
+{
+  "gitSyncId": "6628dcf108899a0d84384594_25154378-5776-4643-9831-274871e86016",
+  "id": "ALBARANES FICHA_q_update_albaran",
+  "pluginId": "postgres-plugin",
+  "pluginType": "DB",
+  "unpublishedAction": {
+    "actionConfiguration": {
+      "body": "-- 1. ACTUALIZAR LÍNEA DE HORAS (HTI)\nUPDATE public.lineas_albaran \nSET\n    -- Si hay input, úsalo. Si no (NULL), usa la 'cantidad' que ya existe en la BD\n    cantidad = COALESCE({{ (InputUnidadesHt.text && isFinite(parseFloat(InputUnidadesHt.text))) ? parseFloat(InputUnidadesHt.text.replace(',', '.')) : null }}, cantidad),\n    \n    precio_unitario = COALESCE({{ (InputPrecioBaseHt.text && isFinite(parseFloat(InputPrecioBaseHt.text))) ? parseFloat((InputPrecioBaseHt.text || \"\").toString().replace('€', '').replace(',', '.')) : null }}, precio_unitario),\n    \n    descuento_porcentaje = COALESCE({{ (InputDescHt.text && isFinite(parseFloat(InputDescHt.text))) ? parseFloat((InputDescHt.text || \"\").toString().replace('%', '').replace(',', '.')) : null }}, descuento_porcentaje),\n\n    -- TRUCO MAESTRO: Multiplicamos el COALESCE de arriba por el COALESCE de abajo.\n    -- Así, si editas solo el precio, usa la cantidad antigua para recalcular el total correctamente.\n    importe_total = (\n        COALESCE({{ (InputUnidadesHt.text && isFinite(parseFloat(InputUnidadesHt.text))) ? parseFloat(InputUnidadesHt.text.replace(',', '.')) : null }}, cantidad)::numeric\n        * COALESCE({{ (InputPrecioBaseHt.text && isFinite(parseFloat(InputPrecioBaseHt.text))) ? parseFloat((InputPrecioBaseHt.text || \"\").toString().replace('€', '').replace(',', '.')) : null }}, precio_unitario)::numeric\n        * (1 - (COALESCE({{ (InputDescHt.text && isFinite(parseFloat(InputDescHt.text))) ? parseFloat((InputDescHt.text || \"\").toString().replace('%', '').replace(',', '.')) : null }}, descuento_porcentaje)::numeric / 100))\n    )\nWHERE id_albaran_stel = {{ appsmith.URL.queryParams.id }}::bigint \nAND referencia_articulo = 'HTI';\n\n\n-- 2. ACTUALIZAR LÍNEA DE DESPLAZAMIENTO (DESP)\nUPDATE public.lineas_albaran \nSET\n    cantidad = COALESCE({{ (InputUnidadesDs.text && isFinite(parseFloat(InputUnidadesDs.text))) ? parseFloat(InputUnidadesDs.text.replace(',', '.')) : null }}, cantidad),\n    \n    precio_unitario = COALESCE({{ (InputPreciobaseDs.text && isFinite(parseFloat(InputPreciobaseDs.text))) ? parseFloat((InputPreciobaseDs.text || \"\").toString().replace('€', '').replace(',', '.')) : null }}, precio_unitario),\n    \n    descuento_porcentaje = COALESCE({{ (InputDescuentoDs.text && isFinite(parseFloat(InputDescuentoDs.text))) ? parseFloat((InputDescuentoDs.text || \"\").toString().replace('%', '').replace(',', '.')) : null }}, descuento_porcentaje),\n\n    -- Recálculo automático usando mezcla de dato nuevo (si existe) o viejo\n    importe_total = (\n        COALESCE({{ (InputUnidadesDs.text && isFinite(parseFloat(InputUnidadesDs.text))) ? parseFloat(InputUnidadesDs.text.replace(',', '.')) : null }}, cantidad)::numeric\n        * COALESCE({{ (InputPreciobaseDs.text && isFinite(parseFloat(InputPreciobaseDs.text))) ? parseFloat((InputPreciobaseDs.text || \"\").toString().replace('€', '').replace(',', '.')) : null }}, precio_unitario)::numeric\n        * (1 - (COALESCE({{ (InputDescuentoDs.text && isFinite(parseFloat(InputDescuentoDs.text))) ? parseFloat((InputDescuentoDs.text || \"\").toString().replace('%', '').replace(',', '.')) : null }}, descuento_porcentaje)::numeric / 100))\n    )\nWHERE id_albaran_stel = {{ appsmith.URL.queryParams.id }}::bigint \nAND referencia_articulo = 'DESP';\n\n\n-- 3. ACTUALIZAR DESCRIPCIÓN\nUPDATE public.lineas_albaran \nSET\n    descripcion_larga = COALESCE(NULLIF('{{ (inptrabajos_realizados.text || \"\").replaceAll(\"'\", \"''\") }}', ''), descripcion_larga)\nWHERE id_albaran_stel = {{ appsmith.URL.queryParams.id }}::bigint \nAND length(descripcion_larga) > 20;\n\n\n-- 4. ACTUALIZAR CABECERA (Y RECALCULAR TOTAL REAL SUMANDO TODAS LAS LÍNEAS)\nUPDATE public.albaranes \nSET\n    -- REFERENCIA: Usamos replaceAll para evitar el error de sintaxis\n    referencia = COALESCE(NULLIF('{{ (Input_REFERENCIA.text || \"\").replaceAll(\"'\", \"''\") }}', ''), referencia),\n\n    -- FECHA:\n    fecha = COALESCE(TO_DATE(NULLIF('{{ DatePicker1.formattedDate || \"\" }}', ''), 'DD-MM-YYYY'), fecha),\n    \n    -- CLIENTE (ID): \n    cliente_id_stel = COALESCE(NULLIF('{{ Select_public_clientes2.selectedOptionValue || \"\" }}', '')::integer, cliente_id_stel),\n    \n    -- ESTADO (BUSCA POR NOMBRE, SI NO, RESPETA EL VIEJO):\n    estado_id = COALESCE(\n        (SELECT id_stel FROM public.estados_documento WHERE nombre = '{{ Select_estado.selectedOptionValue || \"\" }}' LIMIT 1),\n        estado_id\n    ),\n\n    -- CREADO POR (BUSCA POR NOMBRE, SI NO, RESPETA EL VIEJO):\n    creado_por_id = COALESCE(\n        (SELECT id_stel FROM public.empleados WHERE nombre = '{{ creado_por.selectedOptionValue || \"\" }}' LIMIT 1),\n        creado_por_id\n    ),\n    \n    -- TITULO: Usamos replaceAll\n    titulo = COALESCE(NULLIF('{{ (Input_TITULO.text || \"\").replaceAll(\"'\", \"''\") }}', ''), titulo),\n\n    -- TOTAL CABECERA: SUMA REAL de todas las líneas (materiales + servicios)\n    importe_total = (\n        SELECT COALESCE(SUM(importe_total), 0)\n        FROM public.lineas_albaran\n        WHERE id_albaran_stel = {{ appsmith.URL.queryParams.id }}::bigint\n    ),\n\n    ultima_actualizacion = NOW()\n\nWHERE id_stel = {{ appsmith.URL.queryParams.id }}::bigint;",
+      "encodeParamsToggle": true,
+      "paginationType": "NONE",
+      "pluginSpecifiedTemplates": [
+        {
+          "value": true
+        }
+      ],
+      "timeoutInMillisecond": 10000
+    },
+    "confirmBeforeExecute": false,
+    "datasource": {
+      "id": "postgres",
+      "isAutoGenerated": false,
+      "name": "postgres",
+      "pluginId": "postgres-plugin"
+    },
+    "dynamicBindingPathList": [
+      {
+        "key": "body"
+      }
+    ],
+    "name": "q_update_albaran",
+    "pageId": "ALBARANES FICHA",
+    "runBehaviour": "MANUAL",
+    "userSetOnLoad": false
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 10,
+  "bottomRowBeforeCollapse": 10,
+  "boxShadow": "none",
+  "buttonColor": "#22c55e",
+  "buttonStyle": "PRIMARY",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "floppy-disk",
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": "{{ CheckEditar.isChecked }}",
+  "key": "5wljn7kxut",
+  "leftColumn": 55,
+  "minWidth": 120,
+  "mobileBottomRow": 22,
+  "mobileLeftColumn": 31,
+  "mobileRightColumn": 47,
+  "mobileTopRow": 18,
+  "needsErrorInfo": false,
+  "onClick": "{{ \n  (async function() {\n      try {\n          if (appsmith.store.modoFicha === 'editar') {\n              await UpdateProducto.run(); \n              showAlert('✅ Actualizado correctamente', 'success');\n          } else {\n              await API_InsertarProducto.run();\n              showAlert('✅ Producto creado', 'success');\n          }\n\n          await q_getProductos.run();\n          await API_ListarProductos.run();\n          \n          resetWidget(\"Image1\"); \n          CheckEditar.setValue(false);\n          closeModal('ModalFichaProducto');\n\n      } catch (error) {\n          showAlert('❌ Error: ' + error.message, 'error');\n          console.log(error);\n      }\n  })()\n}}",
+  "originalBottomRow": 6,
+  "originalTopRow": 6,
+  "parentId": "4p7wibpg6o",
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 63,
+  "text": "Guardar",
+  "topRow": 6,
+  "topRowBeforeCollapse": 6,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "lrtk3h7ldh",
+  "widgetName": "Buttonguardar"
+}

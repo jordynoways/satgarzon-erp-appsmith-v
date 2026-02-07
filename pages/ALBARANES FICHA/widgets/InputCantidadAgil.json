@@ -1,0 +1,66 @@
+{
+  "animateLoading": true,
+  "autoFocus": false,
+  "borderColor": "#E0DEDE",
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "borderWidth": "1",
+  "bottomRow": 68,
+  "boxShadow": "none",
+  "defaultText": "1",
+  "displayName": "Input",
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "hideCard": false,
+  "iconAlign": "left",
+  "inputType": "INTEGER",
+  "isDisabled": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": "{{ appsmith.store.editando }}",
+  "key": "input_cantidad_agil",
+  "label": "Cant.",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelStyle": "",
+  "labelTextColor": "",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 43,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 63,
+  "mobileLeftColumn": 45,
+  "mobileRightColumn": 55,
+  "mobileTopRow": 56,
+  "needsErrorInfo": false,
+  "originalBottomRow": 68,
+  "originalTopRow": 61,
+  "parentColumnSpace": 6.9375,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "resetOnSubmit": true,
+  "responsiveBehavior": "fill",
+  "rightColumn": 53,
+  "shouldAllowAutofill": false,
+  "showStepArrows": true,
+  "topRow": 61,
+  "type": "INPUT_WIDGET_V2",
+  "version": 2,
+  "widgetId": "input_cantidad_agil",
+  "widgetName": "InputCantidadAgil"
+}

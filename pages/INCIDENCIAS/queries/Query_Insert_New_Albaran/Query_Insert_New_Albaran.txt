@@ -1,0 +1,18 @@
+INSERT INTO public.albaranes (
+  id_stel,
+  referencia,
+  titulo,
+  cliente_id_stel,
+  estado_id,
+  json_original,
+  fecha
+)
+VALUES (
+  {{ this.params.id_stel }}::bigint,
+  '{{ this.params.referencia }}',
+  '{{ this.params.titulo }}',
+  {{ this.params.cliente_id }}::bigint,
+  301,
+  jsonb_build_object('parent-incident-id', {{ this.params.ref_incidencia }}::text),
+  CURRENT_DATE
+)

@@ -1,0 +1,11 @@
+BEGIN;
+
+-- 1. Borrar todas las líneas asociadas al albarán
+DELETE FROM public.lineas_albaran 
+WHERE id_albaran_stel = {{ this.params.id }}::bigint;
+
+-- 2. Borrar el albarán en sí
+DELETE FROM public.albaranes 
+WHERE id_stel = {{ this.params.id }}::bigint;
+
+COMMIT;

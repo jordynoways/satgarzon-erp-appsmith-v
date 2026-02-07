@@ -1,0 +1,3 @@
+{
+  "ids": {{ this.params.ids }}
+}

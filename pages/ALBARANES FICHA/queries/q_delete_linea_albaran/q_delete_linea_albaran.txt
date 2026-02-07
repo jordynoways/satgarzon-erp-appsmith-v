@@ -1,0 +1,1 @@
+DELETE FROM public.lineas_albaran WHERE id = {{ this.params.id }}::bigint;

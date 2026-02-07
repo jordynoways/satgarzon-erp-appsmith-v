@@ -1,0 +1,25 @@
+SELECT 
+    a.id_stel,
+    a.creado_por_id, -- <--- AÑADE ESTA LÍNEA PARA QUE DEJE DE SER UNDEFINED
+    COALESCE(a.json_original->>'full-reference', a.referencia) as referencia,
+    a.fecha,
+    a.cliente_id_stel, 
+    c.nombre_fiscal as cliente_nombre,
+    est.nombre as estado_nombre,
+    emp.nombre as empleado_nombre,
+    a.titulo,
+    -- Lógica para sacar el PO o Aviso de origen
+    CASE 
+        WHEN a.json_original->>'source-document-reference' IS NOT NULL 
+            THEN a.json_original->>'source-document-reference'
+        WHEN a.json_original->>'parent-incident-id' IS NOT NULL 
+            THEN 'Aviso: ' || (a.json_original->>'parent-incident-id')
+        ELSE '' 
+    END as po_source,
+    a.json_original->>'subtotal-amount' as subtotal
+FROM public.albaranes a
+LEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text
+LEFT JOIN public.estados_documento est ON a.estado_id = est.id_stel
+LEFT JOIN public.empleados emp ON a.creado_por_id = emp.id_stel
+WHERE a.id_stel = {{ appsmith.URL.queryParams.id }}::bigint
+LIMIT 1;

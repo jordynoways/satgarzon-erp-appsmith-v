@@ -1,0 +1,32 @@
+INSERT INTO public.facturas (
+  referencia,
+  fecha,
+  nombre_fiscal,
+  nombre_comercial,
+  cif_nif,
+  estado,
+  total_importe,
+  importe_restante,
+  observaciones
+)
+VALUES (
+  {{ this.params.referencia }},
+  {{ this.params.fecha }},
+  {{ this.params.nombre_fiscal }},
+  {{ this.params.nombre_comercial }},
+  {{ this.params.cif_nif }},
+  {{ this.params.estado }},
+  {{ this.params.total_importe }},
+  {{ this.params.importe_restante }},
+  {{ this.params.observaciones }}
+)
+ON CONFLICT (referencia)
+DO UPDATE SET
+  fecha = EXCLUDED.fecha,
+  nombre_fiscal = EXCLUDED.nombre_fiscal,
+  nombre_comercial = EXCLUDED.nombre_comercial,
+  cif_nif = EXCLUDED.cif_nif,
+  estado = EXCLUDED.estado,
+  total_importe = EXCLUDED.total_importe,
+  importe_restante = EXCLUDED.importe_restante,
+  observaciones = EXCLUDED.observaciones;

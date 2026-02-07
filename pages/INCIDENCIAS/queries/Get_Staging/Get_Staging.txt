@@ -1,0 +1,34 @@
+-- DATOS DE STEL
+SELECT 
+    id::text as numero_actividad,
+    fecha_creacion as fecha_recepcion,
+    cliente_nombre as fabricante,
+    direccion as emplazamiento,
+    descripcion_problema as descripcion_averia,
+    prioridad as urgencia,
+    estado,
+    CASE WHEN SPLIT_PART(descripcion_problema, chr(10), 2) LIKE '%|%' THEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) ELSE NULL END as numero_averia,
+    NULL::text as modelo,
+    NULL::text as numero_parte,
+    fecha_creacion,
+    cliente_id_stel,
+    'STEL' as origen
+FROM public.incidencias
+UNION ALL
+-- DATOS DE N8N
+SELECT 
+    numero_actividad,
+    COALESCE(fecha_recepcion, fecha_creacion) as fecha_recepcion,
+    fabricante,
+    emplazamiento,
+    descripcion_averia,
+    urgencia,
+    COALESCE(estado, 'Pendiente') as estado,
+    numero_averia,
+    modelo,
+    numero_parte,
+    fecha_creacion,
+    NULL::bigint as cliente_id_stel,
+    'N8N' as origen
+FROM public.incidencias_n8n
+ORDER BY fecha_recepcion DESC;

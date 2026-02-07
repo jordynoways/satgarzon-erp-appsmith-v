@@ -1,0 +1,71 @@
+{
+  "appIsExample": false,
+  "appLayout": {
+    "type": "FLUID"
+  },
+  "applicationVersion": 2,
+  "collapseInvisibleWidgets": true,
+  "color": "#F3F1C7",
+  "evaluationVersion": 2,
+  "pages": [
+    {
+      "id": "MANUALES ISTOBAL",
+      "isDefault": false
+    },
+    {
+      "id": "HOME",
+      "isDefault": true
+    },
+    {
+      "id": "GESTION",
+      "isDefault": false
+    },
+    {
+      "id": "INCIDENCIAS",
+      "isDefault": false
+    },
+    {
+      "id": "SAT",
+      "isDefault": false
+    },
+    {
+      "id": "MANUALES ESQUEMAS",
+      "isDefault": false
+    },
+    {
+      "id": "NUEVO_PARTE",
+      "isDefault": false
+    },
+    {
+      "id": "CLIENTES",
+      "isDefault": false
+    },
+    {
+      "id": "CLIENTE_FICHA",
+      "isDefault": false
+    },
+    {
+      "id": "FACTURAS",
+      "isDefault": false
+    },
+    {
+      "id": "FACTURA_FICHA",
+      "isDefault": false
+    },
+    {
+      "id": "ALBARANES",
+      "isDefault": false
+    },
+    {
+      "id": "ALBARANES FICHA",
+      "isDefault": false
+    },
+    {
+      "id": "PRODUCTOS",
+      "isDefault": false
+    }
+  ],
+  "unpublishedAppLayout": {
+    "type": "FLUID"
+  }
+}

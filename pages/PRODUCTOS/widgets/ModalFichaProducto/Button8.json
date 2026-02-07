@@ -1,0 +1,52 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 48,
+  "boxShadow": "none",
+  "buttonColor": "#231f20",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [],
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "annotation",
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "4xi5nuacyu",
+  "leftColumn": 0,
+  "minWidth": 120,
+  "mobileBottomRow": 49,
+  "mobileLeftColumn": 0,
+  "mobileRightColumn": 16,
+  "mobileTopRow": 45,
+  "needsErrorInfo": false,
+  "onClick": "{{ \n  // 1. Guardamos TODA la fila en una variable llamada 'datos_stock'\n  storeValue('datos_stock', Table1.triggeredRow, false);\n\n  // 2. Guardamos también el ID para la consulta SQL (por si acaso)\n  storeValue('id_stock_editar', Table1.triggeredRow.id, false);\n\n  // 3. Abrimos el modal\n  showModal('ModalStock');\n}}",
+  "originalBottomRow": 44,
+  "originalTopRow": 40,
+  "parentColumnSpace": 13.186718749999999,
+  "parentId": "4p7wibpg6o",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 11,
+  "text": "STOCK",
+  "topRow": 44,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "yi4sj11bbp",
+  "widgetName": "Button8"
+}

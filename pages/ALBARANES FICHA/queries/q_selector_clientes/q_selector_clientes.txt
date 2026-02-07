@@ -1,0 +1,7 @@
+SELECT 
+    id_stel, 
+    nombre_fiscal 
+FROM public.clientes 
+-- El ILIKE está bien si quieres buscar, pero para empezar quítalo o déjalo así para que traiga todos:
+WHERE nombre_fiscal IS NOT NULL
+ORDER BY nombre_fiscal ASC;

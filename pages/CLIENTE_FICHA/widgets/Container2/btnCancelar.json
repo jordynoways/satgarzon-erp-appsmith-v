@@ -1,0 +1,63 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 4,
+  "boxShadow": "none",
+  "buttonColor": "#e32400",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "isDisabled"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "onClick"
+    },
+    {
+      "key": "isDisabled"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "graph-remove",
+  "isDefaultClickDisabled": true,
+  "isDisabled": "{{ !appsmith.store.editando }}",
+  "isLoading": false,
+  "isVisible": "{{ appsmith.store.editando }}",
+  "key": "xvm2ewjhac",
+  "leftColumn": 20,
+  "minWidth": 120,
+  "mobileBottomRow": 4,
+  "mobileLeftColumn": 19,
+  "mobileRightColumn": 35,
+  "mobileTopRow": 0,
+  "needsErrorInfo": false,
+  "onClick": "{{\n  // 1. Apagamos el modo edición\n  storeValue('editando', false);\n  \n  // 2. Limpiamos los inputs para que vuelvan a mostrar el dato de la base de datos\n  resetWidget(\"NombreDelFormulario\", true); \n}}",
+  "parentColumnSpace": 1.828125,
+  "parentId": "nqkiy25mfu",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 31,
+  "text": "Cancelar",
+  "topRow": 0,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "bg8nb9b9pm",
+  "widgetName": "btnCancelar"
+}

@@ -1,0 +1,5 @@
+SELECT
+  id,
+  COALESCE(NULLIF(nombre_comercial,''), NULLIF(nombre_fiscal,''), ('CLIENTE '||id::text)) AS label
+FROM public.clientes
+ORDER BY label;

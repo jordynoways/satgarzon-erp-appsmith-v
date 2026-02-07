@@ -1,0 +1,1 @@
+UPDATE productos_stel SET id = {{ this.params.new_id }} WHERE referencia = {{ this.params.referencia }};

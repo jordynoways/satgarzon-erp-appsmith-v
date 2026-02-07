@@ -1,0 +1,12 @@
+{
+  "contents": [
+    {
+      "parts": [
+        { "text": {{ JSON.stringify("Instrucción sistema: " + (this.params.instruccion || "Eres el asistente de Garzón Garcés SL.")) }} },
+        { "text": {{ JSON.stringify("Datos reales de la tabla: " + (this.params.promptChat || "No hay datos disponibles")) }} },
+        { "text": {{ JSON.stringify("Pregunta del usuario: " + (Input_Pregunta.text || "Hola")) }} }
+        {{ Grabadora_Voz.dataURL ? `, { "inlineData": { "mimeType": "audio/wav", "data": "${Grabadora_Voz.dataURL.split(",")[1]}" } }` : "" }}
+      ]
+    }
+  ]
+}

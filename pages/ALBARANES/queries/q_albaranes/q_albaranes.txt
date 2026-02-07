@@ -1,0 +1,34 @@
+SELECT 
+    a.id_stel,
+    COALESCE(a.json_original->>'full-reference', a.referencia) as referencia,
+    a.fecha,
+    c.nombre_fiscal as cliente,
+    a.titulo,
+    a.importe_total,
+    
+    -- 1. ESTADO TRADUCIDO
+    -- Si no encuentra el nombre en la tabla, pone el ID por si acaso
+    COALESCE(est.nombre, a.estado_id::text) as estado,
+    est.color as color_estado, -- Para usar en Appsmith
+    
+    -- 2. EMPLEADO TRADUCIDO
+    COALESCE(emp.nombre, 'Empleado ' || a.creado_por_id::text) as creado_por,
+    
+    -- 3. GENERADO DE (Lógica mejorada)
+    CASE 
+        -- Si hay referencia de documento origen (Pedido/Presupuesto)
+        WHEN a.json_original->>'source-document-reference' IS NOT NULL 
+            THEN a.json_original->>'source-document-reference'
+        -- Si hay ID de Incidencia (Aviso)
+        WHEN a.json_original->>'parent-incident-id' IS NOT NULL 
+            THEN 'Aviso ID: ' || (a.json_original->>'parent-incident-id')
+        ELSE 'Directo'
+    END as generado_de
+
+FROM public.albaranes a
+LEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text
+-- Unimos con nuestras nuevas tablas diccionario
+LEFT JOIN public.estados_documento est ON a.estado_id = est.id_stel
+LEFT JOIN public.empleados emp ON a.creado_por_id = emp.id_stel
+
+ORDER BY a.fecha DESC;

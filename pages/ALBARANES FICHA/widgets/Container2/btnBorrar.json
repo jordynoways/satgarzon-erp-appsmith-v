@@ -1,0 +1,67 @@
+{
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 4,
+  "bottomRowBeforeCollapse": 4,
+  "boxShadow": "none",
+  "buttonColor": "#e32400",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "isDisabled"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "isDisabled"
+    },
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "delete",
+  "isDefaultClickDisabled": true,
+  "isDisabled": "{{ !appsmith.store.editando }}",
+  "isLoading": false,
+  "isVisible": "{{ appsmith.store.editando }}",
+  "key": "xvm2ewjhac",
+  "leftColumn": 54,
+  "minWidth": 120,
+  "mobileBottomRow": 8,
+  "mobileLeftColumn": 48,
+  "mobileRightColumn": 64,
+  "mobileTopRow": 4,
+  "needsErrorInfo": false,
+  "onClick": "{{ \n      (async function() {\n        try {\n          // Nota: Lo ideal sería un Modal, pero para arreglar el error 'Modal not found' rápido:\n          // Ejecutamos borrado directo. Si quieres confirmación, avísame para crear el Modal.\n          await q_delete_albaran_cascade.run();\n          showAlert('Albarán eliminado correctamente', 'success');\n          navigateTo('ALBARANES'); \n        } catch (err) {\n           showAlert('Error al eliminar: ' + err.message, 'error');\n        }\n      })()\n  }}",
+  "originalBottomRow": 4,
+  "originalTopRow": 0,
+  "parentColumnSpace": 13.578125,
+  "parentId": "pv1p9nvpcw",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 64,
+  "text": "Eliminar",
+  "topRow": 0,
+  "topRowBeforeCollapse": 0,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "v3s4anxdjd",
+  "widgetName": "btnBorrar"
+}

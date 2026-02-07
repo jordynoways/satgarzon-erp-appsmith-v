@@ -1,0 +1,11 @@
+{
+  "gitSyncId": "6930adeefaf88d0819448125_d7916b0c-46d0-4c45-bf78-f3e8c9366321",
+  "id": "FACTURAS_FacturasJS",
+  "unpublishedCollection": {
+    "name": "FacturasJS",
+    "pageId": "FACTURAS",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": []
+  }
+}

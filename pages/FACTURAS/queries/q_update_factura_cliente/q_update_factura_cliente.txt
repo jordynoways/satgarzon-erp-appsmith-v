@@ -1,0 +1,5 @@
+UPDATE public.facturas
+SET cliente_id = {{ this.params.cliente_id }}
+WHERE referencia = {{ this.params.referencia }};
+
+SELECT 1;

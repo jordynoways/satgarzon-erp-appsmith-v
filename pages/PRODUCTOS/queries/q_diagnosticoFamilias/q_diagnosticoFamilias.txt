@@ -1,0 +1,6 @@
+-- Verificar si existe la tabla y tiene datos
+SELECT 
+    'Tabla existe' as status,
+    COUNT(*) as total_categorias,
+    COUNT(CASE WHEN deleted = false THEN 1 END) as categorias_activas
+FROM public.product_categories_stel;

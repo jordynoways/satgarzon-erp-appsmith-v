@@ -1,0 +1,61 @@
+{
+  "allowedFileTypes": [
+    "image/*"
+  ],
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 45,
+  "bottomRowBeforeCollapse": 45,
+  "boxShadow": "none",
+  "buttonColor": "#3b82f6",
+  "dynamicBindingPathList": [
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onFilesSelected"
+    }
+  ],
+  "dynamicTyping": true,
+  "fileDataType": "Base64",
+  "files": [],
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": "{{ CheckEditar.isChecked }}",
+  "key": "dg2aansb59",
+  "label": "Añadir foto",
+  "leftColumn": 54,
+  "maxFileSize": "20",
+  "maxNumFiles": 1,
+  "minWidth": 120,
+  "mobileBottomRow": 43,
+  "mobileLeftColumn": 44,
+  "mobileRightColumn": 60,
+  "mobileTopRow": 39,
+  "needsErrorInfo": false,
+  "onFilesSelected": "{{ApiSubirFoto.run().then(() => {\n  showAlert('Foto subida correctamente', 'success');\n  q_getProductos.run();\n});}}",
+  "originalBottomRow": 37,
+  "originalTopRow": 37,
+  "parentColumnSpace": 13.557812499999999,
+  "parentId": "4p7wibpg6o",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "hug",
+  "rightColumn": 63,
+  "selectedFiles": [],
+  "topRow": 41,
+  "topRowBeforeCollapse": 41,
+  "type": "FILE_PICKER_WIDGET_V2",
+  "version": 1,
+  "widgetId": "s4elv691m3",
+  "widgetName": "FilePickerFoto"
+}

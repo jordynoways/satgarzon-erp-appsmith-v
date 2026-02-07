@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS public.product_categories_stel (
+    id BIGINT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    rate_id BIGINT,
+    utc_last_modification_date TIMESTAMP WITH TIME ZONE,
+    deleted BOOLEAN DEFAULT false,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_productcat_name ON public.product_categories_stel(name);
+CREATE INDEX IF NOT EXISTS idx_productcat_deleted ON public.product_categories_stel(deleted);

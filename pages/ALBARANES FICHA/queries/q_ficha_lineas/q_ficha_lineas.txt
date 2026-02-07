@@ -1,0 +1,12 @@
+SELECT 
+    id, -- <--- ADDED THIS
+    referencia_articulo, 
+    nombre_articulo,
+    descripcion_larga,
+    cantidad,
+    precio_unitario,
+    importe_total,
+		descuento_porcentaje
+FROM public.lineas_albaran
+WHERE id_albaran_stel = {{ appsmith.URL.queryParams.id }}::bigint
+ORDER BY orden ASC;

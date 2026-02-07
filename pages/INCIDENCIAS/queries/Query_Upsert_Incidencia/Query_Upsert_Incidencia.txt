@@ -1,0 +1,28 @@
+INSERT INTO public.incidencias (
+  id,
+  fecha_creacion,
+  cliente_nombre,
+  direccion,
+  descripcion_problema,
+  prioridad,
+  estado,
+  cliente_id_stel
+)
+VALUES (
+  '{{ this.params.id }}'::int,
+  '{{ this.params.fecha }}'::timestamp,
+  '{{ this.params.cliente }}',
+  '{{ this.params.direccion }}',
+  '{{ this.params.asunto }}' || E'\n' || '{{ this.params.descripcion }}',
+  '{{ this.params.prioridad }}',
+  '{{ this.params.estado }}',
+  {{ this.params.cliente_id }}::bigint
+)
+ON CONFLICT (id) DO UPDATE SET
+  fecha_creacion = EXCLUDED.fecha_creacion,
+  cliente_nombre = EXCLUDED.cliente_nombre,
+  direccion = EXCLUDED.direccion,
+  descripcion_problema = EXCLUDED.descripcion_problema,
+  prioridad = EXCLUDED.prioridad,
+  estado = EXCLUDED.estado,
+  cliente_id_stel = EXCLUDED.cliente_id_stel;

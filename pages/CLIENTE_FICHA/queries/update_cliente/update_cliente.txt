@@ -1,0 +1,12 @@
+UPDATE public.clientes
+SET
+  nombre_comercial = {{ inpNombreComercial.text }},
+  nombre_fiscal    = {{ Input_nombre_fiscal.text }},
+  cif_nif          = {{ Input_cif.text }},
+  email            = {{ Input_Mail.text }},
+  direccion        = {{ Input_direccion.text }},
+  poblacion        = {{ Input_poblacion.text }},
+  codigo_postal    = NULLIF(TRIM({{ Input_codigo_postal.text }}), ''),
+  telefono         = {{ Input_telefono.text }}
+WHERE id = {{ Number(appsmith.URL.queryParams.id) }}
+RETURNING *;

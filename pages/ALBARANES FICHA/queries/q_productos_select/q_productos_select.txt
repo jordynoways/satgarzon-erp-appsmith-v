@@ -1,0 +1,13 @@
+SELECT *, 
+  (
+    COALESCE(CAST(stock_real_1 AS DECIMAL), 0) + 
+    COALESCE(CAST(stock_real_2 AS DECIMAL), 0) + 
+    COALESCE(CAST(stock_real_3 AS DECIMAL), 0) + 
+    COALESCE(CAST(stock_real_4 AS DECIMAL), 0) + 
+    COALESCE(CAST(stock_real_5 AS DECIMAL), 0) + 
+    COALESCE(CAST(stock_real_6 AS DECIMAL), 0) 
+    -- Añade aquí hasta el 10 si los usas todos
+  )::integer as stock_total_calculado  -- <--- ¡FÍJATE EN EL ::integer!
+FROM productos_stel 
+WHERE eliminado = 0 
+ORDER BY id ASC;

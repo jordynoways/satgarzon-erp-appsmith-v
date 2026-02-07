@@ -1,0 +1,6 @@
+SELECT
+  *
+FROM
+  public.clientes_stel_clean
+WHERE
+  "nombre_juridico" ilike '%{{Select_public_clientes2.filterText}}%'

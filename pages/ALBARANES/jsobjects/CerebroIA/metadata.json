@@ -1,0 +1,20 @@
+{
+  "gitSyncId": "6962c1cbdca6af427460bc6e_52203aad-8591-46e8-9780-a0c5a6e395aa",
+  "id": "ALBARANES_CerebroIA",
+  "unpublishedCollection": {
+    "name": "CerebroIA",
+    "pageId": "ALBARANES",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "filtros",
+        "value": "{\n  inicio: moment().startOf('month').format(\"YYYY-MM-DD\"),\n  fin: moment().format(\"YYYY-MM-DD\"),\n  busqueda: \"\"\n}"
+      },
+      {
+        "name": "respuestaTexto",
+        "value": "\"\""
+      }
+    ]
+  }
+}

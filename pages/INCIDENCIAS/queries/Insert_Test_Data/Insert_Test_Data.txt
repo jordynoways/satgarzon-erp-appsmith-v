@@ -1,0 +1,18 @@
+INSERT INTO public.incidencias_n8n (
+    fecha_recepcion, 
+    descripcion_averia, 
+    estado, 
+    urgencia,
+    cliente,
+    fabricante,
+    modelo
+) 
+VALUES (
+    CURRENT_DATE, 
+    'Incidencia de PRUEBA generada para validar tabla', 
+    'Pendiente', 
+    'Media',
+    'Cliente Prueba',
+    'Washtec',
+    'Modelo Test'
+);

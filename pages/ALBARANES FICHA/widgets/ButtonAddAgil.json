@@ -1,0 +1,67 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 68,
+  "boxShadow": "none",
+  "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "displayName": "Button",
+  "dynamicBindingPathList": [
+    {
+      "key": "buttonColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    },
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "hideCard": false,
+  "iconAlign": "left",
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": "{{ appsmith.store.editando }}",
+  "key": "btn_add_agil",
+  "label": "Añadir",
+  "leftColumn": 53,
+  "minWidth": 120,
+  "mobileBottomRow": 63,
+  "mobileLeftColumn": 56,
+  "mobileRightColumn": 64,
+  "mobileTopRow": 59,
+  "needsErrorInfo": false,
+  "onClick": "{{ \n  (async function() {\n     try {\n       const selected = q_productos_select.data.find(p => p.referencia === SelectProductoAgil.selectedOptionValue);\n       // Robust parsing for input quantity\n       const qtyStr = (InputCantidadAgil.text || \"1\").toString().replace(\",\", \".\");\n       const qty = parseFloat(qtyStr);\n\n       if (!selected) {\n         showAlert('Selecciona un producto primero', 'warning');\n         return;\n       }\n       \n       console.log(\"Producto seleccionado:\", selected);\n\n       // Intento de encontrar el precio en varias columnas posibles\n       let rawPrice = selected.p_venta || selected.precio || selected.pvp || selected.precio_venta || selected.neto || \"0\";\n       \n       // Robust parsing for price (handling potential 1.000,00 € format)\n       let priceStr = (rawPrice).toString();\n       if (priceStr.includes(\",\")) {\n          priceStr = priceStr.replace(\"€\", \"\").trim().replace(\".\", \"\").replace(\",\", \".\"); \n       } else {\n          priceStr = priceStr.replace(\"€\", \"\").trim();\n       }\n       const precio = parseFloat(priceStr);\n       \n       if (isNaN(precio) || precio === 0) {\n          showAlert('⚠️ Advertencia: El precio detectado es 0. Revisa la consola o los datos del producto.', 'warning');\n       }\n\n       const total = (qty * precio).toFixed(2);\n\n       if (!appsmith.URL.queryParams.id) {\n          throw new Error(\"No se encuentra el ID del albarán en la URL (id parameter missing).\");\n       }\n\n       await q_insert_linea_albaran.run({\n         referencia: selected.referencia,\n         descripcion: selected.nombre,\n         cantidad: qty,\n         precio: precio,\n         descuento: 0,\n         total: total\n       });\n       \n       await q_ficha_lineas.run();\n       showAlert('Producto añadido correctamente', 'success');\n       resetWidget('SelectProductoAgil');\n       resetWidget('InputCantidadAgil');\n     } catch (err) {\n       showAlert('Error al añadir: ' + err.message, 'error');\n     }\n  })()\n}}",
+  "originalBottomRow": 68,
+  "originalTopRow": 64,
+  "parentColumnSpace": 6.9375,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "fill",
+  "rightColumn": 61,
+  "text": "Añadir",
+  "topRow": 64,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "btn_add_agil",
+  "widgetName": "ButtonAddAgil"
+}

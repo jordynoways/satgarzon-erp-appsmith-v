@@ -1,0 +1,23 @@
+SELECT 
+    c.nombre_fiscal as cliente,
+    a.importe_total,
+    a.fecha,
+    a.titulo,
+    emp.nombre as creado_por,
+    est.nombre as estado
+FROM public.albaranes a
+LEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text
+LEFT JOIN public.empleados emp ON a.creado_por_id = emp.id_stel
+LEFT JOIN public.estados_documento est ON a.estado_id = est.id_stel
+WHERE 1=1
+-- Filtro de Cliente/Técnico (Solo filtra si realmente hay un nombre)
+AND (
+    {{CerebroIA.filtros.cliente === ""}} 
+    OR c.nombre_fiscal ILIKE {{'%' + CerebroIA.filtros.cliente + '%'}} 
+    OR emp.nombre ILIKE {{'%' + CerebroIA.filtros.cliente + '%'}}
+)
+-- Filtro de Fechas (Casteo explícito a date)
+AND a.fecha::date >= {{CerebroIA.filtros.inicio}}::date
+AND a.fecha::date <= {{CerebroIA.filtros.fin}}::date
+
+ORDER BY a.fecha DESC;

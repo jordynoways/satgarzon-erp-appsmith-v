@@ -1,0 +1,24 @@
+-- Insertar en Incidencias Reales
+INSERT INTO public.incidencias (
+    fecha_creacion,
+    cliente_nombre, -- Usamos el del correo si no hay match, o el del ID
+    direccion,
+    descripcion_problema,
+    prioridad,
+    estado,
+    cliente_id_stel
+)
+VALUES (
+    NOW(),
+    '{{ this.params.cliente_nombre }}',
+    '{{ this.params.direccion }}',
+    '{{ this.params.problema }}',
+    '{{ this.params.prioridad }}',
+    301, -- Pendiente
+    {{ this.params.cliente_id ? this.params.cliente_id : 'NULL' }}
+);
+
+-- Marcar como Procesado
+UPDATE public.incidencias_n8n
+SET estado = 'Procesado'
+WHERE id = {{ this.params.id }};

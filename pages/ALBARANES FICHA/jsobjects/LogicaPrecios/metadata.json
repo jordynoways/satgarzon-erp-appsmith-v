@@ -1,0 +1,16 @@
+{
+  "gitSyncId": "694ce73ebe5af016d4a63fd2_fa4c348b-6603-4419-a006-f49d9febd2b4",
+  "id": "ALBARANES FICHA_LogicaPrecios",
+  "unpublishedCollection": {
+    "name": "LogicaPrecios",
+    "pageId": "ALBARANES FICHA",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "tarifas",
+        "value": "{\n  istobal: {\n    hora: 32.74,\n    viaje: 35.08\n  },\n  washtec: {\n    hora: 39.00,\n    viaje: 53.00,\n    viaje_campsa: 50.00,\n    hora_festiva: 54.00\n  },\n  generico: {\n    hora: 50.00,\n    viaje: 65.00\n  },\n  mides: {\n    hora: 26.00\n  }\n}"
+      }
+    ]
+  }
+}

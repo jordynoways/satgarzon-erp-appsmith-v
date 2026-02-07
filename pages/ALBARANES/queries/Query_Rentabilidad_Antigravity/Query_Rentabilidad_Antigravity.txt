@@ -1,0 +1,45 @@
+SELECT 
+    a.id_stel as id,
+    a.fecha,
+    c.nombre_fiscal as cliente,
+    emp.nombre as tecnico,
+    a.importe_total as venta_bruta,
+    
+    -- 1. MANO DE OBRA (14€ x horas)
+    COALESCE((
+        SELECT SUM(l.cantidad * 14) 
+        FROM public.lineas_albaran l 
+        WHERE l.id_albaran_stel = a.id_stel AND l.nombre_articulo ILIKE '%HORA%'
+    ), 0) as subtotal_mano_obra,
+    
+    -- 2. VIAJE (16,50€ fijos)
+    CASE WHEN EXISTS (
+        SELECT 1 FROM public.lineas_albaran l 
+        WHERE l.id_albaran_stel = a.id_stel AND l.nombre_articulo ILIKE '%DESPLAZAMIENTO%'
+    ) THEN 16.50 ELSE 0 END as subtotal_viaje,
+    
+    -- 3. PIEZAS (Usando 'precio_compra' y convirtiendo el texto a número)
+    COALESCE((
+        SELECT SUM(l.cantidad * NULLIF(REPLACE(p.precio_compra, ',', '.'), '')::numeric) 
+        FROM public.lineas_albaran l
+        JOIN public.productos_stel p ON l.referencia_articulo = p.referencia
+        WHERE l.id_albaran_stel = a.id_stel 
+        AND l.nombre_articulo NOT ILIKE '%HORA%' 
+        AND l.nombre_articulo NOT ILIKE '%DESPLAZAMIENTO%'
+    ), 0) as subtotal_piezas_real,
+    
+    -- 4. BENEFICIO NETO (Venta - Sueldos - Viaje - Precio Compra Piezas)
+    (a.importe_total - (
+        COALESCE((SELECT SUM(l.cantidad * 14) FROM public.lineas_albaran l WHERE l.id_albaran_stel = a.id_stel AND l.nombre_articulo ILIKE '%HORA%'), 0) +
+        CASE WHEN EXISTS (SELECT 1 FROM public.lineas_albaran l WHERE l.id_albaran_stel = a.id_stel AND l.nombre_articulo ILIKE '%DESPLAZAMIENTO%') THEN 16.50 ELSE 0 END +
+        COALESCE((SELECT SUM(l.cantidad * NULLIF(REPLACE(p.precio_compra, ',', '.'), '')::numeric) FROM public.lineas_albaran l JOIN public.productos_stel p ON l.referencia_articulo = p.referencia WHERE l.id_albaran_stel = a.id_stel AND l.nombre_articulo NOT ILIKE '%HORA%' AND l.nombre_articulo NOT ILIKE '%DESPLAZAMIENTO%'), 0)
+    )) as beneficio_limpio
+
+FROM public.albaranes a
+LEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text
+LEFT JOIN public.empleados emp ON a.creado_por_id = emp.id_stel
+WHERE 
+    -- ESTO ELIMINA LOS DATOS DE 2023: Solo entran las fechas que la IA decida
+    a.fecha::date >= {{CerebroIA.filtros.inicio}}::date 
+    AND a.fecha::date <= {{CerebroIA.filtros.fin}}::date
+ORDER BY a.fecha DESC;
