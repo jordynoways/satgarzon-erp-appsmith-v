@@ -57,15 +57,13 @@ export default {
                     // pipes[0] = ES00543477
                     // pipes[1] = 5637193446 - ESTACION SERVICIO GUIBE S L - RIVAS
                     // pipes[2] = C/.FUNDICION, 53 - CENTRO LAVAMANIA
-                    // pipes[3] = Modelo 4PH2500, ...M18 - Tubería rota por la parte superior
+                    // pipes[3] = Modelo 4PH2500,...M18 - Tubería rota
 
-                    // Emplazamiento = gasolinera + dirección (pipes[1] sin nº parte + pipes[2])
                     const seg1 = pipes[1].trim().split(" - ");
                     const gasolinera = seg1.slice(1).join(" - ").trim();
                     const direccion = pipes[2].trim();
                     emplazamiento = gasolinera + ", " + direccion;
 
-                    // Modelo y descripción del problema (pipes[3+])
                     if (pipes.length >= 4) {
                         const resto = pipes.slice(3).join(" | ").trim();
                         const lastDash = resto.lastIndexOf(" - ");
@@ -79,8 +77,7 @@ export default {
                 } else {
                     // === WASHTEC ===
                     // pipes[0] = 413223167
-                    // pipes[1] = CAMPSA E.S.AREA Sº LA ATALAYA M.D. - 161741240 48H ... Boquillas partidas
-
+                    // pipes[1] = CAMPSA E.S.AREA LA ATALAYA - 161741240 48H ... Boquillas partidas
                     if (pipes.length >= 2) {
                         const firstDash = pipes[1].trim().indexOf(" - ");
                         if (firstDash > 0) {
@@ -92,8 +89,8 @@ export default {
                     }
                 }
 
-                // Guardar: descripcion = "averia\nemplazamiento\nmodelo\ndescripcion"
-                const datosExtra = [numeroAveria, emplazamiento, modelo, descripcionProblema].join("\n");
+                // Guardar: averia|||emplazamiento|||modelo|||descripcion
+                const datosExtra = [numeroAveria, emplazamiento, modelo, descripcionProblema].join("|||");
 
                 await Query_Upsert_Incidencia.run({
                     id: item.id,
@@ -144,7 +141,7 @@ export default {
                 cliente_id: clienteId,
                 ref_incidencia: incidentRef
             });
-            showAlert("✅ Albarán creado. Redirigiendo...", "success");
+            showAlert("✅ Albarán creado.", "success");
             navigateTo("ALBARANES FICHA", { id: newId, mode: "EDIT" }, "SAME_WINDOW");
         } catch (error) {
             showAlert("❌ Error: " + error.message, "error");
@@ -154,7 +151,7 @@ export default {
     setupTable: async () => {
         try {
             await Query_Create_Incidencias.run();
-            showAlert("Tabla Incidencias lista.", "success");
+            showAlert("Tabla lista.", "success");
         } catch (e) {
             showAlert("Error: " + e.message, "error");
         }

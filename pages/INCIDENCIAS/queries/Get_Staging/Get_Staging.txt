@@ -1,12 +1,12 @@
 -- INCIDENCIAS UNIFICADAS
--- descripcion_problema = "REF\naveria\nemplazamiento\nmodelo\ndescripcion"
+-- descripcion_problema = "INC02826\naveria|||emplazamiento|||modelo|||descripcion"
 SELECT 
     SPLIT_PART(descripcion_problema, chr(10), 1) as referencia,
     cliente_nombre as cliente,
-    SPLIT_PART(descripcion_problema, chr(10), 2) as numero_averia,
+    SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), '|||', 1) as numero_averia,
     direccion as emplazamiento,
-    SPLIT_PART(descripcion_problema, chr(10), 4) as modelo,
-    SPLIT_PART(descripcion_problema, chr(10), 5) as descripcion_averia,
+    SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), '|||', 3) as modelo,
+    SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), '|||', 4) as descripcion_averia,
     estado,
     prioridad as urgencia,
     fecha_creacion as fecha_recepcion,
