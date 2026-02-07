@@ -44,21 +44,10 @@ export default {
 
                 if (!item.id) continue;
 
-                // Parsear descripción: "NUMERO_AVERIA | CLIENTE/EMPLAZAMIENTO - DETALLES"
+                // Nombre real del cliente desde STEL (ej: ISTOBAL ESPAÑA S.L.U)
                 const desc = item.description || "";
                 const parts = desc.split(" | ");
-                const numeroAveria = parts.length > 1 ? parts[0].trim() : "";
-                
-                // Determinar fabricante por formato del número
-                let fabricante = "Desconocido";
-                if (numeroAveria.startsWith("ES")) {
-                    fabricante = "Istobal";
-                } else if (/^\d+$/.test(numeroAveria)) {
-                    fabricante = "WashTec";
-                }
-
-                // Nombre real del cliente desde el mapa de clientes STEL
-                const clienteNombre = clientesMap[item["account-id"]] || 
+                const clienteNombre = clientesMap[item["account-id"]] ||
                     (parts.length > 1 ? parts.slice(1).join(" | ").split(" - ")[0].trim() : "Desconocido");
 
                 await Query_Upsert_Incidencia.run({
@@ -66,7 +55,7 @@ export default {
                     fecha: item["creation-date"],
                     cliente: clienteNombre,
                     asunto: item["full-reference"] || "Sin Ref",
-                    descripcion: fabricante + " | " + numeroAveria + " | " + desc,
+                    descripcion: desc,
                     estado: statusName,
                     direccion: "",
                     prioridad: item.priority || "Normal",

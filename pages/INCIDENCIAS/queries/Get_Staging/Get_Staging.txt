@@ -1,34 +1,51 @@
--- DATOS DE STEL
+-- === INCIDENCIAS UNIFICADAS (STEL + N8N) ===
 SELECT 
-    id::text as numero_actividad,
-    fecha_creacion as fecha_recepcion,
-    cliente_nombre as fabricante,
-    direccion as emplazamiento,
-    descripcion_problema as descripcion_averia,
-    prioridad as urgencia,
+    -- Referencia (INC02826)
+    SPLIT_PART(descripcion_problema, chr(10), 1) as referencia,
+    -- Cliente real (ISTOBAL ESPAÑA S.L.U / WASHTEC SPAIN S.A.U)
+    cliente_nombre as cliente,
+    -- Nº Avería (ES00538724 / 413216055)
+    CASE 
+        WHEN SPLIT_PART(descripcion_problema, chr(10), 2) LIKE '%|%'
+        THEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1))
+        ELSE NULL 
+    END as numero_averia,
+    -- Fabricante (Istobal si empieza por ES, WashTec si solo números)
+    CASE 
+        WHEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) LIKE 'ES%' THEN 'Istobal'
+        WHEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) ~ '^\d+$' THEN 'WashTec'
+        ELSE cliente_nombre
+    END as fabricante,
+    -- Descripción (parte después del número)
+    CASE 
+        WHEN SPLIT_PART(descripcion_problema, chr(10), 2) LIKE '%|%'
+        THEN TRIM(SUBSTRING(SPLIT_PART(descripcion_problema, chr(10), 2) FROM POSITION(' | ' IN SPLIT_PART(descripcion_problema, chr(10), 2)) + 3))
+        ELSE SPLIT_PART(descripcion_problema, chr(10), 2)
+    END as descripcion_averia,
     estado,
-    CASE WHEN SPLIT_PART(descripcion_problema, chr(10), 2) LIKE '%|%' THEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) ELSE NULL END as numero_averia,
-    NULL::text as modelo,
-    NULL::text as numero_parte,
-    fecha_creacion,
+    prioridad as urgencia,
+    fecha_creacion as fecha_recepcion,
+    direccion as emplazamiento,
+    id::text as numero_actividad,
     cliente_id_stel,
     'STEL' as origen
 FROM public.incidencias
+
 UNION ALL
--- DATOS DE N8N
+
 SELECT 
-    numero_actividad,
-    COALESCE(fecha_recepcion, fecha_creacion) as fecha_recepcion,
-    fabricante,
-    emplazamiento,
-    descripcion_averia,
-    urgencia,
-    COALESCE(estado, 'Pendiente') as estado,
+    numero_actividad as referencia,
+    COALESCE(fabricante, 'N8N') as cliente,
     numero_averia,
-    modelo,
-    numero_parte,
-    fecha_creacion,
+    fabricante,
+    descripcion_averia,
+    COALESCE(estado, 'Pendiente') as estado,
+    urgencia,
+    COALESCE(fecha_recepcion, fecha_creacion) as fecha_recepcion,
+    emplazamiento,
+    numero_actividad,
     NULL::bigint as cliente_id_stel,
     'N8N' as origen
 FROM public.incidencias_n8n
+
 ORDER BY fecha_recepcion DESC;

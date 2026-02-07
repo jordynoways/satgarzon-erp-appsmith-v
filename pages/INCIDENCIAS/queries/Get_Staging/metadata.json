@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "-- DATOS DE STEL\nSELECT \n    id::text as numero_actividad,\n    fecha_creacion as fecha_recepcion,\n    cliente_nombre as fabricante,\n    direccion as emplazamiento,\n    descripcion_problema as descripcion_averia,\n    prioridad as urgencia,\n    estado,\n    CASE WHEN SPLIT_PART(descripcion_problema, chr(10), 2) LIKE '%|%' THEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) ELSE NULL END as numero_averia,\n    NULL::text as modelo,\n    NULL::text as numero_parte,\n    fecha_creacion,\n    cliente_id_stel,\n    'STEL' as origen\nFROM public.incidencias\nUNION ALL\n-- DATOS DE N8N\nSELECT \n    numero_actividad,\n    COALESCE(fecha_recepcion, fecha_creacion) as fecha_recepcion,\n    fabricante,\n    emplazamiento,\n    descripcion_averia,\n    urgencia,\n    COALESCE(estado, 'Pendiente') as estado,\n    numero_averia,\n    modelo,\n    numero_parte,\n    fecha_creacion,\n    NULL::bigint as cliente_id_stel,\n    'N8N' as origen\nFROM public.incidencias_n8n\nORDER BY fecha_recepcion DESC;",
+      "body": "-- INCIDENCIAS UNIFICADAS (STEL + N8N)\nSELECT\n    SPLIT_PART(descripcion_problema, chr(10), 1) as referencia,\n    cliente_nombre as cliente,\n    CASE WHEN SPLIT_PART(descripcion_problema, chr(10), 2) LIKE '%|%' THEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) ELSE NULL END as numero_averia,\n    CASE WHEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) LIKE 'ES%' THEN 'Istobal' WHEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) ~ '^\\d+$' THEN 'WashTec' ELSE cliente_nombre END as fabricante,\n    CASE WHEN SPLIT_PART(descripcion_problema, chr(10), 2) LIKE '%|%' THEN TRIM(SUBSTRING(SPLIT_PART(descripcion_problema, chr(10), 2) FROM POSITION(' | ' IN SPLIT_PART(descripcion_problema, chr(10), 2)) + 3)) ELSE SPLIT_PART(descripcion_problema, chr(10), 2) END as descripcion_averia,\n    estado,\n    prioridad as urgencia,\n    fecha_creacion as fecha_recepcion,\n    direccion as emplazamiento,\n    id::text as numero_actividad,\n    cliente_id_stel,\n    'STEL' as origen\nFROM public.incidencias\nUNION ALL\nSELECT\n    numero_actividad as referencia,\n    COALESCE(fabricante, 'N8N') as cliente,\n    numero_averia,\n    fabricante,\n    descripcion_averia,\n    COALESCE(estado, 'Pendiente') as estado,\n    urgencia,\n    COALESCE(fecha_recepcion, fecha_creacion) as fecha_recepcion,\n    emplazamiento,\n    numero_actividad,\n    NULL::bigint as cliente_id_stel,\n    'N8N' as origen\nFROM public.incidencias_n8n\nORDER BY fecha_recepcion DESC;",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -13,7 +13,7 @@
           "value": true
         }
       ],
-      "timeoutInMillisecond": 10000
+      "timeoutInMillisecond": 30000
     },
     "confirmBeforeExecute": false,
     "datasource": {
