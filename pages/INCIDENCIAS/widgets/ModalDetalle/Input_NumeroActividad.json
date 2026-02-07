@@ -4,7 +4,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 16,
   "boxShadow": "none",
-  "defaultText": "{{Table2.selectedRow.numero_actividad}}",
+  "defaultText": "{{Table2.selectedRow.referencia}}",
   "dynamicBindingPathList": [
     {
       "key": "defaultText"
