@@ -1,33 +1,12 @@
--- === INCIDENCIAS UNIFICADAS ===
--- descripcion_problema = "INC02826\n<descripcion original STEL>"
--- direccion = emplazamiento parseado (gasolinera + dirección)
-
+-- INCIDENCIAS UNIFICADAS
+-- descripcion_problema = "REF\naveria\nemplazamiento\nmodelo\ndescripcion"
 SELECT 
-    -- Referencia (INC02826)
     SPLIT_PART(descripcion_problema, chr(10), 1) as referencia,
-    -- Cliente real
     cliente_nombre as cliente,
-    -- Nº Avería = primer campo antes de ' | ' en la descripcion STEL
-    TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) as numero_averia,
-    -- Emplazamiento (gasolinera + dirección, parseado en sync y guardado en direccion)
+    SPLIT_PART(descripcion_problema, chr(10), 2) as numero_averia,
     direccion as emplazamiento,
-    -- Descripción del problema:
-    -- Istobal (ES%): último pipe de la descripción
-    -- WashTec: parte después del primer ' - ' del segundo pipe
-    CASE 
-        WHEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) LIKE 'ES%' 
-        THEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 
-             array_length(string_to_array(SPLIT_PART(descripcion_problema, chr(10), 2), ' | '), 1)))
-        ELSE TRIM(SUBSTRING(
-             SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 2) 
-             FROM POSITION(' - ' IN SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 2)) + 3))
-    END as descripcion_averia,
-    -- Nº Parte (solo Istobal: primer segmento del segundo pipe, antes del ' - ')
-    CASE 
-        WHEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) LIKE 'ES%'
-        THEN TRIM(SPLIT_PART(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 2), ' - ', 1))
-        ELSE ''
-    END as numero_parte,
+    SPLIT_PART(descripcion_problema, chr(10), 4) as modelo,
+    SPLIT_PART(descripcion_problema, chr(10), 5) as descripcion_averia,
     estado,
     prioridad as urgencia,
     fecha_creacion as fecha_recepcion,
@@ -43,8 +22,8 @@ SELECT
     COALESCE(fabricante, 'N8N') as cliente,
     numero_averia,
     emplazamiento,
+    modelo,
     descripcion_averia,
-    numero_parte,
     COALESCE(estado, 'Pendiente') as estado,
     urgencia,
     COALESCE(fecha_recepcion, fecha_creacion) as fecha_recepcion,

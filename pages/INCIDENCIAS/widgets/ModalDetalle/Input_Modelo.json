@@ -4,7 +4,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 27,
   "boxShadow": "none",
-  "defaultText": "{{Table2.selectedRow.direccion_completa}}",
+  "defaultText": "{{Table2.selectedRow.modelo}}",
   "dynamicBindingPathList": [
     {
       "key": "defaultText"
@@ -22,7 +22,7 @@
   "isRequired": false,
   "isVisible": true,
   "key": "modelo_key",
-  "label": "Dirección",
+  "label": "Modelo",
   "labelAlignment": "left",
   "labelPosition": "Top",
   "labelStyle": "",
