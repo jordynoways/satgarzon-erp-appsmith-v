@@ -1,31 +1,29 @@
--- === INCIDENCIAS UNIFICADAS (STEL + N8N) ===
+-- === INCIDENCIAS UNIFICADAS ===
+-- descripcion_problema formato: "REF\nnumero_averia\nnumero_parte\nemplazamiento\ndireccion\ndescripcion"
 SELECT 
     -- Referencia (INC02826)
     SPLIT_PART(descripcion_problema, chr(10), 1) as referencia,
-    -- Cliente real (ISTOBAL ESPAÑA S.L.U / WASHTEC SPAIN S.A.U)
+    -- Cliente real (ISTOBAL ESPAÑA S.L.U)
     cliente_nombre as cliente,
     -- Nº Avería (ES00538724 / 413216055)
+    SPLIT_PART(descripcion_problema, chr(10), 2) as numero_averia,
+    -- Nº Parte (5637193446 para Istobal, vacío para WashTec)
+    SPLIT_PART(descripcion_problema, chr(10), 3) as numero_parte,
+    -- Emplazamiento (ESTACION SERVICIO GUIBE S L - RIVAS)
+    COALESCE(NULLIF(direccion, ''), SPLIT_PART(descripcion_problema, chr(10), 4)) as emplazamiento,
+    -- Dirección completa (C/.FUNDICION, 53 - 28522)
+    SPLIT_PART(descripcion_problema, chr(10), 5) as direccion_completa,
+    -- Descripción del problema
+    SPLIT_PART(descripcion_problema, chr(10), 6) as descripcion_averia,
+    -- Fabricante auto-detectado
     CASE 
-        WHEN SPLIT_PART(descripcion_problema, chr(10), 2) LIKE '%|%'
-        THEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1))
-        ELSE NULL 
-    END as numero_averia,
-    -- Fabricante (Istobal si empieza por ES, WashTec si solo números)
-    CASE 
-        WHEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) LIKE 'ES%' THEN 'Istobal'
-        WHEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) ~ '^\d+$' THEN 'WashTec'
-        ELSE cliente_nombre
+        WHEN SPLIT_PART(descripcion_problema, chr(10), 2) LIKE 'ES%' THEN 'Istobal'
+        WHEN SPLIT_PART(descripcion_problema, chr(10), 2) ~ '^\d+$' THEN 'WashTec'
+        ELSE 'Otro'
     END as fabricante,
-    -- Descripción (parte después del número)
-    CASE 
-        WHEN SPLIT_PART(descripcion_problema, chr(10), 2) LIKE '%|%'
-        THEN TRIM(SUBSTRING(SPLIT_PART(descripcion_problema, chr(10), 2) FROM POSITION(' | ' IN SPLIT_PART(descripcion_problema, chr(10), 2)) + 3))
-        ELSE SPLIT_PART(descripcion_problema, chr(10), 2)
-    END as descripcion_averia,
     estado,
     prioridad as urgencia,
     fecha_creacion as fecha_recepcion,
-    direccion as emplazamiento,
     id::text as numero_actividad,
     cliente_id_stel,
     'STEL' as origen
@@ -33,16 +31,19 @@ FROM public.incidencias
 
 UNION ALL
 
+-- N8N
 SELECT 
     numero_actividad as referencia,
     COALESCE(fabricante, 'N8N') as cliente,
     numero_averia,
-    fabricante,
+    numero_parte,
+    emplazamiento,
+    '' as direccion_completa,
     descripcion_averia,
+    fabricante,
     COALESCE(estado, 'Pendiente') as estado,
     urgencia,
     COALESCE(fecha_recepcion, fecha_creacion) as fecha_recepcion,
-    emplazamiento,
     numero_actividad,
     NULL::bigint as cliente_id_stel,
     'N8N' as origen

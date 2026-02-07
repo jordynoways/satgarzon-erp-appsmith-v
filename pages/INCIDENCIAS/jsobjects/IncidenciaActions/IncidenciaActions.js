@@ -41,37 +41,68 @@ export default {
             let count = 0;
             for (const item of items) {
                 const statusName = statesMap[item["incident-state-id"]] || item["incident-state-id"] || "Desconocido";
-
                 if (!item.id) continue;
 
-                // Nombre real del cliente desde STEL (ej: ISTOBAL ESPAÑA S.L.U)
-                const desc = item.description || "";
-                const parts = desc.split(" | ");
-                const clienteNombre = clientesMap[item["account-id"]] ||
-                    (parts.length > 1 ? parts.slice(1).join(" | ").split(" - ")[0].trim() : "Desconocido");
+                // Nombre real del cliente
+                const clienteNombre = clientesMap[item["account-id"]] || "Desconocido";
 
-                // Extraer ubicación/emplazamiento de la descripción
-                // Formato: "ES00538724 | 5637193446 - ESTACION SERVICIO GUIBE S L - RIVAS | C/.FUNDICION, 53..."
-                // O: "413216055 | Flow Car Global Alcobendas - cortar y tensar cadena"
+                // Parsear descripcion STEL segun fabricante
+                const desc = item.description || "";
+                const pipes = desc.split(" | ");
+                const numeroAveria = pipes.length > 0 ? pipes[0].trim() : "";
+
+                let numeroParte = "";
                 let emplazamiento = "";
-                if (parts.length > 1) {
-                    const locationPart = parts[1].trim();
-                    // Coger nombre del emplazamiento (antes del último segmento que suele ser la descripción)
-                    const segments = locationPart.split(" - ");
-                    if (segments.length >= 2) {
-                        // Tomamos los primeros segmentos como ubicación
-                        emplazamiento = segments.slice(0, Math.min(segments.length, 2)).join(" - ").trim();
-                    } else {
-                        emplazamiento = locationPart;
+                let direccionCompleta = "";
+                let descripcionProblema = "";
+
+                if (numeroAveria.startsWith("ES")) {
+                    // === ISTOBAL ===
+                    // Formato: ES00538724 | 5637193446 - ESTACION SERVICIO - CIUDAD | C/.CALLE, NUM - CP - CIUDAD | Descripcion
+                    if (pipes.length >= 2) {
+                        const seg = pipes[1].trim().split(" - ");
+                        numeroParte = seg[0].trim();
+                        emplazamiento = seg.slice(1).join(" - ").trim();
+                    }
+                    if (pipes.length >= 3) {
+                        direccionCompleta = pipes[2].trim();
+                    }
+                    if (pipes.length >= 4) {
+                        descripcionProblema = pipes.slice(3).join(" | ").trim();
+                    }
+                } else {
+                    // === WASHTEC ===
+                    // Formato: 413216055 | CAMPSA E.S.AREA LA ATALAYA M.D. - 161741240 48H Boquillas partidas
+                    if (pipes.length >= 2) {
+                        const seg = pipes[1].trim().split(" - ");
+                        emplazamiento = seg[0].trim();
+                        descripcionProblema = seg.slice(1).join(" - ").trim();
                     }
                 }
+
+                // Guardar datos estructurados en descripcion_problema (6 lineas)
+                // Linea 1: referencia (INC02826)
+                // Linea 2: numero_averia (ES00538724)
+                // Linea 3: numero_parte (5637193446)
+                // Linea 4: emplazamiento (ESTACION SERVICIO - RIVAS)
+                // Linea 5: direccion (C/.FUNDICION, 53)
+                // Linea 6+: descripcion problema
+                const ref = item["full-reference"] || "Sin Ref";
+                const structured = [
+                    ref,
+                    numeroAveria,
+                    numeroParte,
+                    emplazamiento,
+                    direccionCompleta,
+                    descripcionProblema
+                ].join("\n");
 
                 await Query_Upsert_Incidencia.run({
                     id: item.id,
                     fecha: item["creation-date"],
                     cliente: clienteNombre,
-                    asunto: item["full-reference"] || "Sin Ref",
-                    descripcion: desc,
+                    asunto: ref,
+                    descripcion: [numeroAveria, numeroParte, emplazamiento, direccionCompleta, descripcionProblema].join("\n"),
                     estado: statusName,
                     direccion: emplazamiento,
                     prioridad: item.priority || "Normal",
@@ -101,7 +132,7 @@ export default {
             const nextRef = refData[0].siguiente_ref;
 
             let clienteId = row.cliente_id_stel;
-            const clienteNombre = row.cliente || row.fabricante;
+            const clienteNombre = row.cliente;
 
             if (!clienteId && clienteNombre) {
                 const clienteData = await Query_Find_Client_ID.run({ nombre: clienteNombre });
@@ -114,7 +145,7 @@ export default {
                 showAlert(`⚠️ No se encontró cliente '${clienteNombre}' en STEL.`, "warning");
             }
 
-            const incidentRef = row.referencia || row.numero_actividad || row.numero_averia;
+            const incidentRef = row.referencia || row.numero_actividad;
             const newId = Date.now();
 
             await Query_Insert_New_Albaran.run({
