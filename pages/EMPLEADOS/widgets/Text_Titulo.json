@@ -1,6 +1,6 @@
 {
     "animateLoading": true,
-    "bottomRow": 5,
+    "bottomRow": 4,
     "dynamicBindingPathList": [
         {
             "key": "fontFamily"
@@ -15,15 +15,15 @@
     "key": "titulo_empleados",
     "leftColumn": 0,
     "minWidth": 450,
-    "mobileBottomRow": 5,
+    "mobileBottomRow": 4,
     "mobileLeftColumn": 0,
-    "mobileRightColumn": 40,
+    "mobileRightColumn": 30,
     "mobileTopRow": 0,
     "needsErrorInfo": false,
     "parentId": "0",
     "renderMode": "CANVAS",
     "responsiveBehavior": "fill",
-    "rightColumn": 40,
+    "rightColumn": 24,
     "text": "👷 Gestión de Empleados",
     "textAlign": "LEFT",
     "textColor": "#333",

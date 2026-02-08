@@ -1,7 +1,6 @@
 export default {
     importarDeStel: async () => {
         try {
-            // 1. Llamar a la API de STEL
             const empleados = await get_empleados_stel.run();
 
             if (!empleados || empleados.length === 0) {
@@ -12,10 +11,9 @@ export default {
             let insertados = 0;
             let errores = 0;
 
-            // 2. Insertar cada empleado
             for (const emp of empleados) {
-                const nombre = emp.name || emp['employee-name'] || emp.nombre || '';
-                const apellidos = emp.surname || emp['employee-surname'] || emp.apellidos || '';
+                const nombre = emp.name || emp.nombre || '';
+                const apellidos = emp.surname || emp.apellidos || '';
                 const email = emp.email || '';
                 const telefono = emp.phone || emp.telefono || '';
 
@@ -34,9 +32,8 @@ export default {
                 }
             }
 
-            // 3. Refrescar tabla
             await Get_Empleados_DB.run();
-            showAlert(`Importados: ${insertados} empleados. Errores: ${errores}`, 'success');
+            showAlert('Importados: ' + insertados + ' empleados. Errores: ' + errores, 'success');
 
         } catch (error) {
             showAlert('Error al importar: ' + error.message, 'error');
