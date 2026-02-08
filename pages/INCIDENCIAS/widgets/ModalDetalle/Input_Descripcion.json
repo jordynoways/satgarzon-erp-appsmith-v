@@ -2,7 +2,7 @@
   "animateLoading": true,
   "autoFocus": false,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 62,
+  "bottomRow": 55,
   "boxShadow": "none",
   "defaultText": "{{Table2.selectedRow.descripcion_averia}}",
   "dynamicBindingPathList": [
@@ -46,7 +46,7 @@
   "rightColumn": 62,
   "shouldAllowAutofill": false,
   "showStepArrows": false,
-  "topRow": 42,
+  "topRow": 35,
   "type": "INPUT_WIDGET_V2",
   "version": 2,
   "widgetId": "input_descripcion",
