@@ -16,12 +16,15 @@
     },
     {
       "key": "borderRadius"
+    },
+    {
+      "key": "isDisabled"
     }
   ],
   "dynamicHeight": "FIXED",
   "dynamicTriggerPathList": [],
   "firstDayOfWeek": 1,
-  "isDisabled": false,
+  "isDisabled": "{{!appsmith.store.editMode}}",
   "isLoading": false,
   "isRequired": false,
   "isVisible": true,

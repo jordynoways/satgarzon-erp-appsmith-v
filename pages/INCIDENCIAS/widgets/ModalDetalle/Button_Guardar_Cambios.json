@@ -12,6 +12,9 @@
     },
     {
       "key": "borderRadius"
+    },
+    {
+      "key": "isVisible"
     }
   ],
   "dynamicTriggerPathList": [
@@ -23,7 +26,7 @@
   "isDefaultClickDisabled": true,
   "isDisabled": false,
   "isLoading": false,
-  "isVisible": true,
+  "isVisible": "{{appsmith.store.editMode === true}}",
   "key": "boton_guardar_key",
   "label": "Guardar Cambios",
   "leftColumn": 40,
@@ -35,7 +38,7 @@
   "mobileRightColumn": 16,
   "mobileTopRow": 20,
   "needsErrorInfo": false,
-  "onClick": "{{Update_Incidencia_N8N.run().then(() => {\n  closeModal('ModalDetalle');\n  Get_Staging.run();\n  showAlert('Incidencia actualizada', 'success');\n}).catch(() => {\n  showAlert('Error al actualizar', 'error');\n});}}",
+  "onClick": "{{Update_Incidencia_N8N.run().then(() => {\n  storeValue('editMode', false);\n  closeModal('ModalDetalle');\n  Get_Staging.run();\n  showAlert('Incidencia actualizada', 'success');\n}).catch(() => {\n  showAlert('Error al actualizar', 'error');\n});}}",
   "parentColumnSpace": 10,
   "parentId": "xfirhtgsix",
   "parentRowSpace": 10,

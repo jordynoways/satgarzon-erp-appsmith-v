@@ -11,13 +11,16 @@
     },
     {
       "key": "borderRadius"
+    },
+    {
+      "key": "isDisabled"
     }
   ],
   "dynamicHeight": "FIXED",
   "dynamicTriggerPathList": [],
   "iconAlign": "left",
   "inputType": "TEXT",
-  "isDisabled": false,
+  "isDisabled": "{{!appsmith.store.editMode}}",
   "isLoading": false,
   "isRequired": false,
   "isVisible": true,
