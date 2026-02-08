@@ -8,8 +8,9 @@
       "key": "borderRadius"
     }
   ],
-  "dynamicHeight": "AUTO_HEIGHT_WITH_LIMITS",
-  "height": 400,
+  "dynamicHeight": "FIXED",
+  "dynamicTriggerPathList": [],
+  "height": 170,
   "isLoading": false,
   "isVisible": true,
   "key": "modal_empleado_key",
