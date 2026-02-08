@@ -1,0 +1,3 @@
+SELECT id, nombre, apellidos, email, telefono, rol, activo, created_at, updated_at
+FROM public.empleados
+ORDER BY activo DESC, nombre ASC;

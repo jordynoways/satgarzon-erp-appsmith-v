@@ -1,0 +1,11 @@
+-- Sincroniza empleados de STEL a la tabla local
+-- Inserta nuevos, no toca los existentes
+INSERT INTO public.empleados (nombre, apellidos, email, telefono, rol)
+SELECT 
+  COALESCE(e.name, e."employee-name", e.nombre, 'Sin nombre'),
+  COALESCE(e.surname, e."employee-surname", e.apellidos, ''),
+  COALESCE(e.email, ''),
+  COALESCE(e.phone, e.telefono, ''),
+  'Técnico'
+FROM unnest({{get_empleados_stel.data}}::jsonb[]) AS e
+ON CONFLICT DO NOTHING;

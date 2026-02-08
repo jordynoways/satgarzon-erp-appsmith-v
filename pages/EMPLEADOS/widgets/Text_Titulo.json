@@ -1,0 +1,35 @@
+{
+    "animateLoading": true,
+    "bottomRow": 5,
+    "dynamicHeight": "FIXED",
+    "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+    "fontSize": "1.5rem",
+    "fontStyle": "BOLD",
+    "isLoading": false,
+    "isVisible": true,
+    "key": "titulo_empleados",
+    "leftColumn": 0,
+    "minWidth": 450,
+    "mobileBottomRow": 5,
+    "mobileLeftColumn": 0,
+    "mobileRightColumn": 40,
+    "mobileTopRow": 0,
+    "needsErrorInfo": false,
+    "parentId": "0",
+    "renderMode": "CANVAS",
+    "responsiveBehavior": "fill",
+    "rightColumn": 40,
+    "text": "👷 Gestión de Empleados",
+    "textAlign": "LEFT",
+    "textColor": "#333",
+    "topRow": 0,
+    "type": "TEXT_WIDGET",
+    "version": 1,
+    "widgetId": "txt_titulo_empleados",
+    "widgetName": "Text_Titulo",
+    "dynamicBindingPathList": [
+        {
+            "key": "fontFamily"
+        }
+    ]
+}

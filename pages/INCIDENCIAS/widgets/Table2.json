@@ -199,7 +199,7 @@
       "label": "asignado_a",
       "notation": "standard",
       "originalId": "asignado_a",
-      "selectOptions": "{{[{label: 'Sin asignar', value: 'Sin asignar'}, ...(get_empleados.data || []).map(e => ({label: e.name || e['employee-name'] || e.nombre || '', value: e.name || e['employee-name'] || e.nombre || ''}))]}}",
+      "selectOptions": "{{[{label: 'Sin asignar', value: 'Sin asignar'}, ...((Get_Empleados_Local.data && Get_Empleados_Local.data.length > 0) ? Get_Empleados_Local.data : (get_empleados.data || [])).map(e => ({label: e.nombre || e.name || e['employee-name'] || '', value: e.nombre || e.name || e['employee-name'] || ''}))]}}",
       "sticky": "",
       "textColor": "",
       "textSize": "0.875rem",
