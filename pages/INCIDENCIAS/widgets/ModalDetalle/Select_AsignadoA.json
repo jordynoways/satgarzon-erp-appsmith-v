@@ -1,65 +1,65 @@
 {
-    "accentColor": "{{appsmith.theme.colors.primaryColor}}",
-    "animateLoading": true,
-    "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-    "bottomRow": 48,
-    "boxShadow": "none",
-    "defaultOptionValue": "{{Table2.selectedRow.asignado_a || 'Sin asignar'}}",
-    "dynamicBindingPathList": [
-        {
-            "key": "defaultOptionValue"
-        },
-        {
-            "key": "borderRadius"
-        },
-        {
-            "key": "accentColor"
-        },
-        {
-            "key": "isDisabled"
-        }
-    ],
-    "dynamicHeight": "FIXED",
-    "dynamicPropertyPathList": [
-        {
-            "key": "sourceData"
-        }
-    ],
-    "dynamicTriggerPathList": [],
-    "isDisabled": "{{!appsmith.store.editMode}}",
-    "isFilterable": true,
-    "isLoading": false,
-    "isRequired": false,
-    "isVisible": true,
-    "key": "asignado_key",
-    "labelAlignment": "left",
-    "labelPosition": "Top",
-    "labelText": "Asignado a",
-    "labelTextSize": "0.875rem",
-    "labelWidth": 5,
-    "leftColumn": 32,
-    "maxDynamicHeight": 9000,
-    "minDynamicHeight": 4,
-    "minWidth": 450,
-    "mobileBottomRow": 48,
-    "mobileLeftColumn": 0,
-    "mobileRightColumn": 20,
-    "mobileTopRow": 41,
-    "needsErrorInfo": false,
-    "optionLabel": "label",
-    "optionValue": "value",
-    "parentColumnSpace": 10,
-    "parentId": "xfirhtgsix",
-    "parentRowSpace": 10,
-    "placeholderText": "Seleccionar técnico",
-    "renderMode": "CANVAS",
-    "responsiveBehavior": "fill",
-    "rightColumn": 62,
-    "serverSideFiltering": false,
-    "sourceData": "[\n  { \"label\": \"🔴 Sin asignar\", \"value\": \"Sin asignar\" },\n  { \"label\": \"👷 Jordy\", \"value\": \"Jordy\" },\n  { \"label\": \"👷 Técnico 2\", \"value\": \"Tecnico 2\" },\n  { \"label\": \"👷 Técnico 3\", \"value\": \"Tecnico 3\" }\n]",
-    "topRow": 41,
-    "type": "SELECT_WIDGET",
-    "version": 1,
-    "widgetId": "select_asignado",
-    "widgetName": "Select_AsignadoA"
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 13,
+  "boxShadow": "none",
+  "defaultOptionValue": "{{Table2.selectedRow.asignado_a || 'Sin asignar'}}",
+  "dynamicBindingPathList": [
+    {
+      "key": "defaultOptionValue"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "isDisabled"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "sourceData"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "isDisabled": "{{!appsmith.store.editMode}}",
+  "isFilterable": true,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "asignado_key",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelText": "Asignado a",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 33,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 48,
+  "mobileLeftColumn": 0,
+  "mobileRightColumn": 20,
+  "mobileTopRow": 41,
+  "needsErrorInfo": false,
+  "optionLabel": "label",
+  "optionValue": "value",
+  "parentColumnSpace": 10,
+  "parentId": "xfirhtgsix",
+  "parentRowSpace": 10,
+  "placeholderText": "Seleccionar técnico",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "serverSideFiltering": false,
+  "sourceData": "[\n  { \"label\": \"🔴 Sin asignar\", \"value\": \"Sin asignar\" },\n  { \"label\": \"👷 Jordy\", \"value\": \"Jordy\" },\n  { \"label\": \"👷 Técnico 2\", \"value\": \"Tecnico 2\" },\n  { \"label\": \"👷 Técnico 3\", \"value\": \"Tecnico 3\" }\n]",
+  "topRow": 6,
+  "type": "SELECT_WIDGET",
+  "version": 1,
+  "widgetId": "select_asignado",
+  "widgetName": "Select_AsignadoA"
 }
