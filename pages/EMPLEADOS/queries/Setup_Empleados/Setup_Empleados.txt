@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS public.empleados (
+  id SERIAL PRIMARY KEY,
+  nombre TEXT NOT NULL,
+  apellidos TEXT,
+  email TEXT,
+  telefono TEXT,
+  rol TEXT DEFAULT 'Técnico',
+  activo BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);

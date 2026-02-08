@@ -1,0 +1,8 @@
+INSERT INTO public.empleados (nombre, apellidos, email, telefono, rol)
+VALUES (
+  {{Input_Nombre.text}},
+  {{Input_Apellidos.text}},
+  {{Input_Email.text}},
+  {{Input_Telefono.text}},
+  {{Select_Rol.selectedOptionValue}}
+);

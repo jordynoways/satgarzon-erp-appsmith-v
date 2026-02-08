@@ -1,0 +1,51 @@
+{
+    "animateLoading": true,
+    "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+    "bottomRow": 5,
+    "boxShadow": "none",
+    "buttonColor": "#EF4444",
+    "buttonVariant": "SECONDARY",
+    "disabledWhenInvalid": false,
+    "dynamicBindingPathList": [
+        {
+            "key": "borderRadius"
+        },
+        {
+            "key": "isDisabled"
+        }
+    ],
+    "dynamicTriggerPathList": [
+        {
+            "key": "onClick"
+        }
+    ],
+    "iconAlign": "left",
+    "iconName": "trash",
+    "isDefaultClickDisabled": true,
+    "isDisabled": "{{!Table_Empleados.selectedRow || !Table_Empleados.selectedRow.id}}",
+    "isLoading": false,
+    "isVisible": true,
+    "key": "btn_eliminar_empleado",
+    "label": "🗑️ Eliminar",
+    "leftColumn": 40,
+    "minWidth": 120,
+    "mobileBottomRow": 8,
+    "mobileLeftColumn": 0,
+    "mobileRightColumn": 16,
+    "mobileTopRow": 5,
+    "needsErrorInfo": false,
+    "onClick": "{{Delete_Empleado.run().then(() => { Get_Empleados_DB.run(); showAlert('Empleado eliminado', 'success'); }).catch(() => showAlert('Error al eliminar', 'error'))}}",
+    "parentId": "0",
+    "placement": "CENTER",
+    "recaptchaType": "V3",
+    "renderMode": "CANVAS",
+    "resetFormOnClick": false,
+    "responsiveBehavior": "hug",
+    "rightColumn": 48,
+    "text": "🗑️ Eliminar",
+    "topRow": 0,
+    "type": "BUTTON_WIDGET",
+    "version": 1,
+    "widgetId": "btn_del_emp",
+    "widgetName": "Button_Eliminar"
+}

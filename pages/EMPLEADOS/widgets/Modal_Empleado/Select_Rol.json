@@ -1,0 +1,48 @@
+{
+    "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+    "animateLoading": true,
+    "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+    "bottomRow": 21,
+    "boxShadow": "none",
+    "defaultOptionValue": "Técnico",
+    "dynamicBindingPathList": [
+        {
+            "key": "borderRadius"
+        },
+        {
+            "key": "accentColor"
+        }
+    ],
+    "dynamicHeight": "FIXED",
+    "dynamicPropertyPathList": [
+        {
+            "key": "sourceData"
+        }
+    ],
+    "isDisabled": false,
+    "isFilterable": true,
+    "isLoading": false,
+    "isRequired": true,
+    "isVisible": true,
+    "key": "select_rol_key",
+    "labelAlignment": "left",
+    "labelPosition": "Top",
+    "labelText": "Rol",
+    "labelTextSize": "0.875rem",
+    "labelWidth": 5,
+    "leftColumn": 0,
+    "optionLabel": "label",
+    "optionValue": "value",
+    "parentId": "modal_emp_id",
+    "placeholderText": "Seleccionar rol",
+    "renderMode": "CANVAS",
+    "responsiveBehavior": "fill",
+    "rightColumn": 32,
+    "serverSideFiltering": false,
+    "sourceData": "[\n  { \"label\": \"🛠️ Técnico\", \"value\": \"Técnico\" },\n  { \"label\": \"👔 Administrador\", \"value\": \"Administrador\" },\n  { \"label\": \"📋 Supervisor\", \"value\": \"Supervisor\" }\n]",
+    "topRow": 14,
+    "type": "SELECT_WIDGET",
+    "version": 1,
+    "widgetId": "sel_rol_emp",
+    "widgetName": "Select_Rol"
+}
