@@ -109,10 +109,16 @@
       "key": "primaryColumns.estado.textColor"
     },
     {
+      "key": "primaryColumns.estado.selectOptions"
+    },
+    {
       "key": "primaryColumns.modelo.computedValue"
     },
     {
       "key": "primaryColumns.asignado_a.computedValue"
+    },
+    {
+      "key": "primaryColumns.asignado_a.selectOptions"
     }
   ],
   "dynamicPropertyPathList": [
@@ -124,18 +130,28 @@
     },
     {
       "key": "primaryColumns.estado.textColor"
+    },
+    {
+      "key": "primaryColumns.estado.selectOptions"
+    },
+    {
+      "key": "primaryColumns.asignado_a.selectOptions"
     }
   ],
   "dynamicTriggerPathList": [
     {
       "key": "onRowSelected"
+    },
+    {
+      "key": "onSubmit"
     }
   ],
   "enableClientSideSearch": true,
   "endOfData": false,
   "flexVerticalAlignment": "start",
   "horizontalAlignment": "LEFT",
-  "inlineEditingSaveOption": "ROW_LEVEL",
+  "inlineEditingSaveOption": "CUSTOM",
+  "onSubmit": "{{Update_Inline_N8N.run().then(() => { Get_Staging.run(); showAlert('Actualizado', 'success'); }).catch(() => showAlert('Error al actualizar', 'error'))}}",
   "isLoading": false,
   "isSortable": true,
   "isVisible": true,
@@ -162,7 +178,7 @@
       "allowCellWrapping": false,
       "allowSameOptionsInNewRow": true,
       "cellBackground": "",
-      "columnType": "text",
+      "columnType": "select",
       "computedValue": "{{(() => { const tableData = Table2.processedTableData || []; return tableData.length > 0 ? tableData.map((currentRow, currentIndex) => (currentRow[\"asignado_a\"])) : asignado_a })()}}",
       "currencyCode": "USD",
       "decimals": 0,
@@ -172,17 +188,18 @@
       "horizontalAlignment": "CENTER",
       "id": "asignado_a",
       "index": 7,
-      "isCellEditable": false,
+      "isCellEditable": true,
       "isCellVisible": true,
       "isDerived": false,
       "isDisabled": false,
       "isDiscardVisible": true,
-      "isEditable": false,
+      "isEditable": true,
       "isSaveVisible": true,
       "isVisible": true,
       "label": "asignado_a",
       "notation": "standard",
       "originalId": "asignado_a",
+      "selectOptions": "{{[{label: 'Sin asignar', value: 'Sin asignar'}, ...(get_empleados.data || []).map(e => ({label: e.name || e['employee-name'] || e.nombre || '', value: e.name || e['employee-name'] || e.nombre || ''}))]}}",
       "sticky": "",
       "textColor": "",
       "textSize": "0.875rem",
@@ -332,7 +349,7 @@
       "allowCellWrapping": false,
       "allowSameOptionsInNewRow": true,
       "cellBackground": "{{(() => { const tableData = Table2.processedTableData || []; return tableData.length > 0 ? tableData.map((currentRow) => { const e = (currentRow.estado || '').toLowerCase(); if (e.includes('pendiente')) return '#FFFDE7'; if (e.includes('cerrada')) return '#E8F5E9'; if (e.includes('resuelta')) return '#E3F2FD'; if (e.includes('rechazada')) return '#FFEBEE'; if (e.includes('mantenimiento')) return '#FFF3E0'; if (e.includes('pedir') || e.includes('material')) return '#ECEFF1'; return ''; }) : '' })()}}",
-      "columnType": "text",
+      "columnType": "select",
       "computedValue": "{{(() => { const tableData = Table2.processedTableData || []; return tableData.length > 0 ? tableData.map((currentRow, currentIndex) => (currentRow[\"estado\"])) : estado })()}}",
       "currencyCode": "USD",
       "decimals": 0,
@@ -342,17 +359,18 @@
       "horizontalAlignment": "CENTER",
       "id": "estado",
       "index": 6,
-      "isCellEditable": false,
+      "isCellEditable": true,
       "isCellVisible": true,
       "isDerived": false,
       "isDisabled": false,
       "isDiscardVisible": true,
-      "isEditable": false,
+      "isEditable": true,
       "isSaveVisible": true,
       "isVisible": true,
       "label": "estado",
       "notation": "standard",
       "originalId": "estado",
+      "selectOptions": "{{[{label: '⏳ Pendiente', value: 'Pendiente'}, {label: '❌ Rechazada', value: 'Rechazada'}, {label: '🔵 Resuelta', value: 'Resuelta'}, {label: '🛠️ MANTENIMIENTO', value: 'MANTENIMIENTO'}, {label: '📦 PEDIR MATERIAL', value: 'PEDIR MATERIAL'}, {label: '✅ Cerrada', value: 'Cerrada'}]}}",
       "sticky": "",
       "textColor": "{{(() => { const tableData = Table2.processedTableData || []; return tableData.length > 0 ? tableData.map((currentRow) => { const e = (currentRow.estado || '').toLowerCase(); if (e.includes('pendiente')) return '#F9A825'; if (e.includes('cerrada')) return '#2E7D32'; if (e.includes('resuelta')) return '#1565C0'; if (e.includes('rechazada')) return '#C62828'; if (e.includes('mantenimiento')) return '#E65100'; if (e.includes('pedir') || e.includes('material')) return '#37474F'; return '#333'; }) : '' })()}}",
       "textSize": "0.875rem",

@@ -1,0 +1,5 @@
+UPDATE public.incidencias_n8n
+SET 
+  estado = {{Table2.updatedRow.estado}},
+  asignado_a = {{Table2.updatedRow.asignado_a}}
+WHERE numero_actividad = {{Table2.updatedRow.numero_actividad}};

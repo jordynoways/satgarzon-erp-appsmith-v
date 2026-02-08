@@ -17,6 +17,9 @@
     },
     {
       "key": "isDisabled"
+    },
+    {
+      "key": "sourceData"
     }
   ],
   "dynamicHeight": "FIXED",
@@ -56,7 +59,7 @@
   "responsiveBehavior": "fill",
   "rightColumn": 63,
   "serverSideFiltering": false,
-  "sourceData": "[\n  { \"label\": \"🔴 Sin asignar\", \"value\": \"Sin asignar\" },\n  { \"label\": \"👷 Jordy\", \"value\": \"Jordy\" },\n  { \"label\": \"👷 Técnico 2\", \"value\": \"Tecnico 2\" },\n  { \"label\": \"👷 Técnico 3\", \"value\": \"Tecnico 3\" }\n]",
+  "sourceData": "{{[{label: '🔴 Sin asignar', value: 'Sin asignar'}, ...(get_empleados.data || []).map(e => ({label: '👷 ' + (e.name || e['employee-name'] || e.nombre || ''), value: e.name || e['employee-name'] || e.nombre || ''}))]}}",
   "topRow": 6,
   "type": "SELECT_WIDGET",
   "version": 1,
