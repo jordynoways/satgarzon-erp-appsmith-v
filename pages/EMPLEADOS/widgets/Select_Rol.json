@@ -2,7 +2,7 @@
   "accentColor": "{{appsmith.theme.colors.primaryColor}}",
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 21,
+  "bottomRow": 400,
   "boxShadow": "none",
   "defaultOptionValue": "Técnico",
   "dynamicBindingPathList": [
@@ -31,6 +31,7 @@
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
   "leftColumn": 0,
+  "minHeight": 400,
   "optionLabel": "label",
   "optionValue": "value",
   "parentId": "modal_emp_id",

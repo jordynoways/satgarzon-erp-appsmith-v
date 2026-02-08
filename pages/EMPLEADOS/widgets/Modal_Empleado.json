@@ -27,5 +27,6 @@
   "type": "MODAL_WIDGET",
   "version": 2,
   "widgetId": "modal_emp_id",
-  "widgetName": "Modal_Empleado"
+  "widgetName": "Modal_Empleado",
+  "width": 650.75
 }
