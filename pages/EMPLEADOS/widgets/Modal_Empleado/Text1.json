@@ -11,6 +11,9 @@
     },
     {
       "key": "borderRadius"
+    },
+    {
+      "key": "text"
     }
   ],
   "dynamicHeight": "AUTO_HEIGHT",
@@ -35,7 +38,7 @@
   "responsiveBehavior": "fill",
   "rightColumn": 41,
   "shouldTruncate": false,
-  "text": "Modal Title",
+  "text": "{{appsmith.store.modalMode === 'edit' ? '✏️ Editar Empleado' : '➕ Nuevo Empleado'}}",
   "textAlign": "LEFT",
   "textColor": "#231F20",
   "topRow": 1,

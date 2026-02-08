@@ -1,11 +1,11 @@
 {
-    "gitSyncId": "6987b6eefc080202ca7dfe57_Insert_Empleado",
-    "id": "EMPLEADOS_Insert_Empleado",
+    "gitSyncId": "6987b6eefc080202ca7dfe57_Update_Empleado_Modal",
+    "id": "EMPLEADOS_Update_Empleado_Modal",
     "pluginId": "postgres-plugin",
     "pluginType": "DB",
     "unpublishedAction": {
         "actionConfiguration": {
-            "body": "INSERT INTO public.empleados (nombre, apellidos, email, telefono, rol)\nVALUES (\n  {{Input_Nombre_.text}},\n  {{Input_Apellidos.text}},\n  {{Input_Email.text}},\n  {{Input_Telefono.text}},\n  {{Select_Rol.selectedOptionValue}}\n);\n",
+            "body": "UPDATE public.empleados\nSET\n  nombre = {{Input_Nombre_.text}},\n  apellidos = {{Input_Apellidos.text}},\n  email = {{Input_Email.text}},\n  telefono = {{Input_Telefono.text}},\n  rol = {{Select_Rol.selectedOptionValue}}\nWHERE id = {{Table_Empleados.selectedRow.id}};\n",
             "encodeParamsToggle": true,
             "paginationType": "NONE",
             "pluginSpecifiedTemplates": [
@@ -27,7 +27,7 @@
                 "key": "body"
             }
         ],
-        "name": "Insert_Empleado",
+        "name": "Update_Empleado_Modal",
         "pageId": "EMPLEADOS",
         "runBehaviour": "MANUAL",
         "userSetOnLoad": false

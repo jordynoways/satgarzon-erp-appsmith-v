@@ -98,12 +98,17 @@
       "key": "tableData"
     }
   ],
-  "dynamicTriggerPathList": [],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onRowSelected"
+    }
+  ],
   "enableClientSideSearch": true,
   "endOfData": false,
   "flexVerticalAlignment": "start",
   "horizontalAlignment": "LEFT",
   "inlineEditingSaveOption": "ROW_LEVEL",
+  "onRowSelected": "{{storeValue('modalMode', 'edit').then(() => showModal(Modal_Empleado.name))}}",
   "isLoading": false,
   "isSortable": true,
   "isVisible": true,

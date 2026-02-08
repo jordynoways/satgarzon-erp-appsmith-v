@@ -7,6 +7,11 @@
   "buttonStyle": "PRIMARY_BUTTON",
   "buttonVariant": "PRIMARY",
   "disabledWhenInvalid": false,
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
   "dynamicBindingPathList": [
     {
       "key": "buttonColor"
@@ -34,7 +39,8 @@
   "resetFormOnClick": false,
   "responsiveBehavior": "hug",
   "rightColumn": 60,
-  "text": "Confirm",
+  "onClick": "{{(appsmith.store.modalMode === 'edit' ? Update_Empleado_Modal.run() : Insert_Empleado.run()).then(() => { closeModal(Modal_Empleado.name); Get_Empleados_DB.run(); showAlert(appsmith.store.modalMode === 'edit' ? 'Empleado actualizado' : 'Empleado creado', 'success'); }).catch(() => showAlert('Error al guardar', 'error'))}}",
+  "text": "💾 Guardar",
   "topRow": 55,
   "type": "BUTTON_WIDGET",
   "version": 1,

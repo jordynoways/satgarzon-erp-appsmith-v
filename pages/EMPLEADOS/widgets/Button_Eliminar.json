@@ -9,11 +9,18 @@
   "dynamicBindingPathList": [
     {
       "key": "borderRadius"
+    },
+    {
+      "key": "isDisabled"
     }
   ],
-  "dynamicTriggerPathList": [],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
   "isDefaultClickDisabled": true,
-  "isDisabled": false,
+  "isDisabled": "{{!Table_Empleados.selectedRow || !Table_Empleados.selectedRow.id}}",
   "isLoading": false,
   "isVisible": true,
   "key": "x3vtk7thcf",
@@ -33,6 +40,7 @@
   "resetFormOnClick": false,
   "responsiveBehavior": "hug",
   "rightColumn": 64,
+  "onClick": "{{Delete_Empleado.run().then(() => { Get_Empleados_DB.run(); showAlert('Empleado eliminado', 'success'); }).catch(() => showAlert('Error al eliminar', 'error'))}}",
   "text": "🗑️ Eliminar",
   "topRow": 5,
   "type": "BUTTON_WIDGET",

@@ -4,13 +4,19 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 7,
   "boxShadow": "none",
-  "defaultOptionValue": "GREEN",
+  "defaultOptionValue": "{{appsmith.store.modalMode === 'edit' ? Table_Empleados.selectedRow.rol : 'Técnico'}}",
   "dynamicBindingPathList": [
     {
       "key": "accentColor"
     },
     {
       "key": "borderRadius"
+    },
+    {
+      "key": "defaultOptionValue"
+    },
+    {
+      "key": "sourceData"
     }
   ],
   "dynamicHeight": "FIXED",
@@ -27,7 +33,7 @@
   "key": "19sf0662vo",
   "labelAlignment": "left",
   "labelPosition": "Top",
-  "labelText": "Label",
+  "labelText": "Rol",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
   "leftColumn": 44,
@@ -39,8 +45,8 @@
   "mobileRightColumn": 64,
   "mobileTopRow": 0,
   "needsErrorInfo": false,
-  "optionLabel": "name",
-  "optionValue": "code",
+  "optionLabel": "label",
+  "optionValue": "value",
   "parentColumnSpace": 9.98046875,
   "parentId": "7qjkmco6vw",
   "parentRowSpace": 10,
@@ -49,7 +55,7 @@
   "responsiveBehavior": "fill",
   "rightColumn": 64,
   "serverSideFiltering": false,
-  "sourceData": "[\n  {\n    \"name\": \"Blue\",\n    \"code\": \"BLUE\"\n  },\n  {\n    \"name\": \"Green\",\n    \"code\": \"GREEN\"\n  },\n  {\n    \"name\": \"Red\",\n    \"code\": \"RED\"\n  }\n]",
+  "sourceData": "{{[{label: 'Técnico', value: 'Técnico'}, {label: 'Administrador', value: 'Administrador'}, {label: 'Supervisor', value: 'Supervisor'}]}}",
   "topRow": 0,
   "type": "SELECT_WIDGET",
   "version": 1,
