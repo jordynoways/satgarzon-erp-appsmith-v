@@ -1,0 +1,9 @@
+INSERT INTO public.empleados (nombre, apellidos, email, telefono, rol)
+VALUES (
+  {{this.params.nombre}},
+  {{this.params.apellidos}},
+  {{this.params.email}},
+  {{this.params.telefono}},
+  'Técnico'
+)
+ON CONFLICT DO NOTHING;
