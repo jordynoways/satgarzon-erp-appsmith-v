@@ -63,10 +63,6 @@
     {
       "id": "PRODUCTOS",
       "isDefault": false
-    },
-    {
-      "id": "EMPLEADOS",
-      "isDefault": false
     }
   ],
   "unpublishedAppLayout": {
