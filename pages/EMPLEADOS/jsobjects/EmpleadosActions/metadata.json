@@ -1,23 +1,10 @@
 {
-    "gitSyncId": "6987b6eefc080202ca7dfe57_EmpleadosActions",
-    "id": "EMPLEADOS_EmpleadosActions",
+  "gitSyncId": "6987b6eefc080202ca7dfe57_EmpleadosActions",
+  "id": "EMPLEADOS_EmpleadosActions",
+  "unpublishedCollection": {
+    "name": "EmpleadosActions",
+    "pageId": "EMPLEADOS",
     "pluginId": "js-plugin",
-    "pluginType": "JS",
-    "unpublishedCollection": {
-        "actions": [
-            {
-                "actionConfiguration": {
-                    "body": "",
-                    "isAsync": true,
-                    "timeoutInMillisecond": 60000
-                },
-                "name": "importarDeStel"
-            }
-        ],
-        "body": "export default {\n  importarDeStel: async () => {\n    try {\n      const empleados = await get_empleados_stel.run();\n      if (!empleados || empleados.length === 0) {\n        showAlert('No se encontraron empleados en STEL', 'warning');\n        return;\n      }\n      let insertados = 0;\n      let errores = 0;\n      for (const emp of empleados) {\n        const nombre = emp.name || emp['employee-name'] || emp.nombre || '';\n        const apellidos = emp.surname || emp['employee-surname'] || emp.apellidos || '';\n        const email = emp.email || '';\n        const telefono = emp.phone || emp.telefono || '';\n        if (!nombre) continue;\n        try {\n          await Import_Empleado_Stel.run({ nombre, apellidos, email, telefono });\n          insertados++;\n        } catch (e) { errores++; }\n      }\n      await Get_Empleados_DB.run();\n      showAlert(`Importados: ${insertados} empleados. Errores: ${errores}`, 'success');\n    } catch (error) {\n      showAlert('Error al importar: ' + error.message, 'error');\n    }\n  }\n}",
-        "name": "EmpleadosActions",
-        "pageId": "EMPLEADOS",
-        "pluginId": "js-plugin",
-        "pluginType": "JS"
-    }
+    "pluginType": "JS"
+  }
 }
