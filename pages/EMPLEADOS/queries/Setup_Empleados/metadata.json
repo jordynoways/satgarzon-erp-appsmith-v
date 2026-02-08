@@ -5,7 +5,7 @@
     "pluginType": "DB",
     "unpublishedAction": {
         "actionConfiguration": {
-            "body": "CREATE TABLE IF NOT EXISTS public.empleados (\n  id SERIAL PRIMARY KEY,\n  nombre TEXT NOT NULL,\n  apellidos TEXT,\n  email TEXT,\n  telefono TEXT,\n  rol TEXT DEFAULT 'Técnico',\n  activo BOOLEAN DEFAULT TRUE,\n  created_at TIMESTAMPTZ DEFAULT NOW(),\n  updated_at TIMESTAMPTZ DEFAULT NOW()\n);\n",
+            "body": "DROP TABLE IF EXISTS public.empleados;\n\nCREATE TABLE public.empleados (\n  id SERIAL PRIMARY KEY,\n  nombre TEXT NOT NULL,\n  apellidos TEXT DEFAULT '',\n  email TEXT DEFAULT '',\n  telefono TEXT DEFAULT '',\n  rol TEXT DEFAULT 'Técnico',\n  activo BOOLEAN DEFAULT TRUE,\n  created_at TIMESTAMPTZ DEFAULT NOW(),\n  updated_at TIMESTAMPTZ DEFAULT NOW()\n);\n",
             "encodeParamsToggle": true,
             "paginationType": "NONE",
             "pluginSpecifiedTemplates": [

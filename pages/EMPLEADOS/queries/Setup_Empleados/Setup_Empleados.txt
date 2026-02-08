@@ -1,9 +1,11 @@
-CREATE TABLE IF NOT EXISTS public.empleados (
+DROP TABLE IF EXISTS public.empleados;
+
+CREATE TABLE public.empleados (
   id SERIAL PRIMARY KEY,
   nombre TEXT NOT NULL,
-  apellidos TEXT,
-  email TEXT,
-  telefono TEXT,
+  apellidos TEXT DEFAULT '',
+  email TEXT DEFAULT '',
+  telefono TEXT DEFAULT '',
   rol TEXT DEFAULT 'Técnico',
   activo BOOLEAN DEFAULT TRUE,
   created_at TIMESTAMPTZ DEFAULT NOW(),
