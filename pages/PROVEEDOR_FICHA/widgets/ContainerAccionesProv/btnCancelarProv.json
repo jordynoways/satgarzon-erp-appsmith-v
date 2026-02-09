@@ -1,0 +1,55 @@
+{
+    "animateLoading": true,
+    "borderRadius": "1.5rem",
+    "bottomRow": 4,
+    "boxShadow": "none",
+    "buttonColor": "#e32400",
+    "buttonVariant": "PRIMARY",
+    "dynamicBindingPathList": [
+        {
+            "key": "isVisible"
+        },
+        {
+            "key": "isDisabled"
+        }
+    ],
+    "dynamicPropertyPathList": [
+        {
+            "key": "isVisible"
+        },
+        {
+            "key": "onClick"
+        },
+        {
+            "key": "isDisabled"
+        }
+    ],
+    "dynamicTriggerPathList": [
+        {
+            "key": "onClick"
+        }
+    ],
+    "iconAlign": "left",
+    "iconName": "graph-remove",
+    "isDisabled": "{{ !appsmith.store.editando }}",
+    "isLoading": false,
+    "isVisible": "{{ appsmith.store.editando }}",
+    "key": "pf_btnCancelar_key",
+    "leftColumn": 20,
+    "minWidth": 120,
+    "needsErrorInfo": false,
+    "onClick": "{{\n  storeValue('editando', false);\n}}",
+    "parentColumnSpace": 1.828125,
+    "parentId": "provficha_c2_canvas_01",
+    "parentRowSpace": 10,
+    "placement": "CENTER",
+    "renderMode": "CANVAS",
+    "responsiveBehavior": "hug",
+    "rightColumn": 31,
+    "text": "Cancelar",
+    "topRow": 0,
+    "type": "BUTTON_WIDGET",
+    "version": 1,
+    "widgetId": "pf_btnCancelar_01",
+    "widgetName": "btnCancelarProv"
+}

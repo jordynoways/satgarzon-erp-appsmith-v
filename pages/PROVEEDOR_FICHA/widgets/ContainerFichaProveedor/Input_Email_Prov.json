@@ -1,43 +1,43 @@
 {
-  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
-  "animateLoading": true,
-  "autoFocus": false,
-  "borderRadius": "1.5rem",
-  "bottomRow": 35,
-  "boxShadow": "none",
-  "defaultText": "{{ appsmith.store.proveedorSeleccionado?.email }}",
-  "dynamicBindingPathList": [
-    {
-      "key": "accentColor"
-    },
-    {
-      "key": "defaultText"
-    }
-  ],
-  "dynamicHeight": "FIXED",
-  "iconAlign": "left",
-  "inputType": "EMAIL",
-  "isDisabled": true,
-  "isLoading": false,
-  "isVisible": true,
-  "key": "pf_inp_email",
-  "label": "Email",
-  "labelAlignment": "left",
-  "labelPosition": "Top",
-  "labelTextSize": "0.875rem",
-  "labelWidth": 5,
-  "leftColumn": 23,
-  "minWidth": 450,
-  "needsErrorInfo": false,
-  "parentColumnSpace": 12.7294921875,
-  "parentId": "provficha_canvas_01",
-  "parentRowSpace": 10,
-  "renderMode": "CANVAS",
-  "responsiveBehavior": "fill",
-  "rightColumn": 45,
-  "topRow": 31,
-  "type": "INPUT_WIDGET_V2",
-  "version": 2,
-  "widgetId": "pf_inp_email_01",
-  "widgetName": "Input_Email_Prov"
+    "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+    "animateLoading": true,
+    "autoFocus": false,
+    "borderRadius": "1.5rem",
+    "bottomRow": 20,
+    "boxShadow": "none",
+    "defaultText": "{{ appsmith.store.proveedorSeleccionado?.email }}",
+    "dynamicBindingPathList": [
+        {
+            "key": "accentColor"
+        },
+        {
+            "key": "defaultText"
+        }
+    ],
+    "dynamicPropertyPathList": [{ "key": "isDisabled" }],\n    "dynamicHeight": "FIXED",
+    "iconAlign": "left",
+    "inputType": "EMAIL",
+    "isDisabled": "{{ !appsmith.store.editando }}",
+    "isLoading": false,
+    "isVisible": true,
+    "key": "pf_inp_email",
+    "label": "Email",
+    "labelAlignment": "left",
+    "labelPosition": "Top",
+    "labelTextSize": "0.875rem",
+    "labelWidth": 5,
+    "leftColumn": 21,
+    "minWidth": 450,
+    "needsErrorInfo": false,
+    "parentColumnSpace": 12.7294921875,
+    "parentId": "provficha_canvas_01",
+    "parentRowSpace": 10,
+    "renderMode": "CANVAS",
+    "responsiveBehavior": "fill",
+    "rightColumn": 43,
+    "topRow": 16,
+    "type": "INPUT_WIDGET_V2",
+    "version": 2,
+    "widgetId": "pf_inp_email_01",
+    "widgetName": "Input_Email_Prov"
 }

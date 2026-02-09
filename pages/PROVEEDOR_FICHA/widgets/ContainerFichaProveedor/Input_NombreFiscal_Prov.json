@@ -14,10 +14,10 @@
             "key": "defaultText"
         }
     ],
-    "dynamicHeight": "FIXED",
+    "dynamicPropertyPathList": [{ "key": "isDisabled" }],\n    "dynamicHeight": "FIXED",
     "iconAlign": "left",
     "inputType": "TEXT",
-    "isDisabled": true,
+    "isDisabled": "{{ !appsmith.store.editando }}",
     "isLoading": false,
     "isRequired": false,
     "isVisible": true,
