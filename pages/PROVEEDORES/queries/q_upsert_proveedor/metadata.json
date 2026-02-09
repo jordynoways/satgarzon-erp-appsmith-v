@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "INSERT INTO public.proveedores (id, nombre_fiscal, nombre_comercial, cif_nif, direccion, poblacion, provincia, codigo_postal, telefono, email, referencia)\nVALUES (\n  {{ Number(this.params.id) }},\n  {{ this.params.nombre_fiscal || 'Sin Nombre' }},\n  {{ this.params.nombre_comercial || null }},\n  {{ this.params.cif_nif || null }},\n  {{ this.params.direccion || null }},\n  {{ this.params.poblacion || null }},\n  {{ this.params.provincia || null }},\n  {{ this.params.codigo_postal || null }},\n  {{ this.params.telefono || null }},\n  {{ this.params.email || null }},\n  {{ this.params.referencia || null }}\n)\nON CONFLICT (id) \nDO UPDATE SET\n  nombre_fiscal = EXCLUDED.nombre_fiscal,\n  nombre_comercial = EXCLUDED.nombre_comercial,\n  cif_nif = EXCLUDED.cif_nif,\n  direccion = EXCLUDED.direccion,\n  poblacion = EXCLUDED.poblacion,\n  provincia = EXCLUDED.provincia,\n  codigo_postal = EXCLUDED.codigo_postal,\n  telefono = EXCLUDED.telefono,\n  email = EXCLUDED.email,\n  referencia = EXCLUDED.referencia;\n",
+      "body": "INSERT INTO public.proveedores (id, nombre_fiscal, nombre_comercial, cif_nif)\nVALUES (\n  {{ Number(this.params.id) }},\n  {{ this.params.nombre_fiscal || 'Sin Nombre' }},\n  {{ this.params.nombre_comercial || null }},\n  {{ this.params.cif_nif || null }}\n)\nON CONFLICT (id) \nDO UPDATE SET\n  nombre_fiscal = EXCLUDED.nombre_fiscal,\n  nombre_comercial = EXCLUDED.nombre_comercial,\n  cif_nif = EXCLUDED.cif_nif;\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
