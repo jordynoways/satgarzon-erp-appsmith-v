@@ -71,6 +71,10 @@
     {
       "id": "PROVEEDORES",
       "isDefault": false
+    },
+    {
+      "id": "PROVEEDOR_FICHA",
+      "isDefault": false
     }
   ],
   "unpublishedAppLayout": {
