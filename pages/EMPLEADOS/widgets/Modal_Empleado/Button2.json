@@ -7,17 +7,17 @@
   "buttonStyle": "PRIMARY_BUTTON",
   "buttonVariant": "PRIMARY",
   "disabledWhenInvalid": false,
-  "dynamicTriggerPathList": [
-    {
-      "key": "onClick"
-    }
-  ],
   "dynamicBindingPathList": [
     {
       "key": "buttonColor"
     },
     {
       "key": "borderRadius"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
     }
   ],
   "isDefaultClickDisabled": true,
@@ -32,6 +32,7 @@
   "mobileRightColumn": 63,
   "mobileTopRow": 18,
   "needsErrorInfo": false,
+  "onClick": "{{(appsmith.store.modalMode === 'edit' ? Update_Empleado_Modal.run() : Insert_Empleado.run()).then(() => { closeModal(Modal_Empleado.name); Get_Empleados_DB.run(); showAlert(appsmith.store.modalMode === 'edit' ? 'Empleado actualizado' : 'Empleado creado', 'success'); }).catch(() => showAlert('Error al guardar', 'error'))}}",
   "parentId": "7qjkmco6vw",
   "placement": "CENTER",
   "recaptchaType": "V3",
@@ -39,7 +40,6 @@
   "resetFormOnClick": false,
   "responsiveBehavior": "hug",
   "rightColumn": 60,
-  "onClick": "{{(appsmith.store.modalMode === 'edit' ? Update_Empleado_Modal.run() : Insert_Empleado.run()).then(() => { closeModal(Modal_Empleado.name); Get_Empleados_DB.run(); showAlert(appsmith.store.modalMode === 'edit' ? 'Empleado actualizado' : 'Empleado creado', 'success'); }).catch(() => showAlert('Error al guardar', 'error'))}}",
   "text": "💾 Guardar",
   "topRow": 55,
   "type": "BUTTON_WIDGET",

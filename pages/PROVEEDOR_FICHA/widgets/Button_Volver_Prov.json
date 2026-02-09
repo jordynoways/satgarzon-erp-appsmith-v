@@ -1,40 +1,40 @@
 {
-    "animateLoading": true,
-    "borderRadius": "1.5rem",
-    "bottomRow": 5,
-    "boxShadow": "none",
-    "buttonColor": "#18181b",
-    "buttonVariant": "TERTIARY",
-    "dynamicPropertyPathList": [
-        {
-            "key": "onClick"
-        }
-    ],
-    "dynamicTriggerPathList": [
-        {
-            "key": "onClick"
-        }
-    ],
-    "iconAlign": "left",
-    "iconName": "arrow-left",
-    "isLoading": false,
-    "isVisible": true,
-    "key": "btn_volver_prov_key",
-    "leftColumn": 0,
-    "minWidth": 120,
-    "needsErrorInfo": false,
-    "onClick": "{{\nnavigateTo(\"PROVEEDORES\", {}, \"SAME_WINDOW\");\n}}",
-    "parentColumnSpace": 12.7294921875,
-    "parentId": "0",
-    "parentRowSpace": 10,
-    "placement": "CENTER",
-    "renderMode": "CANVAS",
-    "responsiveBehavior": "hug",
-    "rightColumn": 12,
-    "text": "Volver",
-    "topRow": 1,
-    "type": "BUTTON_WIDGET",
-    "version": 1,
-    "widgetId": "btn_volver_prov_01",
-    "widgetName": "Button_Volver_Prov"
+  "animateLoading": true,
+  "borderRadius": "1.5rem",
+  "bottomRow": 5,
+  "boxShadow": "none",
+  "buttonColor": "#18181b",
+  "buttonVariant": "TERTIARY",
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "iconAlign": "left",
+  "iconName": "arrow-left",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "btn_volver_prov_key",
+  "leftColumn": 0,
+  "minWidth": 120,
+  "needsErrorInfo": false,
+  "onClick": "{{\nnavigateTo(\"PROVEEDORES\", {}, \"SAME_WINDOW\");\n}}",
+  "parentColumnSpace": 12.7294921875,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "hug",
+  "rightColumn": 12,
+  "text": "Volver",
+  "topRow": 1,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "btn_volver_prov_01",
+  "widgetName": "Button_Volver_Prov"
 }

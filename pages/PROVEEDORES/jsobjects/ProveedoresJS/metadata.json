@@ -1,11 +1,11 @@
 {
-    "gitSyncId": "694ce73ebe5af016d4a63fd2_proveedoresjs_001",
-    "id": "PROVEEDORES_ProveedoresJS",
-    "unpublishedCollection": {
-        "name": "ProveedoresJS",
-        "pageId": "PROVEEDORES",
-        "pluginId": "js-plugin",
-        "pluginType": "JS",
-        "variables": []
-    }
+  "gitSyncId": "694ce73ebe5af016d4a63fd2_proveedoresjs_001",
+  "id": "PROVEEDORES_ProveedoresJS",
+  "unpublishedCollection": {
+    "name": "ProveedoresJS",
+    "pageId": "PROVEEDORES",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": []
+  }
 }
