@@ -1,0 +1,40 @@
+CREATE OR REPLACE FUNCTION importar_proveedores_stel(p_json json)
+RETURNS void AS $$
+DECLARE
+  r json;
+BEGIN
+  FOR r IN SELECT * FROM json_array_elements(p_json)
+  LOOP
+    INSERT INTO public.proveedores (
+      id, nombre_fiscal, nombre_comercial, cif_nif,
+      direccion, poblacion, provincia, codigo_postal,
+      telefono, email, referencia, id_stel
+    ) VALUES (
+      (r->>'id')::bigint,
+      r->>'fiscal-name',
+      r->>'commercial-name',
+      r->>'fiscal-id',
+      r->>'address',
+      r->>'city',
+      r->>'state',
+      r->>'zip-code',
+      r->>'phone',
+      r->>'email',
+      r->>'reference',
+      (r->>'id')::bigint
+    )
+    ON CONFLICT (id) DO UPDATE SET
+      nombre_fiscal = EXCLUDED.nombre_fiscal,
+      nombre_comercial = EXCLUDED.nombre_comercial,
+      cif_nif = EXCLUDED.cif_nif,
+      direccion = EXCLUDED.direccion,
+      poblacion = EXCLUDED.poblacion,
+      provincia = EXCLUDED.provincia,
+      codigo_postal = EXCLUDED.codigo_postal,
+      telefono = EXCLUDED.telefono,
+      email = EXCLUDED.email,
+      referencia = EXCLUDED.referencia,
+      id_stel = EXCLUDED.id_stel;
+  END LOOP;
+END;
+$$ LANGUAGE plpgsql;
