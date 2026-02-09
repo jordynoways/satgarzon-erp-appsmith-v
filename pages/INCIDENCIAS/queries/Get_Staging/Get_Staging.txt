@@ -1,14 +1,34 @@
--- INCIDENCIAS UNIFICADAS
--- descripcion_problema = "INC02826\naveria|||emplazamiento|||modelo|||descripcion"
+-- === INCIDENCIAS UNIFICADAS ===
+-- descripcion_problema = "INC02826\n<descripcion original STEL>"
+-- direccion = emplazamiento parseado (gasolinera + dirección)
+
 SELECT 
+    -- Referencia (INC02826)
     SPLIT_PART(descripcion_problema, chr(10), 1) as referencia,
+    -- Cliente real
     cliente_nombre as cliente,
-    SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), '|||', 1) as numero_averia,
+    -- Nº Avería = primer campo antes de ' | ' en la descripcion STEL
+    TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) as numero_averia,
+    -- Emplazamiento (gasolinera + dirección, parseado en sync y guardado en direccion)
     direccion as emplazamiento,
-    SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), '|||', 3) as modelo,
-    SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), '|||', 4) as descripcion_averia,
+    -- Descripción del problema:
+    -- Istobal (ES%): último pipe de la descripción
+    -- WashTec: parte después del primer ' - ' del segundo pipe
+    CASE 
+        WHEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) LIKE 'ES%' 
+        THEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 
+             array_length(string_to_array(SPLIT_PART(descripcion_problema, chr(10), 2), ' | '), 1)))
+        ELSE TRIM(SUBSTRING(
+             SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 2) 
+             FROM POSITION(' - ' IN SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 2)) + 3))
+    END as descripcion_averia,
+    -- Nº Parte (solo Istobal: primer segmento del segundo pipe, antes del ' - ')
+    CASE 
+        WHEN TRIM(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 1)) LIKE 'ES%'
+        THEN TRIM(SPLIT_PART(SPLIT_PART(SPLIT_PART(descripcion_problema, chr(10), 2), ' | ', 2), ' - ', 1))
+        ELSE ''
+    END as numero_parte,
     estado,
-    'Sin asignar' as asignado_a,
     prioridad as urgencia,
     fecha_creacion as fecha_recepcion,
     id::text as numero_actividad,
@@ -23,10 +43,9 @@ SELECT
     COALESCE(fabricante, 'N8N') as cliente,
     numero_averia,
     emplazamiento,
-    modelo,
     descripcion_averia,
+    numero_parte,
     COALESCE(estado, 'Pendiente') as estado,
-    COALESCE(asignado_a, 'Sin asignar') as asignado_a,
     urgencia,
     COALESCE(fecha_recepcion, fecha_creacion) as fecha_recepcion,
     numero_actividad,

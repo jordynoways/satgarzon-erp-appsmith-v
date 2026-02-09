@@ -1,4 +1,0 @@
-SELECT id, nombre, apellidos, rol
-FROM public.empleados
-WHERE activo = TRUE
-ORDER BY nombre ASC;

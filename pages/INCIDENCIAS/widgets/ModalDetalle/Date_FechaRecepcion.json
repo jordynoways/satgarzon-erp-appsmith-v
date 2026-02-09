@@ -2,10 +2,10 @@
   "accentColor": "{{appsmith.theme.colors.primaryColor}}",
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 6,
+  "bottomRow": 7,
   "boxShadow": "none",
   "closeOnSelection": true,
-  "dateFormat": "D MMMM, YYYY",
+  "dateFormat": "YYYY-MM-DD HH:mm",
   "defaultDate": "{{Table2.selectedRow.fecha_recepcion}}",
   "dynamicBindingPathList": [
     {
@@ -16,15 +16,12 @@
     },
     {
       "key": "borderRadius"
-    },
-    {
-      "key": "isDisabled"
     }
   ],
   "dynamicHeight": "FIXED",
   "dynamicTriggerPathList": [],
   "firstDayOfWeek": 1,
-  "isDisabled": "{{!appsmith.store.editMode}}",
+  "isDisabled": false,
   "isLoading": false,
   "isRequired": false,
   "isVisible": true,

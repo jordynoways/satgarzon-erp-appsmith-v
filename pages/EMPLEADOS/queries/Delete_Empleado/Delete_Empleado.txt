@@ -1,2 +1,0 @@
-DELETE FROM public.empleados
-WHERE id = {{Table_Empleados.selectedRow.id}};

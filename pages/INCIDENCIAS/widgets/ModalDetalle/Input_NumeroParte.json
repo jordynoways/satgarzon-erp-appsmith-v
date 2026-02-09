@@ -1,20 +1,16 @@
 {
-  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
   "animateLoading": true,
   "autoFocus": false,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 21,
+  "bottomRow": 41,
   "boxShadow": "none",
-  "defaultText": "{{appsmith.store.modalMode === 'edit' ? Table_Empleados.selectedRow.email : ''}}",
+  "defaultText": "{{Table2.selectedRow.numero_parte}}",
   "dynamicBindingPathList": [
     {
-      "key": "accentColor"
+      "key": "defaultText"
     },
     {
       "key": "borderRadius"
-    },
-    {
-      "key": "defaultText"
     }
   ],
   "dynamicHeight": "FIXED",
@@ -25,33 +21,34 @@
   "isLoading": false,
   "isRequired": false,
   "isVisible": true,
-  "key": "7b9qpk0a43",
-  "label": "Email",
+  "key": "parte_key",
+  "label": "Nº Parte",
   "labelAlignment": "left",
   "labelPosition": "Top",
   "labelStyle": "",
   "labelTextSize": "0.875rem",
   "labelWidth": 5,
-  "leftColumn": 1,
+  "leftColumn": 0,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
-  "mobileBottomRow": 21,
-  "mobileLeftColumn": 1,
-  "mobileRightColumn": 21,
-  "mobileTopRow": 14,
+  "mobileBottomRow": 20,
+  "mobileLeftColumn": 0,
+  "mobileRightColumn": 20,
+  "mobileTopRow": 13,
   "needsErrorInfo": false,
-  "parentColumnSpace": 9.98046875,
-  "parentId": "7qjkmco6vw",
+  "parentColumnSpace": 10,
+  "parentId": "xfirhtgsix",
   "parentRowSpace": 10,
   "renderMode": "CANVAS",
   "resetOnSubmit": true,
   "responsiveBehavior": "fill",
-  "rightColumn": 21,
+  "rightColumn": 62,
+  "shouldAllowAutofill": false,
   "showStepArrows": false,
-  "topRow": 14,
+  "topRow": 34,
   "type": "INPUT_WIDGET_V2",
   "version": 2,
-  "widgetId": "bkh8u15hbb",
-  "widgetName": "Input_Email"
+  "widgetId": "input_parte",
+  "widgetName": "Input_NumeroParte"
 }

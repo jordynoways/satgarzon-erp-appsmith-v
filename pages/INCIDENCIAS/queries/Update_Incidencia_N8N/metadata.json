@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "UPDATE public.incidencias_n8n\nSET \n  descripcion_averia = {{Input_Descripcion.text}},\n  estado = {{Select1.selectedOptionValue}},\n  urgencia = {{Select_Urgencia.selectedOptionValue}},\n  numero_averia = {{Input_NumeroAveria.text}},\n  fecha_recepcion = {{Date_FechaRecepcion.formattedDate}},\n  modelo = {{Input_Modelo.text}},\n  fabricante = {{Input_Fabricante.text}},\n  emplazamiento = {{Input_Emplazamiento.text}},\n  asignado_a = {{Select_AsignadoA.selectedOptionValue}}\nWHERE numero_actividad = {{Input_NumeroActividad.text}};\n",
+      "body": "UPDATE public.incidencias_n8n\nSET \n  descripcion_averia = {{Input_Descripcion.text}},\n  estado = {{Select1.selectedOptionValue}},\n  urgencia = {{Select_Urgencia.selectedOptionValue}},\n  numero_averia = {{Input_NumeroAveria.text}},\n  numero_parte = {{Input_NumeroParte.text}},\n  fecha_recepcion = {{Date_FechaRecepcion.formattedDate}},\n  modelo = {{Input_Modelo.text}},\n  fabricante = {{Input_Fabricante.text}},\n  emplazamiento = {{Input_Emplazamiento.text}}\nWHERE numero_actividad = {{Input_NumeroActividad.text}};\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

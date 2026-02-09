@@ -35,7 +35,7 @@
     "dynamicBindingPathList": [],
     "name": "get_empleados",
     "pageId": "INCIDENCIAS",
-    "runBehaviour": "ON_PAGE_LOAD",
-    "userSetOnLoad": true
+    "runBehaviour": "MANUAL",
+    "userSetOnLoad": false
   }
 }

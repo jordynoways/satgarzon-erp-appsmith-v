@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 58,
+  "bottomRow": 70,
   "boxShadow": "none",
   "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
   "buttonVariant": "PRIMARY",
@@ -12,9 +12,6 @@
     },
     {
       "key": "borderRadius"
-    },
-    {
-      "key": "isVisible"
     }
   ],
   "dynamicTriggerPathList": [
@@ -26,10 +23,10 @@
   "isDefaultClickDisabled": true,
   "isDisabled": false,
   "isLoading": false,
-  "isVisible": "{{appsmith.store.editMode === true}}",
+  "isVisible": true,
   "key": "boton_guardar_key",
   "label": "Guardar Cambios",
-  "leftColumn": 39,
+  "leftColumn": 40,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 120,
@@ -38,7 +35,7 @@
   "mobileRightColumn": 16,
   "mobileTopRow": 20,
   "needsErrorInfo": false,
-  "onClick": "{{Update_Incidencia_N8N.run().then(() => {\n  storeValue('editMode', false);\n  closeModal('ModalDetalle');\n  Get_Staging.run();\n  showAlert('Incidencia actualizada', 'success');\n}).catch(() => {\n  showAlert('Error al actualizar', 'error');\n});}}",
+  "onClick": "{{Update_Incidencia_N8N.run().then(() => {\n  closeModal('ModalDetalle');\n  Get_Staging.run();\n  showAlert('Incidencia actualizada', 'success');\n}).catch(() => {\n  showAlert('Error al actualizar', 'error');\n});}}",
   "parentColumnSpace": 10,
   "parentId": "xfirhtgsix",
   "parentRowSpace": 10,
@@ -47,9 +44,9 @@
   "renderMode": "CANVAS",
   "resetFormOnClick": false,
   "responsiveBehavior": "hug",
-  "rightColumn": 61,
+  "rightColumn": 62,
   "text": "Guardar Cambios",
-  "topRow": 52,
+  "topRow": 64,
   "type": "BUTTON_WIDGET",
   "version": 1,
   "widgetId": "btn_guardar_cambios",

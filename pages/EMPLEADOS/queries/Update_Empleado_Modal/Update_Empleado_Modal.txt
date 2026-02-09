@@ -1,8 +1,0 @@
-UPDATE public.empleados
-SET
-  nombre = {{Input_Nombre_.text}},
-  apellidos = {{Input_Apellidos.text}},
-  email = {{Input_Email.text}},
-  telefono = {{Input_Telefono.text}},
-  rol = {{Select_Rol.selectedOptionValue}}
-WHERE id = {{Table_Empleados.selectedRow.id}};

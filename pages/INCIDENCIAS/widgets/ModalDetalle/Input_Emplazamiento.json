@@ -2,7 +2,7 @@
   "animateLoading": true,
   "autoFocus": false,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 35,
+  "bottomRow": 34,
   "boxShadow": "none",
   "defaultText": "{{Table2.selectedRow.emplazamiento}}",
   "dynamicBindingPathList": [
@@ -11,16 +11,13 @@
     },
     {
       "key": "borderRadius"
-    },
-    {
-      "key": "isDisabled"
     }
   ],
   "dynamicHeight": "FIXED",
   "dynamicTriggerPathList": [],
   "iconAlign": "left",
   "inputType": "TEXT",
-  "isDisabled": "{{!appsmith.store.editMode}}",
+  "isDisabled": false,
   "isLoading": false,
   "isRequired": false,
   "isVisible": true,
@@ -49,7 +46,7 @@
   "rightColumn": 62,
   "shouldAllowAutofill": false,
   "showStepArrows": false,
-  "topRow": 28,
+  "topRow": 27,
   "type": "INPUT_WIDGET_V2",
   "version": 2,
   "widgetId": "input_emplazamiento",

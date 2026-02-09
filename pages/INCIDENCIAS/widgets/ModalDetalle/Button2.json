@@ -32,7 +32,7 @@
   "mobileRightColumn": 47,
   "mobileTopRow": 18,
   "needsErrorInfo": false,
-  "onClick": "{{storeValue('editMode', false).then(() => closeModal(ModalDetalle.name))}}",
+  "onClick": "{{closeModal(ModalDetalle.name);}}",
   "originalBottomRow": 23,
   "originalTopRow": 19,
   "parentId": "xfirhtgsix",

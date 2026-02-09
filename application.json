@@ -63,18 +63,6 @@
     {
       "id": "PRODUCTOS",
       "isDefault": false
-    },
-    {
-      "id": "EMPLEADOS",
-      "isDefault": false
-    },
-    {
-      "id": "PROVEEDORES",
-      "isDefault": false
-    },
-    {
-      "id": "PROVEEDOR_FICHA",
-      "isDefault": false
     }
   ],
   "unpublishedAppLayout": {

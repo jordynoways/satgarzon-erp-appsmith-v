@@ -1,1 +1,0 @@
-SELECT importar_proveedores_stel({{ this.params.json_data }}::json);

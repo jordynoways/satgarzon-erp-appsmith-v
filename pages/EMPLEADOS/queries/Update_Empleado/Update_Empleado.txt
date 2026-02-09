@@ -1,9 +1,0 @@
-UPDATE public.empleados
-SET 
-  nombre = {{Table_Empleados.updatedRow.nombre}},
-  apellidos = {{Table_Empleados.updatedRow.apellidos}},
-  email = {{Table_Empleados.updatedRow.email}},
-  telefono = {{Table_Empleados.updatedRow.telefono}},
-  rol = {{Table_Empleados.updatedRow.rol}},
-  activo = {{Table_Empleados.updatedRow.activo}}
-WHERE id = {{Table_Empleados.updatedRow.id}};
