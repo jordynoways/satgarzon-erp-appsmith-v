@@ -2,22 +2,30 @@ CREATE OR REPLACE FUNCTION importar_proveedores_stel(p_json json)
 RETURNS void AS $$
 DECLARE
   r json;
+  addr json;
 BEGIN
   FOR r IN SELECT * FROM json_array_elements(p_json)
   LOOP
+    -- Extraer main-address (puede ser objeto vacío {})
+    addr := r->'main-address';
+    
     INSERT INTO public.proveedores (
       id, nombre_fiscal, nombre_comercial, cif_nif,
       direccion, poblacion, provincia, codigo_postal,
       telefono, email, referencia, id_stel
     ) VALUES (
       (r->>'id')::bigint,
-      r->>'fiscal-name',
-      r->>'commercial-name',
-      r->>'fiscal-id',
-      r->>'address',
-      r->>'city',
-      r->>'state',
-      r->>'zip-code',
+      r->>'legal-name',
+      r->>'name',
+      r->>'tax-identification-number',
+      CASE WHEN addr IS NOT NULL AND addr->>'address-data' IS NOT NULL 
+           THEN addr->>'address-data' ELSE NULL END,
+      CASE WHEN addr IS NOT NULL AND addr->>'city-town' IS NOT NULL 
+           THEN addr->>'city-town' ELSE NULL END,
+      CASE WHEN addr IS NOT NULL AND addr->>'province' IS NOT NULL 
+           THEN addr->>'province' ELSE NULL END,
+      CASE WHEN addr IS NOT NULL AND addr->>'postal-code' IS NOT NULL 
+           THEN addr->>'postal-code' ELSE NULL END,
       r->>'phone',
       r->>'email',
       r->>'reference',
