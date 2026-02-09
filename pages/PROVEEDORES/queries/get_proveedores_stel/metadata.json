@@ -25,11 +25,11 @@
       "queryParameters": [
         {
           "key": "start",
-          "value": "{{this.params.start}}"
+          "value": "0"
         },
         {
           "key": "limit",
-          "value": "{{this.params.limit}}"
+          "value": "500"
         }
       ],
       "timeoutInMillisecond": 10000
@@ -44,12 +44,6 @@
     "dynamicBindingPathList": [
       {
         "key": "path"
-      },
-      {
-        "key": "queryParameters[0].value"
-      },
-      {
-        "key": "queryParameters[1].value"
       }
     ],
     "name": "get_proveedores_stel",
