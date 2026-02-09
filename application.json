@@ -67,6 +67,10 @@
     {
       "id": "EMPLEADOS",
       "isDefault": false
+    },
+    {
+      "id": "PROVEEDORES",
+      "isDefault": false
     }
   ],
   "unpublishedAppLayout": {
