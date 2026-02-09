@@ -1,7 +1,7 @@
 export default {
     async sincronizarProveedoresMasivo() {
         let registroInicial = 0;
-        let tamanoBloque = 100;
+        let tamanoBloque = 500; // Traer todos de una vez (son ~303)
         let continuar = true;
 
         try {
@@ -21,9 +21,16 @@ export default {
                     await q_importar_masivo_proveedores.run({
                         json_data: JSON.stringify(data)
                     });
-                    console.log(`Sincronizados registros desde el ${registroInicial}`);
+                    console.log(`Sincronizados ${data.length} registros desde el ${registroInicial}`);
                 } catch (dbErr) {
                     console.error(`Error en bloque ${registroInicial}:`, dbErr.message);
+                }
+
+                // Si recibimos menos del bloque solicitado, ya no hay más
+                if (data.length < tamanoBloque) {
+                    console.log("Último bloque recibido, fin de sincronización.");
+                    continuar = false;
+                    break;
                 }
 
                 registroInicial += tamanoBloque;
