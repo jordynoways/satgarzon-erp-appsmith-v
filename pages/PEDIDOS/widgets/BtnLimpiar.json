@@ -1,0 +1,50 @@
+{
+    "animateLoading": true,
+    "borderRadius": "1.5rem",
+    "bottomRow": 55,
+    "boxShadow": "none",
+    "buttonColor": "#757575",
+    "buttonVariant": "SECONDARY",
+    "disabledWhenInvalid": false,
+    "dynamicBindingPathList": [],
+    "dynamicPropertyPathList": [
+        {
+            "key": "onClick"
+        }
+    ],
+    "dynamicTriggerPathList": [
+        {
+            "key": "onClick"
+        }
+    ],
+    "iconAlign": "left",
+    "iconName": "trash",
+    "isDefaultClickDisabled": true,
+    "isDisabled": false,
+    "isLoading": false,
+    "isVisible": true,
+    "key": "ped_btn_limpiar_key",
+    "leftColumn": 22,
+    "minWidth": 120,
+    "mobileBottomRow": 55,
+    "mobileLeftColumn": 22,
+    "mobileRightColumn": 38,
+    "mobileTopRow": 51,
+    "needsErrorInfo": false,
+    "onClick": "{{\nPedidoActions.limpiarTodo();\n}}",
+    "parentColumnSpace": 13.265625,
+    "parentId": "0",
+    "parentRowSpace": 10,
+    "placement": "CENTER",
+    "recaptchaType": "V3",
+    "renderMode": "CANVAS",
+    "resetFormOnClick": false,
+    "responsiveBehavior": "hug",
+    "rightColumn": 34,
+    "text": "🧹 Limpiar",
+    "topRow": 51,
+    "type": "BUTTON_WIDGET",
+    "version": 1,
+    "widgetId": "ped_btn_limpiar_01",
+    "widgetName": "BtnLimpiar"
+}
