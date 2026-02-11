@@ -75,10 +75,6 @@
     {
       "id": "PROVEEDOR_FICHA",
       "isDefault": false
-    },
-    {
-      "id": "PEDIDOS",
-      "isDefault": false
     }
   ],
   "unpublishedAppLayout": {
