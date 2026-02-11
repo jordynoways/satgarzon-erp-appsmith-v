@@ -1,0 +1,44 @@
+{
+    "animateLoading": true,
+    "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+    "bottomRow": 56,
+    "boxShadow": "none",
+    "buttonColor": "#757575",
+    "buttonVariant": "SECONDARY",
+    "dynamicBindingPathList": [
+        {
+            "key": "borderRadius"
+        }
+    ],
+    "dynamicTriggerPathList": [
+        {
+            "key": "onClick"
+        }
+    ],
+    "iconAlign": "left",
+    "iconName": "trash",
+    "isDisabled": false,
+    "isLoading": false,
+    "isVisible": true,
+    "key": "ped_btn_limpiar",
+    "leftColumn": 22,
+    "minWidth": 120,
+    "mobileBottomRow": 56,
+    "mobileLeftColumn": 32,
+    "mobileRightColumn": 64,
+    "mobileTopRow": 52,
+    "onClick": "{{PedidoActions.limpiarTodo()}}",
+    "parentColumnSpace": 10.515625,
+    "parentId": "0",
+    "parentRowSpace": 10,
+    "placement": "CENTER",
+    "renderMode": "CANVAS",
+    "responsiveBehavior": "hug",
+    "rightColumn": 38,
+    "text": "🧹 Limpiar",
+    "topRow": 53,
+    "type": "BUTTON_WIDGET",
+    "version": 1,
+    "widgetId": "ped_btn_limpiar",
+    "widgetName": "BtnLimpiar"
+}

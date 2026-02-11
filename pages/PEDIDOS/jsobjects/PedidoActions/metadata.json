@@ -1,0 +1,16 @@
+{
+    "gitSyncId": "6930adeefaf88d0819448125_PedidoActions",
+    "id": "PEDIDOS_PedidoActions",
+    "unpublishedCollection": {
+        "name": "PedidoActions",
+        "pageId": "PEDIDOS",
+        "pluginId": "js-plugin",
+        "pluginType": "JS",
+        "variables": [
+            {
+                "name": "loading",
+                "value": "false"
+            }
+        ]
+    }
+}

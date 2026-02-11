@@ -1,0 +1,22 @@
+# FastAPI Microservice - Procesamiento de Pedidos con IA
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.18
+pydantic==2.10.4
+pydantic-settings==2.7.1
+
+# IA
+google-generativeai==0.8.4
+
+# PDF (pdfplumber = más preciso que pypdf para tablas)
+pdfplumber==0.11.4
+
+# Data
+pandas==2.2.3
+
+# STEL API + HTTP
+requests==2.32.3
+httpx==0.28.1
+
+# SQL Server (TODO: activar cuando iQuote tenga datos)
+# pymssql==2.3.2

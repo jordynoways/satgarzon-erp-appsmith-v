@@ -1,0 +1,41 @@
+{
+    "animateLoading": true,
+    "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+    "bottomRow": 56,
+    "boxShadow": "none",
+    "dynamicBindingPathList": [
+        {
+            "key": "borderRadius"
+        },
+        {
+            "key": "fontFamily"
+        },
+        {
+            "key": "text"
+        }
+    ],
+    "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+    "fontSize": "1.25rem",
+    "fontStyle": "BOLD",
+    "isLoading": false,
+    "isVisible": true,
+    "key": "ped_total",
+    "leftColumn": 42,
+    "mobileBottomRow": 56,
+    "mobileLeftColumn": 42,
+    "mobileRightColumn": 64,
+    "mobileTopRow": 52,
+    "parentColumnSpace": 10.515625,
+    "parentId": "0",
+    "parentRowSpace": 10,
+    "renderMode": "CANVAS",
+    "rightColumn": 64,
+    "text": "{{appsmith.store.tipo_documento ? '🏷️ ' + appsmith.store.tipo_documento + ' — Total: ' + PedidoActions.calcularTotal() + ' €' : '📦 Sube un PDF para empezar'}}",
+    "textAlign": "RIGHT",
+    "textColor": "#1d1d1f",
+    "topRow": 53,
+    "type": "TEXT_WIDGET",
+    "version": 1,
+    "widgetId": "ped_total",
+    "widgetName": "TxtTotal"
+}

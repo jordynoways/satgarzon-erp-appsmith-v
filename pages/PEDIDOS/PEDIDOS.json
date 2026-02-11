@@ -1,0 +1,32 @@
+{
+    "gitSyncId": "6930adeefaf88d0819448125_pedidos_page",
+    "unpublishedPage": {
+        "isHidden": false,
+        "layouts": [
+            {
+                "dsl": {
+                    "backgroundColor": "none",
+                    "bottomRow": 1500,
+                    "canExtend": true,
+                    "containerStyle": "none",
+                    "detachFromLayout": true,
+                    "dynamicBindingPathList": [],
+                    "leftColumn": 0,
+                    "minHeight": 970,
+                    "parentColumnSpace": 1,
+                    "parentRowSpace": 1,
+                    "rightColumn": 1224,
+                    "snapColumns": 64,
+                    "snapRows": 95,
+                    "topRow": 0,
+                    "type": "CANVAS_WIDGET",
+                    "version": 94,
+                    "widgetId": "0",
+                    "widgetName": "MainContainer"
+                }
+            }
+        ],
+        "name": "PEDIDOS",
+        "slug": "pedidos"
+    }
+}

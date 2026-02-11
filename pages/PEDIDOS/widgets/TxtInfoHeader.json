@@ -1,0 +1,38 @@
+{
+    "animateLoading": true,
+    "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+    "bottomRow": 17,
+    "boxShadow": "none",
+    "dynamicBindingPathList": [
+        {
+            "key": "borderRadius"
+        },
+        {
+            "key": "fontFamily"
+        }
+    ],
+    "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+    "fontSize": "1rem",
+    "fontStyle": "BOLD",
+    "isLoading": false,
+    "isVisible": true,
+    "key": "ped_info_header",
+    "leftColumn": 0,
+    "mobileBottomRow": 17,
+    "mobileLeftColumn": 0,
+    "mobileRightColumn": 64,
+    "mobileTopRow": 15,
+    "parentColumnSpace": 10.515625,
+    "parentId": "0",
+    "parentRowSpace": 10,
+    "renderMode": "CANVAS",
+    "rightColumn": 64,
+    "text": "📋 Información del Pedido",
+    "textAlign": "LEFT",
+    "textColor": "#1d1d1f",
+    "topRow": 15,
+    "type": "TEXT_WIDGET",
+    "version": 1,
+    "widgetId": "ped_info_header",
+    "widgetName": "TxtInfoHeader"
+}

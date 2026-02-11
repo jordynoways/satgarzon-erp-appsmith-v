@@ -1,0 +1,55 @@
+{
+    "animateLoading": true,
+    "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+    "bottomRow": 56,
+    "boxShadow": "none",
+    "buttonColor": "#2E7D32",
+    "buttonVariant": "PRIMARY",
+    "dynamicBindingPathList": [
+        {
+            "key": "borderRadius"
+        },
+        {
+            "key": "isDisabled"
+        },
+        {
+            "key": "text"
+        }
+    ],
+    "dynamicPropertyPathList": [
+        {
+            "key": "isDisabled"
+        }
+    ],
+    "dynamicTriggerPathList": [
+        {
+            "key": "onClick"
+        }
+    ],
+    "iconAlign": "left",
+    "iconName": "send-message",
+    "isDisabled": "{{!appsmith.store.cesta || appsmith.store.cesta.length === 0}}",
+    "isLoading": false,
+    "isVisible": true,
+    "key": "ped_btn_confirmar",
+    "leftColumn": 0,
+    "minWidth": 120,
+    "mobileBottomRow": 56,
+    "mobileLeftColumn": 0,
+    "mobileRightColumn": 32,
+    "mobileTopRow": 52,
+    "onClick": "{{PedidoActions.confirmarPedido()}}",
+    "parentColumnSpace": 10.515625,
+    "parentId": "0",
+    "parentRowSpace": 10,
+    "placement": "CENTER",
+    "renderMode": "CANVAS",
+    "responsiveBehavior": "hug",
+    "rightColumn": 22,
+    "text": "✅ CONFIRMAR PEDIDO EN STEL",
+    "topRow": 53,
+    "type": "BUTTON_WIDGET",
+    "version": 1,
+    "widgetId": "ped_btn_confirmar",
+    "widgetName": "BtnConfirmar"
+}

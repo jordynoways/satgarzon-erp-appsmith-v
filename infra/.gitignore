@@ -1,0 +1,18 @@
+# ISOs y archivos grandes
+*.iso
+*.qcow2
+
+# Archivos de referencia (no necesarios en prod)
+infra/fastapi-service/current_streamlit_app.py
+infra/fastapi-service/original_streamlit_app.py
+infra/fastapi-service/ref_*.py
+infra/fastapi-service/ref_*.txt
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# OS
+Thumbs.db
+.DS_Store
