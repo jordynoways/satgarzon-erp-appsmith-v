@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "1.5rem",
-  "bottomRow": 58,
+  "bottomRow": 60,
   "boxShadow": "none",
   "buttonColor": "#757575",
   "buttonVariant": "SECONDARY",
@@ -42,7 +42,7 @@
   "responsiveBehavior": "hug",
   "rightColumn": 35,
   "text": "🧹 Limpiar",
-  "topRow": 54,
+  "topRow": 56,
   "type": "BUTTON_WIDGET",
   "version": 1,
   "widgetId": "ped_btn_limpiar_01",

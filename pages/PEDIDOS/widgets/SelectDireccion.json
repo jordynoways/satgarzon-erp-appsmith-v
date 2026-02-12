@@ -1,0 +1,38 @@
+{
+  "bottomRow": 23,
+  "defaultOptionValue": "{{appsmith.store.direccion_envio || ''}}",
+  "dynamicBindingPathList": [
+    {
+      "key": "options"
+    },
+    {
+      "key": "defaultOptionValue"
+    },
+    {
+      "key": "onOptionChange"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onOptionChange"
+    }
+  ],
+  "isDisabled": false,
+  "isVisible": true,
+  "label": "📍 Dirección de envío (selecciona)",
+  "leftColumn": 1,
+  "onOptionChange": "{{storeValue('direccion_envio', SelectDireccion.selectedOptionValue)}}",
+  "options": "{{(appsmith.store.direcciones_candidatas || []).map((d, i) => ({label: d, value: d}))}}",
+  "parentColumnSpace": 1,
+  "parentId": "0",
+  "parentRowSpace": 1,
+  "placeholderText": "Selecciona una dirección detectada...",
+  "renderMode": "CANVAS",
+  "rightColumn": 63,
+  "serverSideFiltering": false,
+  "topRow": 19,
+  "type": "SELECT_WIDGET",
+  "version": 1,
+  "widgetId": "vb63bjawwiny7f",
+  "widgetName": "SelectDireccion"
+}

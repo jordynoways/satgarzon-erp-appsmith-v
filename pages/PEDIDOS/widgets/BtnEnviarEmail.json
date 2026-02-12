@@ -1,0 +1,19 @@
+{
+  "bottomRow": 66,
+  "buttonStyle": "PRIMARY",
+  "buttonVariant": "PRIMARY",
+  "isDisabled": false,
+  "isVisible": true,
+  "leftColumn": 50,
+  "parentColumnSpace": 1,
+  "parentId": "0",
+  "parentRowSpace": 1,
+  "renderMode": "CANVAS",
+  "rightColumn": 63,
+  "text": "📧 Enviar Email",
+  "topRow": 62,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "8k9yep584i3uf0",
+  "widgetName": "BtnEnviarEmail"
+}

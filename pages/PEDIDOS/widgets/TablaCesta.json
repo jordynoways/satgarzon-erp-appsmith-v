@@ -4,7 +4,7 @@
   "borderColor": "#E0DEDE",
   "borderRadius": "0.375rem",
   "borderWidth": "1",
-  "bottomRow": 53,
+  "bottomRow": 55,
   "boxShadow": "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
   "canFreezeColumn": true,
   "columnOrder": [
@@ -157,7 +157,7 @@
   "searchKey": "",
   "tableData": "{{appsmith.store.cesta || []}}",
   "textSize": "0.875rem",
-  "topRow": 23,
+  "topRow": 25,
   "totalRecordsCount": 0,
   "type": "TABLE_WIDGET_V2",
   "version": 2,

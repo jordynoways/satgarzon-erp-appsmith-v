@@ -1,0 +1,17 @@
+{
+  "bottomRow": 77,
+  "buttonStyle": "SECONDARY",
+  "isVisible": true,
+  "leftColumn": 42,
+  "parentColumnSpace": 1,
+  "parentId": "0",
+  "parentRowSpace": 1,
+  "renderMode": "CANVAS",
+  "rightColumn": 55,
+  "text": "🔍 Buscar",
+  "topRow": 73,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "32gu9k49dyfcbw",
+  "widgetName": "BtnBuscarRef"
+}

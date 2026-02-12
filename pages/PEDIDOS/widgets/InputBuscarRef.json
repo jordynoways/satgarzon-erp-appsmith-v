@@ -1,0 +1,18 @@
+{
+  "bottomRow": 77,
+  "inputType": "TEXT",
+  "isVisible": true,
+  "label": "🔍 Buscar referencia",
+  "leftColumn": 1,
+  "parentColumnSpace": 1,
+  "parentId": "0",
+  "parentRowSpace": 1,
+  "placeholderText": "Escribe referencia o descripción...",
+  "renderMode": "CANVAS",
+  "rightColumn": 42,
+  "topRow": 73,
+  "type": "INPUT_WIDGET_V2",
+  "version": 2,
+  "widgetId": "2hw3u8nfamxxop",
+  "widgetName": "InputBuscarRef"
+}

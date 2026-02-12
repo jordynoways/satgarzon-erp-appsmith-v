@@ -1,0 +1,19 @@
+{
+  "bottomRow": 72,
+  "defaultText": "",
+  "inputType": "MULTI_LINE_TEXT",
+  "isVisible": true,
+  "label": "📧 Texto del email",
+  "leftColumn": 1,
+  "parentColumnSpace": 1,
+  "parentId": "0",
+  "parentRowSpace": 1,
+  "placeholderText": "Escribe aquí el texto del email para el pedido...",
+  "renderMode": "CANVAS",
+  "rightColumn": 50,
+  "topRow": 62,
+  "type": "INPUT_WIDGET_V2",
+  "version": 2,
+  "widgetId": "u1ialhznze3yh6",
+  "widgetName": "TxtEmailBody"
+}
