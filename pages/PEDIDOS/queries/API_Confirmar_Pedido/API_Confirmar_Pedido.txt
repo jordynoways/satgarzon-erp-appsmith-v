@@ -1,1 +1,7 @@
-
+{{JSON.stringify({
+  tipo_documento: appsmith.store.tipo_documento || 'ISTOBAL',
+  pedido_ref: InputRefPedido.text || '',
+  titulo_lugar: InputEstacion.text || '',
+  direccion_envio: InputDireccion.text || '',
+  cesta: appsmith.store.cesta || []
+})}}
