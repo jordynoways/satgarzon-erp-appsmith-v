@@ -1,10 +1,8 @@
-{{
 {
-  tipo_documento: appsmith.store.tipo_documento || 'ISTOBAL',
-  pedido_ref: InputRefPedido.text || '',
-  titulo_lugar: InputEstacion.text || '',
-  direccion_envio: InputDireccion.text || '',
-  email_texto: '',
-  cesta: (appsmith.store.cesta || []).map(item => ({ref: item.ref, desc: item.desc, qty: item.qty, precio: item.precio}))
+  "tipo_documento": "{{appsmith.store.tipo_documento || 'ISTOBAL'}}",
+  "pedido_ref": "{{InputRefPedido.text || ''}}",
+  "titulo_lugar": "{{InputEstacion.text || ''}}",
+  "direccion_envio": "{{InputDireccion.text || ''}}",
+  "email_texto": "",
+  "cesta": {{JSON.stringify((appsmith.store.cesta || []).map(function(item) { return {ref: item.ref, desc: item.desc, qty: item.qty, precio: item.precio}; }))}}
 }
-}}
