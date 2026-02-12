@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "1.5rem",
-  "bottomRow": 95,
+  "bottomRow": 102,
   "boxShadow": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
   "buttonColor": "#ef4444",
   "buttonVariant": "PRIMARY",
@@ -38,7 +38,7 @@
   "responsiveBehavior": "hug",
   "rightColumn": 18,
   "text": "GAMA MNEX",
-  "topRow": 91,
+  "topRow": 98,
   "type": "BUTTON_WIDGET",
   "version": 1,
   "widgetId": "r558zz4ukt",
