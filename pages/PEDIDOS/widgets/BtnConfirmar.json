@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "1.5rem",
-  "bottomRow": 56,
+  "bottomRow": 58,
   "boxShadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
   "buttonColor": "#2E7D32",
   "buttonVariant": "PRIMARY",
@@ -49,7 +49,7 @@
   "responsiveBehavior": "hug",
   "rightColumn": 22,
   "text": "✅ CONFIRMAR EN STEL",
-  "topRow": 52,
+  "topRow": 54,
   "type": "BUTTON_WIDGET",
   "version": 1,
   "widgetId": "ped_btn_confirmar_01",

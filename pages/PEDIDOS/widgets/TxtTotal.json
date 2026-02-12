@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "0.375rem",
-  "bottomRow": 58,
+  "bottomRow": 59,
   "boxShadow": "none",
   "dynamicBindingPathList": [
     {
@@ -16,7 +16,7 @@
   "isLoading": false,
   "isVisible": true,
   "key": "ped_total_key",
-  "leftColumn": 42,
+  "leftColumn": 40,
   "mobileBottomRow": 55,
   "mobileLeftColumn": 42,
   "mobileRightColumn": 63,
@@ -25,11 +25,11 @@
   "parentId": "0",
   "parentRowSpace": 10,
   "renderMode": "CANVAS",
-  "rightColumn": 63,
+  "rightColumn": 61,
   "text": "{{appsmith.store.tipo_documento ? '🏷️ ' + appsmith.store.tipo_documento + ' — Total: ' + PedidoActions.calcularTotal() + ' €' : '📦 Sube un PDF para empezar'}}",
   "textAlign": "RIGHT",
   "textColor": "#1d1d1f",
-  "topRow": 52,
+  "topRow": 53,
   "truncateButtonColor": "#553DE9",
   "type": "TEXT_WIDGET",
   "version": 1,
