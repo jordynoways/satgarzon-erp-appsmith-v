@@ -14,6 +14,7 @@ class TipoDocumento(str, Enum):
 
 class LineaCesta(BaseModel):
     """Una línea de producto en la cesta."""
+    model_config = {"extra": "ignore"}
     ref: str = Field(..., description="Referencia del producto (normalizada)")
     desc: str = Field("NUEVO", description="Descripción del producto")
     qty: int = Field(1, description="Cantidad (máx 100)")
@@ -34,6 +35,7 @@ class AnalisisResponse(BaseModel):
 
 class ConfirmarPedidoRequest(BaseModel):
     """Request para confirmar y crear pedido en STEL."""
+    model_config = {"extra": "ignore"}
     tipo_documento: str = "ISTOBAL"
     pedido_ref: str = ""
     titulo_lugar: str = ""

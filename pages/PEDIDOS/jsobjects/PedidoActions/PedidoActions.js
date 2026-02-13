@@ -22,6 +22,9 @@ export default {
             await storeValue("titulo_lugar", data.titulo_lugar || "");
             await storeValue("pedido_ref", data.pedido_ref || "");
             await storeValue("direccion_envio", data.direccion_envio || "");
+            await storeValue("direcciones_candidatas", data.direcciones_candidatas || []);
+            await storeValue("lineas_raw", data.lineas_raw || []);
+            await storeValue("email_texto", data.email_texto || "");
             showAlert("✅ " + cestaConStatus.length + " productos analizados (" + data.tipo_documento + ")", "success");
         } catch (error) {
             showAlert("❌ Error analizando: " + error.message, "error");
@@ -57,6 +60,9 @@ export default {
         await storeValue("titulo_lugar", "");
         await storeValue("pedido_ref", "");
         await storeValue("direccion_envio", "");
+        await storeValue("direcciones_candidatas", []);
+        await storeValue("lineas_raw", []);
+        await storeValue("email_texto", "");
         showAlert("🧹 Datos limpiados", "info");
     }
 }

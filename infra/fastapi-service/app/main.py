@@ -15,7 +15,7 @@ Endpoints:
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
@@ -79,14 +79,29 @@ async def analizar_pedido(file: UploadFile = File(...)):
     Sube un PDF o imagen de pedido → IA lo analiza → Retorna cesta con precios.
     Acepta: PDF, JPG, PNG.
     """
-    # Validar tipo
-    content_type = file.content_type or ""
-    if content_type not in ["application/pdf", "image/jpeg", "image/png", "image/jpg"]:
-        raise HTTPException(400, f"Tipo de archivo no soportado: {content_type}. Usa PDF, JPG o PNG.")
-
+    # Leer archivo primero
     file_bytes = await file.read()
     if not file_bytes:
         raise HTTPException(400, "Archivo vacío")
+
+    # Detectar MIME real (Appsmith puede enviar application/octet-stream)
+    content_type = file.content_type or ""
+    filename = (file.filename or "").lower()
+
+    # Si el content_type no es específico, detectar por extensión o magic bytes
+    if content_type in ("application/octet-stream", "", "multipart/form-data"):
+        if filename.endswith(".pdf") or file_bytes[:5] == b"%PDF-":
+            content_type = "application/pdf"
+        elif filename.endswith((".jpg", ".jpeg")) or file_bytes[:3] == b"\xff\xd8\xff":
+            content_type = "image/jpeg"
+        elif filename.endswith(".png") or file_bytes[:4] == b"\x89PNG":
+            content_type = "image/png"
+        else:
+            content_type = "application/pdf"  # Default a PDF
+        logger.info(f"Content-type detectado: {content_type} (original: {file.content_type})")
+
+    if content_type not in ["application/pdf", "image/jpeg", "image/png", "image/jpg"]:
+        raise HTTPException(400, f"Tipo de archivo no soportado: {content_type}. Usa PDF, JPG o PNG.")
 
     # Mapear MIME
     mime_map = {
@@ -129,8 +144,29 @@ async def analizar_pedido(file: UploadFile = File(...)):
 
 
 @app.post("/confirmar-pedido", response_model=ConfirmarPedidoResponse)
-async def confirmar_pedido(req: ConfirmarPedidoRequest):
-    """Crea el pedido en STEL Order con la cesta confirmada."""
+async def confirmar_pedido(request: Request):
+    """Crea el pedido en STEL Order con la cesta confirmada.
+    Acepta body como JSON object o como string JSON (Appsmith envía string)."""
+    import json as json_mod
+    raw_body = await request.body()
+    body_str = raw_body.decode("utf-8").strip()
+    logger.info(f"Confirmar pedido raw body: {body_str[:200]}")
+
+    # Intentar parsear - puede ser JSON object o string JSON
+    try:
+        data = json_mod.loads(body_str)
+        # Si el resultado es un string, es un JSON.stringify doble - parsear de nuevo
+        if isinstance(data, str):
+            data = json_mod.loads(data)
+    except json_mod.JSONDecodeError as e:
+        raise HTTPException(400, f"JSON inválido: {e}")
+
+    # Validar con el modelo Pydantic
+    try:
+        req = ConfirmarPedidoRequest(**data)
+    except Exception as e:
+        raise HTTPException(400, f"Datos inválidos: {e}")
+
     cesta_dicts = [item.model_dump() for item in req.cesta]
     result = enviar_pedido(
         tipo=req.tipo_documento,

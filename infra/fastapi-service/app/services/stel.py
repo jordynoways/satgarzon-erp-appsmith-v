@@ -119,7 +119,7 @@ def enviar_pedido(
             "line-type": "ITEM",
             "item-id": settings.portes_id,
             "units": 1.0,
-            "item-base-price": settings.portes_price,
+            "item-base-price": 15.0,  # Fijo a 15€ (no usar settings, Docker env override)
             "discount-percentage": 0
         })
 
