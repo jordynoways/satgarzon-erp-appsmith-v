@@ -1,0 +1,8 @@
+-- Último albaran y estado de sincronización
+SELECT
+  MAX(fecha)::date AS ultimo_albaran_fecha,
+  MAX(ultima_actualizacion) AS ultima_sync,
+  ROUND(EXTRACT(EPOCH FROM (NOW() - MAX(ultima_actualizacion))) / 3600, 1) AS horas_desde_sync,
+  COUNT(CASE WHEN fecha::date = CURRENT_DATE THEN 1 END)::int AS albaranes_hoy,
+  COUNT(CASE WHEN fecha >= date_trunc('week', CURRENT_DATE) THEN 1 END)::int AS albaranes_semana
+FROM public.albaranes;

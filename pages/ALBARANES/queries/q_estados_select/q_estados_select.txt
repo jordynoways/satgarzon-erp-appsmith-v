@@ -1,0 +1,7 @@
+-- Lista de estados para el dropdown de filtros
+SELECT
+  id_stel,
+  nombre,
+  color
+FROM public.estados_documento
+ORDER BY nombre ASC;

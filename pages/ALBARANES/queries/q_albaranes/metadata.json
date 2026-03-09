@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT \n    a.id_stel,\n    COALESCE(a.json_original->>'full-reference', a.referencia) as referencia,\n    a.fecha,\n    c.nombre_fiscal as cliente,\n    a.titulo,\n    a.importe_total,\n    \n    -- 1. ESTADO TRADUCIDO\n    -- Si no encuentra el nombre en la tabla, pone el ID por si acaso\n    COALESCE(est.nombre, a.estado_id::text) as estado,\n    est.color as color_estado, -- Para usar en Appsmith\n    \n    -- 2. EMPLEADO TRADUCIDO\n    COALESCE(emp.nombre, 'Empleado ' || a.creado_por_id::text) as creado_por,\n    \n    -- 3. GENERADO DE (Lógica mejorada)\n    CASE \n        -- Si hay referencia de documento origen (Pedido/Presupuesto)\n        WHEN a.json_original->>'source-document-reference' IS NOT NULL \n            THEN a.json_original->>'source-document-reference'\n        -- Si hay ID de Incidencia (Aviso)\n        WHEN a.json_original->>'parent-incident-id' IS NOT NULL \n            THEN 'Aviso ID: ' || (a.json_original->>'parent-incident-id')\n        ELSE 'Directo'\n    END as generado_de\n\nFROM public.albaranes a\nLEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text\n-- Unimos con nuestras nuevas tablas diccionario\nLEFT JOIN public.estados_documento est ON a.estado_id = est.id_stel\nLEFT JOIN public.empleados emp ON a.creado_por_id = emp.id_stel\n\nORDER BY a.fecha DESC;",
+      "body": "SELECT\n    a.id_stel,\n    COALESCE(a.json_original->>'full-reference', a.referencia) as referencia,\n    a.fecha,\n    COALESCE(c.nombre_fiscal, a.cliente_nombre, '—') as cliente,\n    a.titulo,\n    a.importe_total,\n    COALESCE(est.nombre, a.estado_id::text) as estado,\n    est.color as color_estado,\n    COALESCE(emp.nombre_completo, 'Técnico ' || a.creado_por_id::text) as creado_por,\n    CASE\n        WHEN a.json_original->>'source-document-reference' IS NOT NULL\n            THEN a.json_original->>'source-document-reference'\n        WHEN a.json_original->>'parent-incident-id' IS NOT NULL\n            THEN 'Aviso ID: ' || (a.json_original->>'parent-incident-id')\n        ELSE 'Directo'\n    END as generado_de\nFROM public.albaranes a\nLEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text\nLEFT JOIN public.estados_documento est ON a.estado_id = est.id_stel\nLEFT JOIN public.empleados_stel_clean emp ON a.creado_por_id::text = emp.id_stel\nWHERE\n    ({{Filtro_Fecha.selectedDate}} IS NULL OR a.fecha::date >= {{Filtro_Fecha.selectedDate}}::date)\n    AND (\n        {{Filtro_Estado.selectedOptionValue}} IS NULL\n        OR {{Filtro_Estado.selectedOptionValue}} = ''\n        OR est.nombre = {{Filtro_Estado.selectedOptionValue}}\n    )\n    AND (\n        {{Busqueda.text}} IS NULL\n        OR {{Busqueda.text}} = ''\n        OR a.titulo ILIKE '%' || {{Busqueda.text}} || '%'\n        OR COALESCE(c.nombre_fiscal, a.cliente_nombre, '') ILIKE '%' || {{Busqueda.text}} || '%'\n        OR COALESCE(a.json_original->>'full-reference', a.referencia) ILIKE '%' || {{Busqueda.text}} || '%'\n    )\nORDER BY a.fecha DESC\nLIMIT 500;",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -22,7 +22,9 @@
       "name": "postgres",
       "pluginId": "postgres-plugin"
     },
-    "dynamicBindingPathList": [],
+    "dynamicBindingPathList": [
+      { "key": "actionConfiguration.body" }
+    ],
     "name": "q_albaranes",
     "pageId": "ALBARANES",
     "runBehaviour": "ON_PAGE_LOAD",

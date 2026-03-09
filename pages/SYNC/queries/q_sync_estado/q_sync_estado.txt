@@ -1,0 +1,15 @@
+-- Estado actual de la sincronización
+SELECT
+  MAX(ultima_actualizacion) AS ultima_sync,
+  ROUND(EXTRACT(EPOCH FROM (NOW() - MAX(ultima_actualizacion))) / 3600, 2) AS horas_desde_sync,
+  -- Semáforo: Verde < 1h, Amarillo 1-4h, Rojo > 4h
+  CASE
+    WHEN EXTRACT(EPOCH FROM (NOW() - MAX(ultima_actualizacion))) / 3600 < 1   THEN 'VERDE'
+    WHEN EXTRACT(EPOCH FROM (NOW() - MAX(ultima_actualizacion))) / 3600 < 4   THEN 'AMARILLO'
+    ELSE 'ROJO'
+  END AS semaforo,
+  COUNT(*)::int AS total_albaranes,
+  COUNT(CASE WHEN fecha::date = CURRENT_DATE THEN 1 END)::int AS hoy,
+  COUNT(CASE WHEN fecha >= date_trunc('week', CURRENT_DATE) THEN 1 END)::int AS esta_semana,
+  MAX(fecha)::date AS albaran_mas_reciente
+FROM public.albaranes;

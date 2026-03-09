@@ -1,0 +1,13 @@
+-- Evolución mensual por técnico (últimos 6 meses) - para gráfico de líneas
+SELECT
+  TO_CHAR(date_trunc('month', a.fecha), 'YYYY-MM') AS mes,
+  TO_CHAR(date_trunc('month', a.fecha), 'Mon YY') AS mes_label,
+  COALESCE(e.nombre_completo, 'Técnico ' || a.creado_por_id::text) AS tecnico,
+  COUNT(*)::int AS num_partes,
+  ROUND(SUM(a.importe_total), 2) AS facturacion
+FROM public.albaranes a
+LEFT JOIN public.empleados_stel_clean e ON a.creado_por_id::text = e.id_stel
+WHERE a.fecha >= date_trunc('month', CURRENT_DATE) - INTERVAL '5 months'
+GROUP BY date_trunc('month', a.fecha),
+         COALESCE(e.nombre_completo, 'Técnico ' || a.creado_por_id::text)
+ORDER BY mes ASC, tecnico ASC;

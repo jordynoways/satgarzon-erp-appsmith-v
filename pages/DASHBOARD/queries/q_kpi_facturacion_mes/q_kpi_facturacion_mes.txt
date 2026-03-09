@@ -1,0 +1,9 @@
+-- KPI: Facturación del mes actual (albaranes)
+SELECT
+  ROUND(COALESCE(SUM(importe_total), 0), 2) AS facturacion_mes,
+  COUNT(*)::int AS num_albaranes_mes,
+  -- Variación respecto al mes anterior
+  ROUND(COALESCE(SUM(importe_total), 0) - LAG(ROUND(COALESCE(SUM(importe_total), 0), 2)) OVER (ORDER BY date_trunc('month', fecha)), 2) AS variacion
+FROM public.albaranes
+WHERE fecha >= date_trunc('month', CURRENT_DATE)
+  AND fecha < date_trunc('month', CURRENT_DATE) + INTERVAL '1 month';

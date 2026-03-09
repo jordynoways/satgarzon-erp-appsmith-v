@@ -1,0 +1,27 @@
+-- Días sin albaranes en los últimos 30 días (detecta gaps de sync)
+WITH dias AS (
+  SELECT generate_series(
+    CURRENT_DATE - INTERVAL '29 days',
+    CURRENT_DATE,
+    INTERVAL '1 day'
+  )::date AS dia
+),
+actividad AS (
+  SELECT fecha::date AS dia, COUNT(*)::int AS num_albaranes
+  FROM public.albaranes
+  WHERE fecha >= CURRENT_DATE - INTERVAL '29 days'
+  GROUP BY fecha::date
+)
+SELECT
+  d.dia,
+  TO_CHAR(d.dia, 'Day DD/MM') AS dia_label,
+  EXTRACT(DOW FROM d.dia)::int AS dia_semana,
+  COALESCE(a.num_albaranes, 0) AS num_albaranes,
+  CASE
+    WHEN EXTRACT(DOW FROM d.dia) IN (0,6) THEN 'fin_semana'
+    WHEN COALESCE(a.num_albaranes, 0) = 0 THEN 'sin_actividad'
+    ELSE 'normal'
+  END AS tipo_dia
+FROM dias d
+LEFT JOIN actividad a ON d.dia = a.dia
+ORDER BY d.dia ASC;

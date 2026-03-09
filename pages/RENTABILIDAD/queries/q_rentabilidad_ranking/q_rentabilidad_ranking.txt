@@ -1,0 +1,27 @@
+-- Ranking de clientes por media por parte (los más rentables por visita)
+-- Widget: DatePicker_Inicio, DatePicker_Fin
+SELECT
+  COALESCE(c.nombre_fiscal, a.cliente_nombre, '(Sin cliente)') AS cliente,
+  COUNT(*)::int AS num_partes,
+  ROUND(AVG(a.importe_total), 2) AS media_por_parte,
+  ROUND(SUM(a.importe_total), 2) AS facturacion_total,
+  -- Segmentación automática
+  CASE
+    WHEN COUNT(*) >= 10 AND AVG(a.importe_total) >= 400 THEN 'A - Alto volumen, alta media'
+    WHEN COUNT(*) >= 10 AND AVG(a.importe_total) < 400  THEN 'B - Alto volumen, baja media'
+    WHEN COUNT(*) < 10  AND AVG(a.importe_total) >= 400 THEN 'C - Poco volumen, alta media'
+    ELSE 'D - Poco volumen, baja media'
+  END AS segmento
+FROM public.albaranes a
+LEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text
+WHERE a.fecha >= COALESCE(
+    {{DatePicker_Inicio.selectedDate}}::date,
+    CURRENT_DATE - INTERVAL '3 months'
+  )
+  AND a.fecha <= COALESCE(
+    {{DatePicker_Fin.selectedDate}}::date,
+    CURRENT_DATE
+  )
+GROUP BY COALESCE(c.nombre_fiscal, a.cliente_nombre, '(Sin cliente)')
+HAVING COUNT(*) >= 1
+ORDER BY media_por_parte DESC;

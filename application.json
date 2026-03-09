@@ -17,6 +17,22 @@
       "isDefault": true
     },
     {
+      "id": "DASHBOARD",
+      "isDefault": false
+    },
+    {
+      "id": "RENTABILIDAD",
+      "isDefault": false
+    },
+    {
+      "id": "TECNICOS",
+      "isDefault": false
+    },
+    {
+      "id": "SYNC",
+      "isDefault": false
+    },
+    {
       "id": "GESTION",
       "isDefault": false
     },

@@ -1,0 +1,23 @@
+-- Total de la selección actual (para el stat box debajo de la tabla)
+-- Usa los mismos filtros que q_albaranes
+-- Widgets: Filtro_Fecha, Filtro_Estado, Busqueda (opcionales)
+SELECT
+  COUNT(*)::int AS num_resultados,
+  ROUND(COALESCE(SUM(a.importe_total), 0), 2) AS total_filtrado
+FROM public.albaranes a
+LEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text
+LEFT JOIN public.estados_documento est ON a.estado_id = est.id_stel
+WHERE
+  ({{Filtro_Fecha.selectedDate}} IS NULL OR a.fecha::date >= {{Filtro_Fecha.selectedDate}}::date)
+  AND (
+    {{Filtro_Estado.selectedOptionValue}} IS NULL
+    OR {{Filtro_Estado.selectedOptionValue}} = ''
+    OR est.nombre = {{Filtro_Estado.selectedOptionValue}}
+  )
+  AND (
+    {{Busqueda.text}} IS NULL
+    OR {{Busqueda.text}} = ''
+    OR a.titulo ILIKE '%' || {{Busqueda.text}} || '%'
+    OR COALESCE(c.nombre_fiscal, a.cliente_nombre, '') ILIKE '%' || {{Busqueda.text}} || '%'
+    OR a.referencia ILIKE '%' || {{Busqueda.text}} || '%'
+  );

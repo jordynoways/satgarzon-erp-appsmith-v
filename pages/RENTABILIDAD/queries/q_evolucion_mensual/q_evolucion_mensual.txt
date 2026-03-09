@@ -1,0 +1,11 @@
+-- Evolución mensual de facturación (últimos 12 meses) - para gráfico de líneas
+SELECT
+  TO_CHAR(date_trunc('month', fecha), 'YYYY-MM') AS mes,
+  TO_CHAR(date_trunc('month', fecha), 'Mon YY') AS mes_label,
+  COUNT(*)::int AS num_partes,
+  ROUND(SUM(importe_total), 2) AS facturacion,
+  ROUND(AVG(importe_total), 2) AS media_parte
+FROM public.albaranes
+WHERE fecha >= date_trunc('month', CURRENT_DATE) - INTERVAL '11 months'
+GROUP BY date_trunc('month', fecha)
+ORDER BY date_trunc('month', fecha) ASC;

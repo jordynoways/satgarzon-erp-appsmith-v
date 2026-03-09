@@ -1,0 +1,9 @@
+-- Lista de clientes para el dropdown de filtros
+-- Bind a Select widget con: label = nombre, value = nombre
+SELECT DISTINCT
+  COALESCE(c.nombre_fiscal, a.cliente_nombre, '(Sin cliente)') AS nombre
+FROM public.albaranes a
+LEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text
+WHERE COALESCE(c.nombre_fiscal, a.cliente_nombre) IS NOT NULL
+  AND COALESCE(c.nombre_fiscal, a.cliente_nombre) != ''
+ORDER BY nombre ASC;

@@ -1,0 +1,13 @@
+-- Top 5 clientes del mes por facturación
+SELECT
+  COALESCE(c.nombre_fiscal, a.cliente_nombre, '(Sin cliente)') AS cliente,
+  COUNT(*)::int AS num_partes,
+  ROUND(SUM(a.importe_total), 2) AS facturacion,
+  ROUND(AVG(a.importe_total), 2) AS media_parte
+FROM public.albaranes a
+LEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text
+WHERE a.fecha >= date_trunc('month', CURRENT_DATE)
+  AND a.fecha < date_trunc('month', CURRENT_DATE) + INTERVAL '1 month'
+GROUP BY COALESCE(c.nombre_fiscal, a.cliente_nombre, '(Sin cliente)')
+ORDER BY facturacion DESC
+LIMIT 5;

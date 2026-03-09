@@ -1,0 +1,13 @@
+-- Producción semanal por técnico (últimas 8 semanas) - para gráfico de barras agrupadas
+SELECT
+  TO_CHAR(date_trunc('week', a.fecha), 'YYYY-"W"IW') AS semana,
+  TO_CHAR(date_trunc('week', a.fecha), 'DD/MM') || '-' || TO_CHAR(date_trunc('week', a.fecha) + INTERVAL '6 days', 'DD/MM') AS semana_label,
+  COALESCE(e.nombre_completo, 'Técnico ' || a.creado_por_id::text) AS tecnico,
+  COUNT(*)::int AS num_partes,
+  ROUND(SUM(a.importe_total), 2) AS facturacion
+FROM public.albaranes a
+LEFT JOIN public.empleados_stel_clean e ON a.creado_por_id::text = e.id_stel
+WHERE a.fecha >= date_trunc('week', CURRENT_DATE) - INTERVAL '7 weeks'
+GROUP BY date_trunc('week', a.fecha),
+         COALESCE(e.nombre_completo, 'Técnico ' || a.creado_por_id::text)
+ORDER BY semana ASC, tecnico ASC;

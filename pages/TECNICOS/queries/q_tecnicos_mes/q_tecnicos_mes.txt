@@ -1,0 +1,19 @@
+-- Resumen de técnicos del mes actual
+-- Fuente: albaranes JOIN empleados_stel_clean por creado_por_id
+SELECT
+  COALESCE(e.nombre_completo, 'Técnico ' || a.creado_por_id::text) AS tecnico,
+  COUNT(*)::int AS num_partes,
+  ROUND(SUM(a.importe_total), 2) AS facturacion_generada,
+  ROUND(AVG(a.importe_total), 2) AS media_por_parte,
+  MIN(a.importe_total) AS parte_minimo,
+  MAX(a.importe_total) AS parte_maximo,
+  -- Distribución por estado
+  COUNT(CASE WHEN est.nombre = 'Facturado' THEN 1 END)::int AS partes_facturados,
+  COUNT(CASE WHEN est.nombre = 'Pendiente de facturar' THEN 1 END)::int AS partes_pendientes
+FROM public.albaranes a
+LEFT JOIN public.empleados_stel_clean e ON a.creado_por_id::text = e.id_stel
+LEFT JOIN public.estados_documento est ON a.estado_id = est.id_stel
+WHERE a.fecha >= date_trunc('month', CURRENT_DATE)
+  AND a.fecha < date_trunc('month', CURRENT_DATE) + INTERVAL '1 month'
+GROUP BY COALESCE(e.nombre_completo, 'Técnico ' || a.creado_por_id::text)
+ORDER BY facturacion_generada DESC;

@@ -1,0 +1,14 @@
+-- KPI: Albaranes pendientes de facturar (estados no cerrados/facturados)
+SELECT
+  COUNT(*)::int AS pendientes,
+  ROUND(COALESCE(SUM(a.importe_total), 0), 2) AS importe_pendiente
+FROM public.albaranes a
+LEFT JOIN public.estados_documento est ON a.estado_id = est.id_stel
+WHERE est.nombre IN (
+  'Pendiente de facturar',
+  'COMPROBADO POR GEMINI',
+  'COMPROBADO ISTOBAL',
+  'MANTENIMIENTO',
+  'PEDIR MATERIAL'
+)
+OR a.estado_id IS NULL;

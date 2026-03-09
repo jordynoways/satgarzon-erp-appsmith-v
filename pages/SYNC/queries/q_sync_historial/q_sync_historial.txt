@@ -1,0 +1,15 @@
+-- Historial de los últimos 20 albaranes sincronizados (proxy de actividad de sync)
+SELECT
+  a.referencia,
+  a.fecha::date AS fecha,
+  COALESCE(c.nombre_fiscal, a.cliente_nombre, '—') AS cliente,
+  a.importe_total,
+  est.nombre AS estado,
+  a.ultima_actualizacion AS ultima_sync_registro,
+  -- Tiempo desde que se actualizó
+  ROUND(EXTRACT(EPOCH FROM (NOW() - a.ultima_actualizacion)) / 3600, 1) AS horas_desde_actualizado
+FROM public.albaranes a
+LEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text
+LEFT JOIN public.estados_documento est ON a.estado_id = est.id_stel
+ORDER BY a.ultima_actualizacion DESC
+LIMIT 20;

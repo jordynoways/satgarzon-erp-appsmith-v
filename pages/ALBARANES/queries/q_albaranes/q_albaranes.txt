@@ -1,34 +1,42 @@
-SELECT 
+-- Query principal de albaranes con filtros opcionales
+-- Widgets de filtro (si no existen, devuelve todo):
+--   Filtro_Fecha   → DatePicker  (fecha desde)
+--   Filtro_Estado  → Select      (opciones de q_estados_select)
+--   Busqueda       → Input       (texto libre)
+SELECT
     a.id_stel,
     COALESCE(a.json_original->>'full-reference', a.referencia) as referencia,
     a.fecha,
-    c.nombre_fiscal as cliente,
+    COALESCE(c.nombre_fiscal, a.cliente_nombre, '—') as cliente,
     a.titulo,
     a.importe_total,
-    
-    -- 1. ESTADO TRADUCIDO
-    -- Si no encuentra el nombre en la tabla, pone el ID por si acaso
     COALESCE(est.nombre, a.estado_id::text) as estado,
-    est.color as color_estado, -- Para usar en Appsmith
-    
-    -- 2. EMPLEADO TRADUCIDO
-    COALESCE(emp.nombre, 'Empleado ' || a.creado_por_id::text) as creado_por,
-    
-    -- 3. GENERADO DE (Lógica mejorada)
-    CASE 
-        -- Si hay referencia de documento origen (Pedido/Presupuesto)
-        WHEN a.json_original->>'source-document-reference' IS NOT NULL 
+    est.color as color_estado,
+    COALESCE(emp.nombre_completo, 'Técnico ' || a.creado_por_id::text) as creado_por,
+    CASE
+        WHEN a.json_original->>'source-document-reference' IS NOT NULL
             THEN a.json_original->>'source-document-reference'
-        -- Si hay ID de Incidencia (Aviso)
-        WHEN a.json_original->>'parent-incident-id' IS NOT NULL 
+        WHEN a.json_original->>'parent-incident-id' IS NOT NULL
             THEN 'Aviso ID: ' || (a.json_original->>'parent-incident-id')
         ELSE 'Directo'
     END as generado_de
-
 FROM public.albaranes a
 LEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text
--- Unimos con nuestras nuevas tablas diccionario
 LEFT JOIN public.estados_documento est ON a.estado_id = est.id_stel
-LEFT JOIN public.empleados emp ON a.creado_por_id = emp.id_stel
-
-ORDER BY a.fecha DESC;
+LEFT JOIN public.empleados_stel_clean emp ON a.creado_por_id::text = emp.id_stel
+WHERE
+    ({{Filtro_Fecha.selectedDate}} IS NULL OR a.fecha::date >= {{Filtro_Fecha.selectedDate}}::date)
+    AND (
+        {{Filtro_Estado.selectedOptionValue}} IS NULL
+        OR {{Filtro_Estado.selectedOptionValue}} = ''
+        OR est.nombre = {{Filtro_Estado.selectedOptionValue}}
+    )
+    AND (
+        {{Busqueda.text}} IS NULL
+        OR {{Busqueda.text}} = ''
+        OR a.titulo ILIKE '%' || {{Busqueda.text}} || '%'
+        OR COALESCE(c.nombre_fiscal, a.cliente_nombre, '') ILIKE '%' || {{Busqueda.text}} || '%'
+        OR COALESCE(a.json_original->>'full-reference', a.referencia) ILIKE '%' || {{Busqueda.text}} || '%'
+    )
+ORDER BY a.fecha DESC
+LIMIT 500;

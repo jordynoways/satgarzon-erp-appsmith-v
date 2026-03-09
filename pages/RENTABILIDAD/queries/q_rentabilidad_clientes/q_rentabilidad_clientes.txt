@@ -1,0 +1,24 @@
+-- Rentabilidad por cliente en el periodo seleccionado
+-- Widgets necesarios: DatePicker_Inicio (fecha inicio), DatePicker_Fin (fecha fin)
+-- Si no existen los widgets, usa los últimos 3 meses por defecto
+SELECT
+  COALESCE(c.nombre_fiscal, a.cliente_nombre, '(Sin cliente)') AS cliente,
+  COUNT(*)::int AS num_partes,
+  ROUND(SUM(a.importe_total), 2) AS facturacion_total,
+  ROUND(AVG(a.importe_total), 2) AS media_por_parte,
+  MIN(a.importe_total) AS parte_minimo,
+  MAX(a.importe_total) AS parte_maximo,
+  MIN(a.fecha)::date AS primer_parte,
+  MAX(a.fecha)::date AS ultimo_parte
+FROM public.albaranes a
+LEFT JOIN public.clientes c ON a.cliente_id_stel::text = c.id_stel::text
+WHERE a.fecha >= COALESCE(
+    {{DatePicker_Inicio.selectedDate}}::date,
+    CURRENT_DATE - INTERVAL '3 months'
+  )
+  AND a.fecha <= COALESCE(
+    {{DatePicker_Fin.selectedDate}}::date,
+    CURRENT_DATE
+  )
+GROUP BY COALESCE(c.nombre_fiscal, a.cliente_nombre, '(Sin cliente)')
+ORDER BY facturacion_total DESC;

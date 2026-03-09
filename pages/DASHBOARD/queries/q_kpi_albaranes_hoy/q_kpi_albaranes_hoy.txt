@@ -1,0 +1,6 @@
+-- KPI: Albaranes creados hoy
+SELECT
+  COUNT(*)::int AS albaranes_hoy,
+  ROUND(COALESCE(SUM(importe_total), 0), 2) AS facturacion_hoy
+FROM public.albaranes
+WHERE fecha::date = CURRENT_DATE;
